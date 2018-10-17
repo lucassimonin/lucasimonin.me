@@ -1,0 +1,14 @@
+{% spaceless %}
+    <span class="ability-score">
+        {% if rating > 0 %}
+            {% for i in 1..rating %}
+                <i class="fa fa-star filled" aria-hidden="true"></i>
+            {% endfor %}
+        {% endif %}
+        {% if rating < 5 %}
+            {% for i in 1..5-rating %}
+                <i class="fa fa-star-o" aria-hidden="true"></i>
+            {% endfor %}
+        {% endif %}
+    </span>
+{% endspaceless %}

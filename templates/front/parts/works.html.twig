@@ -1,0 +1,32 @@
+{% spaceless %}
+    {% if works|length > 0 %}
+        <div class="bg-grey print-margin-top">
+            <section id="projects" class="container">
+                <h2>{{ 'app.title.project'|trans({}, 'app') }}</h2>
+                <p class="lead">
+                    “{{ 'app.quote.project'|trans({}, 'app') }}”<br>- {{ 'app.quote.project.author'|trans({}, 'app') }}
+                </p>
+                <hr>
+                <div class="row">
+                    {% for work in works %}
+                        <div class="col-md-6 col-sm-12 col-xs-12 wow fadeInUp">
+                            <figure class="effect">
+                                IMAGE
+                                <figcaption>
+                                    <h3>NAME</h3>
+                                    description_site
+                                    <p><strong>Tags:</strong> <br>description</p>
+                                    <p class="visible-print-block">url</p>
+                                    <a rel="external" href="url" target="_blank">{{ 'app.show_more'|trans({}, 'app') }}</a>
+                                    <span class="icon">
+                                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                                    </span>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    {% endif %}
+{% endspaceless %}

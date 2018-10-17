@@ -1,0 +1,108 @@
+{% extends "admin/layout.html.twig" %}
+
+{% set menuActive = 'users' %}
+{% block title %}{{ 'admin.users.list.title'|trans({}, 'app') }}{% endblock %}
+{% block mainTitle %}
+<h1>{{ 'admin.users.list.title'|trans({}, 'app') }}</h1>
+{% endblock %}
+
+
+{% block options %}
+    <a class="btn btn-success btn-xs" href="{{ path('admin_user_create') }}">
+        <i class="fa fa-plus "></i> {{ 'admin.common.new.button'|trans({}, 'app') }}
+    </a>
+    <a class="btn btn-info btn-xs btn-search-open" href="#">
+        <i class="fa fa-search "></i> {{ 'admin.common.search.button'|trans({}, 'app') }}
+    </a>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+
+        <div class="col-md-12 m-b-2 col-sm-12 search-zone"  {% if app.request.query.get('search') is empty %}style="display: none;"{% endif %}>
+            <div class="row">
+
+                <div class="col-md-12 col-sm-12">
+                    <div class="panel panel-inverse">
+
+                        <div class="panel-body">
+                            {% include "admin/user/parts/search.html.twig" %}
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="col-md-12 col-sm-12">
+
+            <div class="table-app">
+                <table class="table no-margin-botton table-bordered table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th class="cansort {% if pagination.isSorted('u.enabled') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'admin.common.activate'|trans({}, 'app'), 'u.enabled') }} {% if pagination.isSorted('u.enabled') %} <i class="fa fa-sort-{{ pagination.getDirection() }} pull-right"></i>{% endif %}</th>
+                        <th class="cansort {% if pagination.isSorted('u.lastName') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'admin.user.form.lastname'|trans({}, 'app'), 'u.lastName') }} {% if pagination.isSorted('u.lastName') %} <i class="fa fa-sort-{{ pagination.getDirection() }} pull-right"></i>{% endif %}</th>
+                        <th class="cansort {% if pagination.isSorted('u.email') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'admin.user.form.email'|trans({}, 'app'), 'u.email') }} {% if pagination.isSorted('u.email') %} <i class="fa fa-sort-{{ pagination.getDirection() }} pull-right"></i>{% endif %}</th>
+                        <th class="cansort {% if pagination.isSorted('u.created') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'admin.common.created_at'|trans({}, 'app'), 'u.created') }} {% if pagination.isSorted('u.created') %} <i class="fa fa-sort-{{ pagination.getDirection() }} pull-right"></i>{% endif %}</th>
+                        <th>{{ 'admin.common.roles'|trans({}, 'app') }}</th>
+                        <th>{{ 'admin.common.actions'|trans({}, 'app') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for user in pagination %}
+                        <tr>
+                            <td style="text-align:center;vertical-align:middle;width: 40px">
+                                {% if user.enabled %}
+                                    <span class="label label-success label-pill" style="font-size: 5px;">&nbsp;</span>
+                                {% else %}
+                                    <span class="label label-danger label-pill" style="font-size: 5px;">&nbsp;</span>
+                                {% endif %}
+                            </td>
+                            <td style="vertical-align:middle;"><a href="{{ path('admin_user_edit', {'id': user.id}) }}">{{ user.lastName }}</a></td>
+                            <td style="vertical-align:middle;"><a href="{{ path('admin_user_edit', {'id': user.id}) }}">{{ user.email }}</a></td>
+                            <td style="vertical-align:middle; color:gray;font-size: 11px;">{{ user.created|date("m/d/Y h:i", "Europe/Paris") }}</td>
+                            <td style="vertical-align:middle; color:gray;font-size: 11px;">
+                                {% for role in user.roles %}
+                                    {{ (role|replace({'ROLE_': 'roles.'})|lower)|trans({}, 'app') }}
+                                {% endfor %}
+                            </td>
+                            <td style="text-align:center;vertical-align:middle;">
+
+                                <a href="{{ path('admin_user_edit', {'id': user.id}) }}" class="btn btn-default">
+                                    <i class="fa fa-edit"></i> {{ 'admin.common.update.button'|trans({}, 'app') }}
+                                </a>
+                                {% if user.id != app.user.id %}
+                                    <a href="{{ path('admin_dashboard', {'_switch_user': user.username}) }}" class="btn btn-default">
+                                        <i class="fa fa-user-secret"></i> {{ 'admin.common.switch_to_user.button'|trans({}, 'app') }}
+                                    </a>
+                                {% endif %}
+
+                                <a href="{{ path('admin_user_delete', {'id': user.id}) }}" class="btn btn-danger delete-button">
+                                    <i class="fa fa-trash-o" style="color:white;transition: all 30s linear;"></i> {{ 'admin.common.delete.button'|trans({}, 'app') }}
+                                </a>
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="table-footer">
+                    {% if pagination|length <= 0 %}
+                        {{ 'admin.common.no_data.title'|trans({}, 'app') }}
+                    {% endif %}
+
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination, 'admin/parts/sliding.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% spaceless %}
+    {% if items|length > 1 %}
+        {% set count = items|length // 2 %}
+        {% if items|length % 2 == 1 %}
+            {% set count = count + 1 %}
+        {% endif %}
+        <div class="col-md-6">
+            <ul class="no-bullets">
+                {% for item in items[:count] %}
+                    <li>
+                        <span class="ability-title">name</span>
+                        {% include 'front/content/parts/skill_rating.html.twig' with {'rating': 1} %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <ul class="no-bullets">
+                {% for item in items[count:] %}
+                    <li>
+                        <span class="ability-title">name</span>
+                        {% include 'front/content/parts/skill_rating.html.twig' with {'rating': 1} %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <div class="col-md-6">
+            <ul class="no-bullets">
+                {% for item in items %}
+                    <li>
+                        <span class="ability-title">name</span>
+                        {% include 'front/content/parts/skill_rating.html.twig' with {'rating': 1} %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endspaceless %}

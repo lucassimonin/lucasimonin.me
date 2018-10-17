@@ -1,0 +1,23 @@
+{% spaceless %}
+    <nav class="navbar navbar-default" id="mainNav">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a class="page-scroll" href="#profile">{{ 'app.title.presentation'|trans({}, 'app') }}</a></li>
+                <li class=""><a class="page-scroll" href="#experiences">{{ 'app.title.xp'|trans({}, 'app') }}</a></li>
+                <li class=""><a class="page-scroll" href="#abilities">{{ 'app.title.abilities'|trans({}, 'app') }}</a></li>
+                <li><a class="page-scroll" href="#projects">{{ 'app.title.project'|trans({}, 'app') }}</a></li>
+                <li><a class="page-scroll" href="#contact">{{ 'app.title.contact'|trans({}, 'app') }}</a></li>
+                <li class="hidden-xs"><a href="#" onclick="window.print();return false;">{{ 'app.title.print'|trans({}, 'app') }}</a></li>
+                {% include "front/content/parts/languages.html.twig" %}
+            </ul>
+        </div>
+    </nav>
+{% endspaceless %}

@@ -1,0 +1,16 @@
+{% form_theme form with 'admin/form_div_layout.html.twig' %}
+{{ form_start(form, {'attr': {'id': 'mediaSaveSeo', 'action': path('image_seo', {'id': id}), 'multipart': true, 'novalidate': true }}) }}
+<div class="row">
+    <div class="col-md-12" style="text-align: center;margin-bottom: 20px;">
+        {% if form.vars['value']|ifs.extension == "pdf" %}
+            <img style="max-height: 100px;" src="{{ asset('images/admin/pdf_icon.png') }}" />
+        {% else %}
+            <img style="max-height: 100px;" src="{{ asset(form.vars['value']|ifs.path) }}" />
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        {{ form_row(form.title) }}
+        {{ form_row(form.alt) }}
+    </div>
+</div>
+{{ form_end(form) }}

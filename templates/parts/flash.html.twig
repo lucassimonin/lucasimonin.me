@@ -1,0 +1,8 @@
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="ui {{ label }} message">
+            <i class="close icon"></i>
+            <p>{{ message|trans({}, 'app') }}</p>
+        </div>
+    {% endfor %}
+{% endfor %}

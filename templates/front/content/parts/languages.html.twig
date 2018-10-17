@@ -1,0 +1,11 @@
+{% set actual_language = app.request.locale %}
+{% set route_params = app.request.get('_route_params') %}
+{% for language in app_locales %}
+    {% if actual_language != language %}
+        <li class="padding-navbar">
+            <a rel="alternate" hreflang="{{ language }}"  href="{{ path('homepage_locale', {'_locale':language}) }}"><span class="flag-icon flag-icon-{% if language == 'en' %}gb{% else %}{{ language }}{% endif %}"></span></a>
+        </li>
+    {% endif %}
+{% endfor %}
+
+

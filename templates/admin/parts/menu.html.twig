@@ -1,0 +1,28 @@
+
+<!-- Nav -->
+<nav id="main-menu" class="px-nav px-nav-left">
+    <button type="button" class="px-nav-toggle" data-toggle="px-nav">
+        <span class="px-nav-toggle-arrow"></span>
+        <span class="navbar-toggle-icon"></span>
+        <span class="px-nav-toggle-label font-size-11">HIDE MENU</span>
+    </button>
+    <ul class="px-nav-content" id="left-menu" style="height: 100%;">
+        <li id="nav-dashboard"  class="px-nav-item">
+            <a href="{{ path('admin_dashboard') }}"><i class="menu-icon px-nav-icon fa fa-tachometer"></i><span class="px-nav-label">{{ 'admin.dashboard.label'|trans({}, 'app') }}</span></a>
+        </li>
+        <li id="nav-experience" class="px-nav-item">
+            <a href="{{ path('admin_experience_list') }}"><i class="menu-icon px-nav-icon fa fa-users"></i><span class="px-nav-label">{{ 'admin.experience.menu.label'|trans({}, 'app') }}</span></a>
+        </li>
+        <li id="nav-work" class="px-nav-item">
+            <a href="{{ path('admin_work_list') }}"><i class="menu-icon px-nav-icon fa fa-users"></i><span class="px-nav-label">{{ 'admin.work.menu.label'|trans({}, 'app') }}</span></a>
+        </li>
+        <li id="nav-skill" class="px-nav-item">
+            <a href="{{ path('admin_skill_list') }}"><i class="menu-icon px-nav-icon fa fa-users"></i><span class="px-nav-label">{{ 'admin.skill.menu.label'|trans({}, 'app') }}</span></a>
+        </li>
+        {% if is_granted('user-view', app.user) %}
+            <li id="nav-users" class="px-nav-item">
+                <a href="{{ path('admin_user_list') }}"><i class="menu-icon px-nav-icon fa fa-users"></i><span class="px-nav-label">{{ 'admin.users.menu.label'|trans({}, 'app') }}</span></a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>

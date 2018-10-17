@@ -1,0 +1,43 @@
+{% spaceless %}
+    <div class="background-gray">
+        <section id="contact" class="container wow fadeInUp">
+            <h2>{{ 'app.title.contact'|trans({}, 'app') }}</h2>
+            <p class="lead">
+                “{{ 'app.quote.contact'|trans({}, 'app') }}”<br>- {{ 'app.quote.contact.author'|trans({}, 'app') }}
+            </p>
+            <hr>
+            <div class="row margin-icon">
+                <div class="col-md-2 col-md-offset-1 col-xs-4 margin-bt-mobile">
+                    <a rel="nofollow" class="twitter" href="{{ person.twitter }}" target="_blank">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                </div>
+                <div class="col-md-2 col-xs-4 margin-bt-mobile">
+                    <a rel="nofollow" class="linkedin" href="{{ person.linkedin }}" target="_blank">
+                        <i class="fa fa-linkedin"></i>
+                    </a>
+                </div>
+                <div class="col-md-2 col-xs-4 margin-bt-mobile">
+                    <a rel="nofollow" class="github" href="{{ person.github }}" target="_blank">
+                        <i class="fa fa-github-alt"></i>
+                    </a>
+                </div>
+                <div class="col-md-2 col-xs-4">
+                    <a rel="nofollow" class="instagram" href="{{ person.instagram }}" target="_blank">
+                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="col-md-2 col-xs-4">
+                    <a rel="external" class="mail" href="mailto:{{ person.mail }}">
+                        <i class="fa fa-envelope-open-o" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <hr>
+            <div class="footer">
+                Lucas SIMONIN ©
+                <span id="copyright-year">{{ "now"|date("Y") }}</span>
+            </div>
+        </section>
+    </div>
+{% endspaceless %}

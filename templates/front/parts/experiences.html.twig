@@ -1,0 +1,24 @@
+{% spaceless %}
+    <div class="bg-grey">
+        <section id="experiences" class="container">
+            <h2>{{ 'app.title.xp'|trans({}, 'app') }}</h2>
+            <p class="lead">
+                “{{ 'app.quote.xp'|trans({}, 'app') }}”<br>- {{ 'app.quote.xp.author'|trans({}, 'app') }}
+            </p>
+            <hr>
+            <h3>{{ 'app.title.education'|trans({}, 'app') }}</h3>
+            <div class="experiences">
+                {% for education in educations %}
+                    {% include 'front/content/parts/experience.html.twig' with {'item': education} %}
+                {% endfor %}
+            </div>
+            <hr class="print-margin-top">
+            <h3>{{ 'app.title.career'|trans({}, 'app') }}</h3>
+            <div class="experiences">
+                {% for xp in xps %}
+                    {% include 'front/content/parts/experience.html.twig' with {'item': xp} %}
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+{% endspaceless %}

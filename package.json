@@ -1,0 +1,49 @@
+{
+    "name": "cvwebsite",
+    "private": true,
+    "dependencies": {
+        "bootstrap": "3.*",
+        "flag-icon-css": "latest",
+        "font-awesome": "latest",
+        "html5shiv": "latest",
+        "jquery-backstretch": "^2.0.4",
+        "jquery-datetimepicker": "^2.5.20",
+        "jquery.easing": "^1.3.1",
+        "lazysizes": "^2.0.2",
+        "malihu-custom-scrollbar-plugin": "^3.1.5",
+        "modernizr": "^3.6.0",
+        "scrollreveal": "^3.3.1",
+        "wowjs": "^1.1.3"
+    },
+    "overrides": {
+        "bootstrap": {
+            "main": [
+                "less/bootstrap.less",
+                "dist/css/bootstrap.css",
+                "dist/js/bootstrap.js",
+                "dist/fonts/*"
+            ]
+        }
+    },
+    "devDependencies": {
+        "chai": "^3.5.0",
+        "gulp": "^3.9.1",
+        "gulp-concat": "^2.6.1",
+        "gulp-if": "^2.0.2",
+        "gulp-livereload": "^3.8.1",
+        "gulp-sourcemaps": "^2.6.4",
+        "gulp-uglify": "^3.0.1",
+        "gulp-uglifycss": "^1.1.0",
+        "gulp-util": "^3.0.8",
+        "mocha": "^3.1.0"
+    },
+    "resolutions": {
+        "jquery": "^3.1.1"
+    },
+    "license": "UNLICENSED",
+    "scripts": {
+        "watch": "gulp watch",
+        "build": "gulp build",
+        "build-prod": "gulp --env=prod build"
+    }
+}

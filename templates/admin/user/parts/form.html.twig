@@ -1,0 +1,28 @@
+{% form_theme form with 'bootstrap_3_horizontal_layout.html.twig' %}
+<div class="col-sm-12">
+    {% form_theme form with 'admin/form_div_layout.html.twig' %}
+    {{ form_row(form.firstName) }}
+    {{ form_row(form.lastName) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.avatar) }}
+    {{ form_row(form.username) }}
+    {% if edit is defined %}
+        <div class="row">
+            <div class="alert alert-warning">
+                {{ 'admin.flash.user.password'|trans({}, 'app') }}
+            </div>
+        </div>
+    {% endif %}
+    {{ form_row(form.plainPassword.first) }}
+    {{ form_row(form.plainPassword.second) }}
+    {% if form.enabled is defined %}
+        {{ form_row(form.roles) }}
+        {{ form_row(form.enabled) }}
+    {% endif %}
+    {% if edit is defined and (is_granted('ROLE_SUPER_ADMIN') or app.user.id == user.id) %}
+        {{ render(controller(
+            'App\\Controller\\Admin\\UserController::googleAuthenticatorUrl',
+            { 'user': user}
+        )) }}
+    {% endif %}
+</div>

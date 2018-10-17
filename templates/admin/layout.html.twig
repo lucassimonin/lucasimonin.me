@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html class="gt-ie8 gt-ie9 not-ie" lang="{{ app.request.locale }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{% block title %}{% endblock %} | {{ 'admin.adminstration.label'|trans({}, 'app') }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    {% block stylesheets %}
+        <link href="{{ asset('build/admin/css/style.css') }}" rel="stylesheet" type="text/css">
+    {% endblock %}
+    <script src="{{ asset('build/admin/ckeditor/ckeditor.js') }}"></script>
+</head>
+<body id="{% block bodyId %}{% endblock %}">
+    {% trans_default_domain 'app' %}
+    {% block menu %}
+        {% include "admin/parts/menu.html.twig" %}
+    {% endblock %}
+    {% block headbar %}
+        {% include "admin/parts/headbar.html.twig" %}
+    {% endblock %}
+    <div class="px-content">
+        <div class="" id="flash-messages"></div>
+        {% block breadcrumb %}{{ wo_render_breadcrumbs({ viewTemplate: "admin/parts/breadcrumbs.html.twig" }) }}{% endblock %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="alert alert-success alert-layout alert-dark" ><i class="fa fa-check"></i>&nbsp; {{ flashMessage|trans({}, 'app')|raw }}<button type="button" class="close" data-dismiss="alert">×</button></div>
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('warning') %}
+            <div class="alert alert-warning alert-layout alert-dark" ><i class="fa fa-exclamation-triangle"></i>&nbsp; {{ flashMessage|trans({}, 'app')|raw }}<button type="button" class="close" data-dismiss="alert">×</button></div>
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            <div class="alert alert-danger alert-layout alert-dark" ><i class="fa fa-check"></i>&nbsp; {{ flashMessage|trans({}, 'app')|raw }}<button type="button" class="close" data-dismiss="alert">×</button></div>
+        {% endfor %}
+        <div class="page-header {% block classPageHeader %}{% endblock %}">
+            {% block mainTitle %}{% endblock %}
+            <div style="display: inline-block; float: right;">
+                {% block options %}{% endblock %}
+            </div>
+        </div>
+        {% block content %}{% endblock %}
+    </div>
+    {% block javascripts %}
+        <script src="{{ asset('build/admin/js/app.js') }}"></script>
+    {% endblock %}
+    <script>
+        function reloadDropzone()
+        {
+            $('.dropzone-box').each(function(){
+                if($(this).hasClass('alreadyinit'))
+                {
+                    return;
+                }
+                var accepted = $(this).data('accepted');
+                if (!accepted)
+                {
+                    accepted = "image/*";
+                }
+                var ratio = $(this).data('ratio');
+                var uploader = $(this).addClass('alreadyinit').dropzone({
+                    url: "{{ path('admin_media_upload') }}",
+                    method: "post",
+                    paramName: "file", // The name that will be used to transfer the file
+                    maxFilesize: 5, // MB
+                    parallelUploads: 1,
+                    uploadMultiple: false,
+                    //createImageThumbnails: (ratio == '') ? false : true,
+                    autoProcessQueue: (ratio == '') ? true : false,
+                    dictRemoveFileConfirmation: false,
+                    addRemoveLinks : true,
+                    thumbnailWidth: 200,
+                    thumbnailHeight: 200,
+                    maxFiles: 1,
+                    acceptedFiles: accepted,
+                    dictDefaultMessage: "Drop les fichiers ici",
+                    dictFallbackMessage: "Votre navigateur ne supporte pas l'upload de fichier",
+                    dictFallbackText: "",
+                    dictFileTooBig: "Votre fichier est trop lourd. Maximum: 5MiB.",
+                    dictInvalidFileType: "Vous ne pouvez pas uploader ce type de fichier.",
+                    dictResponseError: "Le serveur répond avec une erreur.",
+                    dictCancelUpload: "Annuler l'upload",
+                    dictCancelUploadConfirmation: "Êtes-vous certain de vouloir annuler l'upload ?",
+                    dictRemoveFile: 'Supprimer le fichier',
+                    dictMaxFilesExceeded: "Vous ne pouvez pas uploader plus de fichier.",
+                    success: function(file, response) {
+                        response = JSON.parse(response);
+                        showFinishUpload(response, $(file.previewElement))
+                    },
+                    previewTemplate: '<div class="dz-preview dz-file-preview"><div class="dz-details"><div class="dz-thumbnail-wrapper"><div class="dz-thumbnail"><img data-dz-thumbnail><span class="dz-nopreview">Pas de prévisualisation</span><div class="dz-success-mark"><i class="fa fa-check-circle-o"></i></div><div class="dz-error-mark"><i class="fa fa-times-circle-o"></i></div><div class="dz-error-message"><span data-dz-errormessage></span></div></div></div></div><div class="progress progress-striped active"><div class="progress-bar progress-bar-success" data-dz-uploadprogress></div></div></div>',
+                    resize: function(file) {
+                        var info = { srcX: 0, srcY: 0, srcWidth: file.width, srcHeight: file.height },
+                            srcRatio = file.width / file.height;
+                        if (file.height > this.options.thumbnailHeight || file.width > this.options.thumbnailWidth) {
+                            info.trgHeight = this.options.thumbnailHeight;
+                            info.trgWidth = info.trgHeight * srcRatio;
+                            if (info.trgWidth > this.options.thumbnailWidth) {
+                                info.trgWidth = this.options.thumbnailWidth;
+                                info.trgHeight = info.trgWidth / srcRatio;
+                            }
+                        } else {
+                            info.trgHeight = file.height;
+                            info.trgWidth = file.width;
+                        }
+                        return info;
+                    },
+                });
+                uploader[0].dropzone.on('error', function(file, errormessage, xhr) {
+                    console.log(file.previewElement);
+                    $(file.previewElement).find('.progress-bar').css('width', '100%');
+                });
+                if (ratio == '')
+                {
+                    return;
+                }
+                uploader[0].dropzone.on('addedfile', function(file) {
+                    $("#mediaAddModal").modal("hide");
+                    var previewURL = URL.createObjectURL(file);
+                    var dzPreview = $(file.previewElement).find('img');
+                    dzPreview.attr("src", previewURL);
+                    this.uploadFile(file);
+                    if ($('.panel-media-list').length > 0)
+                    {
+                        $('.panel-media-list').html('<p style="text-align:center"><img style="max-height: 50px" src="{{ asset('images/admin/ajax-loader.svg') }}" /></p>');
+                    }
+                });
+
+            });
+        }
+        function showFinishUpload(response, el)
+        {
+            el.parents('.dropzone-box').find('.dz-success-mark .fa-check-circle-o').hide();
+            el.parents('.dropzone-box').find('.input-dropzone').find('input').val(response.id);
+            el.parents('.dropzone-box').find('.input-dropzone').find('input.url').val(response.url);
+            el.parents('.dropzone-box').find('.input-dropzone').find('input.legend').val(response.legend);
+            el.parents('.dropzone-box').find('.input-dropzone').find('input.alt').val(response.alt);
+            el.parents('.dropzone-box').find('.input-dropzone').find('input.title').val(response.title);
+            var inputHidden = el.parents('.dropzone-box').find('.input-dropzone');
+            $('<a class="dz-update-app" style="margin-top: 10px;" href="/fr/admin/media/seo/'+response.id+'"><i class="fa fa-cogs"></i> &nbsp; Seo</a>').insertBefore(el.find('.dz-remove'));
+            if (inputHidden.parents('#imageModal').length > 0)
+            {
+                $('#imageModalUrl').val(response.url);
+            }
+            el.parents('.dropzone-box').find('.progress-bar').addClass('progress-bar-success').css('width', '100%');
+            el.parents('.dropzone-box').find('.dz-preview').addClass("dz-success");
+            if (response.mimetype == "application/pdf")
+            {
+                el.parents('.dropzone-box').find('.dz-thumbnail').find('img').attr('src', "{{ asset('/images/admin/pdf_icon.png') }}");
+            }
+        }
+        function blobToFile(theBlob, fileName) {
+            theBlob.lastModifiedDate = new Date();
+            theBlob.name = fileName;
+            theBlob.upload = {
+                bytesSent: 0,
+                filename: fileName,
+                progress: 0,
+                total: theBlob.size
+            };
+            return theBlob;
+        }
+        $('body, .zone-update > .content').on('click', '.dz-remove', function(e){
+            e.preventDefault();
+            $(this).parents('.dropzone-box').attr('class', 'dropzone-box dz-clickable');
+            $(this).parents('.dropzone-box').find('.input-dropzone').find('input').val('');
+            $(this).parents('.dz-preview').remove();
+        });
+        $('body').on('click', '#buttonImage', function(e){
+            $('.ckeditor-action').attr('data-content', $('#imageModalUrl').val());
+        });
+        $('.input-dropzone').each(function(){
+            if ($(this).data('id'))
+            {
+                $(this).find("input").val($(this).data('id'));
+            }
+        });
+        $('.input-dropzone input').each(function(){
+            if ($(this).data('id'))
+            {
+                $(this).val($(this).data('id'));
+            }
+            if ($(this).data('url'))
+            {
+                $(this).val($(this).data('url'));
+            }
+            if ($(this).data('alt'))
+            {
+                $(this).val($(this).data('alt'));
+            }
+            if ($(this).data('title'))
+            {
+                $(this).val($(this).data('title'));
+            }
+        });
+        reloadDropzone();
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}{{ 'admin.user.title.edit'|trans({}, 'app') }}{% endblock %}
+{% block mainTitle %}
+    <h1>{{ 'admin.user.title.edit'|trans({}, 'app') }}</h1>
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form, {'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'}}) }}
+        <div class="row">
+            <div class="col-md-12">
+                {% include "admin/user/parts/form.html.twig" with {'edit': true} %}
+                <button class="btn btn-info btn-save">
+                    <i class="fa fa-save"></i> {{ 'admin.common.update.button'|trans({}, 'app') }}
+                </button>
+            </div>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

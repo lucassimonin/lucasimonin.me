@@ -1,0 +1,38 @@
+{% spaceless %}
+    <div class="experience row wow fadeInLeft">
+        <div class="col-md-4">
+            <h4>name</h4>
+            <p class="experience-period">
+                <i class="fa fa-clock-o"></i>
+                duration
+            </p>
+        </div>
+        <div class="col-md-8">
+            <p>
+                <strong>name_description</strong>
+            </p>
+            {% if not empty %}
+                description
+            {% endif %}
+            {#% if not empty city or not empty website %}
+                <p class="experience-details">
+                    {% if not empty city %}
+                        <span class="location">
+                            <i class="fa fa-map-marker"></i>
+                            city
+                        </span>
+                    {% endif %}
+                    {% if not ez_is_field_empty(item, 'city') and not ez_is_field_empty(item, 'website') %}
+                        <span class="seperator">|</span>
+                    {% endif %}
+                    {% if not ez_is_field_empty(item, 'website') %}
+                        <span class="link">
+                            <i class="fa fa-link" aria-hidden="true"></i>
+                            <a rel="nofollow" href="{{ ez_field_value(item, 'website') }}" target="_blank">{{ ez_field_value(item, 'website') }}</a>
+                        </span>
+                    {% endif %}
+                </p>
+            {% endif %#}
+        </div>
+    </div>
+{% endspaceless %}

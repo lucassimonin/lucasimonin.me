@@ -1,0 +1,37 @@
+App\Entity\User:
+  constraints:
+  - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+  properties:
+    firstName:
+    - NotBlank:
+        message: "admin.validation.mandatory.label"
+        groups: [Admin, Registration, Profile]
+
+    - Length:
+        min: 2
+        max: 255
+        minMessage: "admin.validation.too_short.label"
+        maxMessage: "admin.validation.too_long.label"
+        groups: [Admin, Registration, Profile]
+
+    lastName:
+    - NotBlank:
+        message: "admin.validation.mandatory.label"
+        groups: [Admin, Registration, Profile]
+
+    - Length:
+        min: 2
+        max: 255
+        minMessage: "admin.validation.too_short.label"
+        maxMessage: "admin.validation.too_long.label"
+        groups: [Admin, Registration, Profile]
+    email:
+    - NotBlank:
+        message: "admin.validation.mandatory.label"
+        groups: [Admin, Registration, Profile]
+
+    - Email:
+        message: "admin.validation.email"
+        checkMX: true
+        groups: [Admin, Registration, Profile]
+

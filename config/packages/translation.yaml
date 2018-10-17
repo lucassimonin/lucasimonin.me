@@ -1,0 +1,26 @@
+framework:
+    default_locale: '%locale%'
+    translator:
+        paths:
+            - '%kernel.project_dir%/translations'
+        fallbacks:
+            - '%locale%'
+
+translation:
+    locales: "%app.locales.available%"
+    webui:
+        enabled: false
+    edit_in_place:
+        enabled: false
+    configs:
+        app:
+            dirs: ["%kernel.project_dir%/templates", "%kernel.root_dir%/../src"]
+            output_dir: "%kernel.project_dir%/translations"
+            excluded_names: ["*TestCase.php", "*Test.php"]
+            excluded_dirs: [cache, data, logs]
+            remote_storage: ["php_translation.adapter.loco"]
+translation_adapter_loco:
+    index_parameter: 'id' # 'text' or 'name'. Leave blank for "auto"  See https://localise.biz/api/docs/export/exportlocale
+    projects:
+        app:
+            api_key: 'ByfXIxiFSO8oFDN8IMldxEh0IYOLvqh-e'

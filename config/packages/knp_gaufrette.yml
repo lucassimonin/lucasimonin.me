@@ -1,0 +1,10 @@
+knp_gaufrette:
+  adapters:
+    local:
+      local:
+        directory: uploads/
+        create: true
+  filesystems:
+    current:
+      adapter:    local
+      alias:      current

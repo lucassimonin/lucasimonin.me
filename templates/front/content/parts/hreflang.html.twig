@@ -1,0 +1,10 @@
+{% spaceless %}
+    {% set actual_language = app.request.locale %}
+    {% for language in app_locales %}
+        {% if language != actual_language %}
+            <link rel="alternate" hreflang="{{ language }}" href="{{ absolute_url(path('homepage_locale', {'_locale':language})) }}" />
+        {% else %}
+            <link rel="canonical" href="{{ absolute_url(path('homepage_locale', {'_locale':language})) }}" />
+        {% endif %}
+    {% endfor %}
+{% endspaceless %}
