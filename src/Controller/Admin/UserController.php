@@ -28,11 +28,10 @@ class UserController extends Controller
 {
     /**
      * @param Request     $request
-     * @param UserService $userService
      * @Route("/list", name="admin_user_list")
      * @return Response
      */
-    public function list(Request $request, UserService $userService)
+    public function list(Request $request)
     {
         // init search
         $data = $this->initSearch($request);
@@ -49,7 +48,7 @@ class UserController extends Controller
         // Paginate transform
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-            $userService->queryForSearch($data->getSearchData()),
+            $this->getDoctrine()->getRepository(User::class)->queryForSearch($data->getSearchData()),
             $request->query->get('page', 1),
             20
         );
