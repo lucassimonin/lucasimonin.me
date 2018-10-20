@@ -1,10 +1,7 @@
-{% form_theme form with 'bootstrap_3_horizontal_layout.html.twig' %}
 <div class="col-sm-12">
-    {% form_theme form with 'admin/form_div_layout.html.twig' %}
     {{ form_row(form.firstName) }}
     {{ form_row(form.lastName) }}
     {{ form_row(form.email) }}
-    {{ form_row(form.avatar) }}
     {{ form_row(form.username) }}
     {% if edit is defined %}
         <div class="row">

@@ -32,7 +32,7 @@ class PersonController extends Controller
     {
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem('admin.dashboard.label', $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem("admin.person.title.edit");
+        $breadcrumbs->addItem("admin.person.title.update");
 
         $person = $this->getDoctrine()->getRepository(Person::class)->findAll();
         if (empty($person)) {

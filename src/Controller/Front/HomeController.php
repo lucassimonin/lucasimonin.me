@@ -2,7 +2,12 @@
 
 namespace App\Controller\Front;
 
+use App\Entity\Experience;
 use App\Entity\Person;
+use App\Entity\Skill;
+use App\Entity\Work;
+use App\Services\Content\ContentService;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -50,25 +55,25 @@ class HomeController extends Controller
 
     /**
      * Part experiences
+     * @param Request $request
+     * @param ContentService $contentService
      * @return Response
+     * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function experiences() : Response
+    public function experiences(Request $request, ContentService $contentService) : Response
     {
-        /*$this->coreHelper = $this->container->get('app.core_helper');
-        $xpContentTypeIdentifier = $this->container->getParameter('app.experience.content_type.identifier');
-        $xpLocationId = $this->container->getParameter('app.xp.locationid');
-        $params['educations'] = $this->coreHelper->getObjectByType($this->container->getParameter('app.type.education'),
-            $xpLocationId,
-            $xpContentTypeIdentifier);
-        $params['xps'] = $this->coreHelper->getObjectByType($this->container->getParameter('app.type.work'),
-            $xpLocationId,
-            $xpContentTypeIdentifier);*/
+        $orderBy['c.startDate'] = 'desc';
+        $locale = $request->getLocale();
 
         return $this->render(
             'front/parts/experiences.html.twig',
             [
-                'educations' => [],
-                'xps' => []
+                'xps' => $contentService->getContents(
+                    Experience::class,
+                    'app.experiences.' . $locale,
+                    [],
+                    $orderBy
+                )
             ]
         );
 
@@ -76,35 +81,37 @@ class HomeController extends Controller
 
     /**
      * Part skills
+     * @param Request $request
+     * @param ContentService $contentService
      * @return Response
+     * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function skills() : Response
+    public function skills(Request $request, ContentService $contentService) : Response
     {
-       /* $this->coreHelper = $this->container->get('app.core_helper');
-        $skillContentTypeIdentifier = $this->container->getParameter('app.skill.content_type.identifier');
-        $skillsLocationId = $this->container->getParameter('app.skills.locationid');
-        $params['languages'] = $this->coreHelper->getObjectByType($this->container->getParameter('app.type.language'),
-            $skillsLocationId,
-            $skillContentTypeIdentifier,
-            'note',
-            Query::SORT_DESC);
-        $params['tools'] = $this->coreHelper->getObjectByType($this->container->getParameter('app.type.tools'),
-            $skillsLocationId,
-            $skillContentTypeIdentifier,
-            'note',
-            Query::SORT_DESC);
-        $params['skills'] = $this->coreHelper->getObjectByType($this->container->getParameter('app.type.skill'),
-            $skillsLocationId,
-            $skillContentTypeIdentifier,
-            'note',
-            Query::SORT_DESC);*/
+        $orderBy['c.note'] = 'desc';
+        $locale = $request->getLocale();
 
         return $this->render(
             'front/parts/skills.html.twig',
             [
-                'skills' => [],
-                'languages' => [],
-                'tools' => []
+                'skills' => $contentService->getContents(
+                    Skill::class,
+                    'app.skills.' . Skill::SKILL_TYPE_SKILL . '.' . $locale,
+                    ['c.type' => ['=', Skill::SKILL_TYPE_SKILL]],
+                    $orderBy
+                ),
+                'languages' => $contentService->getContents(
+                    Skill::class,
+                    'app.skills.' . Skill::SKILL_TYPE_LANGUAGE . '.' . $locale,
+                    ['c.type' => ['=', Skill::SKILL_TYPE_LANGUAGE]],
+                    $orderBy
+                ),
+                'tools' => $contentService->getContents(
+                    Skill::class,
+                    'app.skills.' . Skill::SKILL_TYPE_TOOLS . '.' . $locale,
+                    ['c.type' => ['=', Skill::SKILL_TYPE_TOOLS]],
+                    $orderBy
+                )
             ]
         );
 
@@ -112,19 +119,22 @@ class HomeController extends Controller
 
     /**
      * Part works
+     * @param Request $request
+     * @param ContentService $contentService
      * @return Response
+     * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function works() : Response
+    public function works(Request $request, ContentService $contentService) : Response
     {
-        /*$this->coreHelper = $this->container->get('app.core_helper');
-        $worksItemContentTypeIdentifier = $this->container->getParameter('app.work.content_type.identifier');
-        $worksLocationId = $this->container->getParameter('app.works.locationid');
-        $params['works'] = $this->coreHelper->getChildrenObject([$worksItemContentTypeIdentifier], $worksLocationId);*/
+        $locale = $request->getLocale();
 
         return $this->render(
             'front/parts/works.html.twig',
             [
-                'works' => []
+                'works' => $contentService->getContents(
+                    Work::class,
+                    'app.works.' . $locale
+                )
             ]
         );
     }

@@ -1,8 +1,3 @@
-$('.btn-search-open').click(function(e){
-    e.preventDefault();
-    $('.search-zone').fadeToggle();
-});
-
 $('.delete-button').click(function(){
     return confirm('Confirmez cette suppression ?');
 });

@@ -17,7 +17,6 @@ var paths = {
             'node_modules/bootstrap/dist/js/bootstrap.min.js',
             'node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js',
             'node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js',
-            'assets/admin/js/vendor/dropzone.min.js',
             'assets/admin/js/app.js'
         ],
         css: [

@@ -5,3 +5,5 @@ twig:
     globals:
         admin_locales: '%admin.locales.available%'
         app_locales: '%app.locales.available%'
+    form_themes:
+        - 'admin/form_div_layout.html.twig'

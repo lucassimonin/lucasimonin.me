@@ -1,0 +1,12 @@
+{% spaceless %}
+    <div class="col-md-6">
+        <ul class="no-bullets">
+            {% for item in items %}
+                <li>
+                    <span class="ability-title">{{ item.name }}</span>
+                    {% include 'front/content/parts/skill_rating.html.twig' with {'rating': item.note} %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endspaceless %}

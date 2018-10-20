@@ -9,7 +9,6 @@
 namespace App\Form\Type\User;
 
 use App\Entity\User;
-use App\Form\Type\Media\ImageType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -60,11 +59,6 @@ class UserType extends AbstractType
             'invalid_message' =>  'admin.user.form.password.error'
         ));
         $builder->add('enabled', CheckboxType::class, array('required' => false, 'label' => 'admin.common.activate'));
-
-        $builder->add('avatar', ImageType::class, [
-            'label' => 'admin.user.form.avatar',
-            'image_input' => true
-        ]);
     }
 
     /**

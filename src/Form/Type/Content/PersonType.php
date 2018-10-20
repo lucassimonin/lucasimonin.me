@@ -9,7 +9,7 @@
 namespace App\Form\Type\Content;
 
 use App\Entity\Person;
-use App\Form\Type\Media\ImageType;
+use App\Form\Type\Media\MediaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -57,9 +57,8 @@ class PersonType extends AbstractType
         ]);
         $builder->add('firstName', TextType::class, ['label' => 'admin.user.form.firstname']);
         $builder->add('lastName', TextType::class, ['label' => 'admin.user.form.lastname']);
-        $builder->add('picture', ImageType::class, [
-            'label' => 'admin.person.form.picture',
-            'image_input' => true
+        $builder->add('picture', MediaType::class, [
+            'label' => false,
         ]);
         $builder->add('city', TextType::class, ['label' => 'admin.person.form.city']);
         $builder->add('cityUrl', UrlType::class, ['label' => 'admin.person.form.city_url']);

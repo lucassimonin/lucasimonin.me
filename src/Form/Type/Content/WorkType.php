@@ -9,7 +9,7 @@
 namespace App\Form\Type\Content;
 
 use App\Entity\Work;
-use App\Form\Type\Media\ImageType;
+use App\Form\Type\Media\MediaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -49,9 +49,8 @@ class WorkType extends AbstractType
 
             ]
         ]);
-        $builder->add('picture', ImageType::class, [
-            'label' => 'admin.work.form.picture',
-            'image_input' => true
+        $builder->add('picture', MediaType::class, [
+            'label' => false
         ]);
         $builder->add('url', UrlType::class, ['label' => 'admin.work.form.url']);
 

@@ -11,6 +11,7 @@ namespace App\Form\Type\Content;
 use App\Entity\Experience;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -59,6 +60,17 @@ class ExperienceType extends AbstractType
             'attr' => ['class' => 'select2']
         ]);
         $builder->add('duration', TextType::class, ['label' => 'admin.experience.form.duration']);
+        $builder->add('startDate', DateType::class, [
+            'widget' => 'single_text',
+            'label' => 'admin.experience.form.start_date',
+            'html5' => false,
+            'required' => true,
+            'format' => 'dd-MM-yyyy',
+            'attr' => [
+                'class' => 'date',
+                'autocomplete' => 'off'
+            ]
+        ]);
         $builder->add('city', TextType::class, ['label' => 'admin.experience.form.city']);
         $builder->add('url', UrlType::class, ['label' => 'admin.experience.form.url']);
     }

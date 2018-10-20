@@ -8,6 +8,7 @@ parameters:
     admin.locales: "en|fr"
     admin.locales.available: ["en", "fr"]
     validator.translation_domain: 'app'
+    media_directory: '%kernel.project_dir%/public/uploads/media'
 
 services:
     # default configuration for services in *this* file
@@ -32,26 +33,32 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    App\Listener\GaufretteListener:
-      arguments:
-          $fileSystem: '@knp_gaufrette.filesystem_map'
-      tags:
-          - { name: doctrine.event_listener, event: postLoad, method: postLoad, priority: 100  }
-          - { name: doctrine.event_listener, event: preUpdate, method: preUpdate, priority: 100  }
-          - { name: doctrine.event_listener, event: prePersist, method: prePersist, priority: 100  }
-          - { name: doctrine.event_listener, event: preRemove, method: preRemove, priority: 100  }
     # Extension
-    App\Form\Extension\ImageExtension:
+
+    App\Form\Extension\MediaExtension:
         tags:
-            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
-    App\Twig\InjectExtension:
-        arguments:
-            $fileSystem: "@knp_gaufrette.filesystem_map"
-        tags:
-            - { name: twig.extension }
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FileType }
     App\Services\Core\CacheService:
         arguments:
             $lifeTime: '%app.cache_lifetime%'
             $cacheFolder: '%kernel.cache_dir%'
+
+    App\Services\Core\FileUploader:
+        arguments:
+            $targetDirectory: '%media_directory%'
+
+    App\EventListener\MediaUploadListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
+            - { name: doctrine.event_listener, event: postLoad }
+
     authentication_handler:
         class: App\Handler\AuthenticationHandler
+
+    App\EventSubscriber\ContentSubscriber:
+        arguments:
+            $locales: '%app.locales.available%'
+        tags:
+        - { name: doctrine.event_listener, event: postUpdate, method: postUpdate, priority: 100  }
+        - { name: doctrine.event_listener, event: postPersist, method: postPersist, priority: 100  }

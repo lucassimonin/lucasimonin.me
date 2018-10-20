@@ -22,7 +22,7 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
  *
  * @package App\Services\Core
  */
-class SerializerService extends BaseService
+class SerializerService
 {
     private $serializer;
 

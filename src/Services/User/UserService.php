@@ -8,8 +8,6 @@
 
 namespace App\Services\User;
 
-use App\Services\Core\BaseService;
-
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -21,20 +19,21 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  *
  * @package App\Services\User
  */
-class UserService extends BaseService
+class UserService
 {
     private $passwordEncoder;
+
+    private $manager;
 
     /**
      * UserService constructor.
      *
-     * @param EntityManagerInterface       $em
+     * @param EntityManagerInterface       $manager
      * @param UserPasswordEncoderInterface $passwordEncoder
      */
-    public function __construct(EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder)
     {
-        parent::__construct($em);
-        $this->addRepository('userRepository', User::class);
+        $this->manager = $manager;
         $this->passwordEncoder = $passwordEncoder;
     }
 
@@ -50,8 +49,8 @@ class UserService extends BaseService
         $user->setUpdated(new \DateTime());
         $password = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
         $user->setPassword($password);
-        $this->em->persist($user);
-        $this->em->flush();
+        $this->manager->persist($user);
+        $this->manager->flush();
     }
 
     /**
@@ -59,42 +58,7 @@ class UserService extends BaseService
      */
     public function remove(User $user)
     {
-        $this->em->remove($user);
-        $this->em->flush();
+        $this->manager->remove($user);
+        $this->manager->flush();
     }
-
-    /**
-     * Get all user
-     *
-     * @param array $filters
-     *
-     * @return mixed
-     */
-    public function queryForSearch($filters = array())
-    {
-        return $this->userRepository->queryForSearch($filters);
-    }
-
-    /**
-     * Find all
-     *
-     * @return mixed
-     */
-    public function findAll()
-    {
-        return $this->userRepository->findAll();
-    }
-
-    /**
-     * Find one by
-     *
-     * @param array $filters
-     * @return mixed
-     */
-    public function findOneBy($filters = array())
-    {
-        return $this->userRepository->findOneBy($filters);
-    }
-
-
 }

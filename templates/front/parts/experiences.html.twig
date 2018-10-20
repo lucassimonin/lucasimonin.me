@@ -7,17 +7,27 @@
             </p>
             <hr>
             <h3>{{ 'app.title.education'|trans({}, 'app') }}</h3>
-            <div class="experiences">
-                {% for education in educations %}
-                    {% include 'front/content/parts/experience.html.twig' with {'item': education} %}
+                {% set experiences_block, educations_block = '', '' %}
+                {% for item in xps %}
+                    {% if item.type == 'education' %}
+                        {% set educations_block %}
+                            {{ educations_block }}
+                            {% include 'front/content/parts/experience.html.twig' with {'item': item} %}
+                        {% endset %}
+                    {% else %}
+                        {% set experiences_block %}
+                            {{ experiences_block }}
+                            {% include 'front/content/parts/experience.html.twig' with {'item': item} %}
+                        {% endset %}
+                    {% endif %}
                 {% endfor %}
+            <div class="experiences">
+                {{ educations_block }}
             </div>
             <hr class="print-margin-top">
             <h3>{{ 'app.title.career'|trans({}, 'app') }}</h3>
             <div class="experiences">
-                {% for xp in xps %}
-                    {% include 'front/content/parts/experience.html.twig' with {'item': xp} %}
-                {% endfor %}
+                {{ experiences_block }}
             </div>
         </section>
     </div>

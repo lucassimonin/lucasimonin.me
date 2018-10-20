@@ -22,7 +22,7 @@ class Work
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Media", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Media", cascade={"all"}, fetch="EAGER")
      * @ORM\JoinColumn(name="picture_id", referencedColumnName="id", onDelete="SET NULL")
      * @var Media
      */

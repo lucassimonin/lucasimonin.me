@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Entity\Traits\GaufretteTrait;
 use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
 
 /**
@@ -17,7 +16,6 @@ use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
 class User implements UserInterface, \Serializable, TwoFactorInterface
 {
     use TimestampableTrait;
-    use GaufretteTrait;
     const PATTERN_EMAIL = '/^(?:(?=.*[a-z])(?:(?=.*[A-Z])(?=.*[\d\W])|(?=.*\W)(?=.*\d))|(?=.*\W)(?=.*[A-Z])(?=.*\d)).{8,}$/';
     const ROLE_DEFAULT = 'ROLE_USER';
     const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
@@ -123,14 +121,6 @@ class User implements UserInterface, \Serializable, TwoFactorInterface
      * @ORM\Column(type="string", nullable=true)
      */
     private $updatedBy;
-
-    /**
-     * Avatar
-     * @ORM\ManyToOne(targetEntity="App\Entity\Media", cascade={"persist"})
-     * @ORM\JoinColumn(name="avatar_id", referencedColumnName="id", onDelete="SET NULL")
-     * @var Media
-     */
-    protected $avatar;
 
     public function __construct($enabled = false)
     {
@@ -350,22 +340,6 @@ class User implements UserInterface, \Serializable, TwoFactorInterface
     public function setUpdatedBy(string $updatedBy): void
     {
         $this->updatedBy = $updatedBy;
-    }
-
-    /**
-     * @return Media
-     */
-    public function getAvatar()
-    {
-        return $this->avatar;
-    }
-
-    /**
-     * @param Media $avatar
-     */
-    public function setAvatar($avatar): void
-    {
-        $this->avatar = $avatar;
     }
 
     /**

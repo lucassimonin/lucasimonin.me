@@ -1,2 +1,0 @@
-parameters:
-    exclude_routes: 'admin|login|logout|sitemap.xml|media|2fa|2fa_check'

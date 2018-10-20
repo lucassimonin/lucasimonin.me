@@ -53,6 +53,13 @@ class Experience
     private $duration;
 
     /**
+     *
+     * @var \DateTime
+     * @ORM\Column(name="start_date", type="date")
+     */
+    private $startDate;
+
+    /**
      * Experience constructor.
      */
     public function __construct()
@@ -133,6 +140,22 @@ class Experience
     }
 
     /**
+     * @return \DateTime
+     */
+    public function getStartDate(): ?\DateTime
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * @param \DateTime $startDate
+     */
+    public function setStartDate(\DateTime $startDate): void
+    {
+        $this->startDate = $startDate;
+    }
+
+    /**
      * @param string $duration
      */
     public function setDuration(string $duration): void
@@ -169,5 +192,4 @@ class Experience
     {
         return $this->__call('name', array());
     }
-
 }

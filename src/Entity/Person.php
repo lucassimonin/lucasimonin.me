@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Entity\Traits\GaufretteTrait;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
@@ -13,7 +12,6 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  */
 class Person
 {
-    use GaufretteTrait;
     use ORMBehaviors\Translatable\Translatable;
 
     /**

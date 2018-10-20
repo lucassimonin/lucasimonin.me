@@ -11,13 +11,17 @@
                     {% for work in works %}
                         <div class="col-md-6 col-sm-12 col-xs-12 wow fadeInUp">
                             <figure class="effect">
-                                IMAGE
+                                <img src="{{ asset('uploads/media/' ~ work.picture.fileName) }}" alt="{{ work.picture.alt }}" />
                                 <figcaption>
-                                    <h3>NAME</h3>
-                                    description_site
-                                    <p><strong>Tags:</strong> <br>description</p>
-                                    <p class="visible-print-block">url</p>
-                                    <a rel="external" href="url" target="_blank">{{ 'app.show_more'|trans({}, 'app') }}</a>
+                                    <h3>{{ work.name }}</h3>
+                                    {{ work.descriptionSite|raw }}
+                                    <p>
+                                        <strong>{{ 'app.common.tags'|trans({}, 'app') }}:</strong>
+                                        <br>
+                                        {{ work.description|raw }}
+                                    </p>
+                                    <p class="visible-print-block">{{ work.url }}</p>
+                                    <a rel="external" href="{{ work.url }}" target="_blank">{{ 'app.show_more'|trans({}, 'app') }}</a>
                                     <span class="icon">
                                         <i class="fa fa-external-link" aria-hidden="true"></i>
                                     </span>

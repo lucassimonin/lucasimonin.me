@@ -2,7 +2,7 @@
 .php_cs.cache
 /.idea/
 /docker/database/*
-/public/uploads/media/media/*
+/public/uploads/media/*
 *.DS_Store
 .AppleDouble
 .LSOverride
