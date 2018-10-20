@@ -38,6 +38,11 @@ services:
     App\Form\Extension\MediaExtension:
         tags:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FileType }
+
+    App\Form\Extension\ChoiceExtension:
+        tags:
+        - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }
+
     App\Services\Core\CacheService:
         arguments:
             $lifeTime: '%app.cache_lifetime%'
