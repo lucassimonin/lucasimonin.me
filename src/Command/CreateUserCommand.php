@@ -60,7 +60,7 @@ class CreateUserCommand extends Command
         $io->title('USER CREATOR');
         $admin = $input->getOption('admin');
         $userEntity = new User(true);
-        $userEntity->addRole($admin ? 'SUPER_ADMIN' : 'ROLE_USER');
+        $userEntity->addRole($admin ? 'ROLE_SUPER_ADMIN' : 'ROLE_USER');
         do {
             $username = $io->ask('Username', null, function ($username) {
                 if (empty($username)) {
