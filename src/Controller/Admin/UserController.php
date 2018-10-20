@@ -145,14 +145,8 @@ class UserController extends Controller
      * @Route("/edit/{id}", name="admin_user_edit")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function edit(Request $request, $id, UserService $userService)
+    public function edit(Request $request, User $user, UserService $userService)
     {
-        // Find it
-        $user =  $userService->findOneBy(['id' => $id]);
-        if (!$user) {
-            throw $this->createNotFoundException('User not found');
-        }
-
         // Breadcrumb
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem('admin.dashboard.label', $this->get("router")->generate("admin_dashboard"));
@@ -207,8 +201,6 @@ class UserController extends Controller
      * @param UserService $userService
      * @Route("/delete/{id}", name="admin_user_delete")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function delete(Request $request, User $user, UserService $userService)
     {
