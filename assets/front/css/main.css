@@ -610,7 +610,7 @@ img::-moz-selection {
     cursor: default;
 }
 
-#projects figure .description {
+#projects figure .description p {
     font-size: 14px;
 }
 .dotted {
