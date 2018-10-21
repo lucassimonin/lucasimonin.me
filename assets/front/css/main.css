@@ -82,7 +82,7 @@ section .lead {
     padding-left: 20px;
 }
 
-.ezrichtext-field p {
+p {
     margin-bottom: 5px;
 }
 .margin-icon > div {
@@ -610,7 +610,7 @@ img::-moz-selection {
     cursor: default;
 }
 
-figure .ezrichtext-field p {
+#projects figure .description {
     font-size: 14px;
 }
 .dotted {

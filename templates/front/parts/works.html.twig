@@ -14,7 +14,9 @@
                                 <img src="{{ asset('uploads/media/' ~ work.picture.fileName) }}" alt="{{ work.picture.alt }}" />
                                 <figcaption>
                                     <h3>{{ work.name }}</h3>
-                                    {{ work.description|raw }}
+                                    <div class="description">
+                                        {{ work.description|raw }}
+                                    </div>
                                     <p>
                                         <strong>{{ 'app.common.tags'|trans({}, 'app') }}:</strong>
                                         <br>
