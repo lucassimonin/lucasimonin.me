@@ -614,7 +614,7 @@ img::-moz-selection {
     font-size: 14px;
 }
 #projects p {
-  margin-bottom: 0;
+  margin-bottom: 5px;
 }
 .dotted {
     border-bottom: 1px dotted;
