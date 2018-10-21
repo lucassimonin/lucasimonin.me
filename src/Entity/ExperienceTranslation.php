@@ -38,7 +38,6 @@ class ExperienceTranslation
     /**
      * @var string
      * @ORM\Column(type="text")
-     * @Assert\NotNull(message="admin.validation.mandatory.label")
      */
     private $description;
 
@@ -101,7 +100,7 @@ class ExperienceTranslation
     /**
      * @param string $description
      */
-    public function setDescription(string $description): void
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
     }

@@ -12,6 +12,7 @@ use App\Entity\Work;
 use App\Form\Type\Media\MediaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -40,15 +41,10 @@ class WorkType extends AbstractType
                     'label' => 'admin.work.form.description',
                     'attr' => ['class' => 'editor-wysiwyg'],
                     'field_type' => TextareaType::class
-                ],
-                'descriptionSite' => [
-                    'label' => 'admin.work.form.description_site',
-                    'attr' => ['class' => 'editor-wysiwyg'],
-                    'field_type' => TextareaType::class
                 ]
-
             ]
         ]);
+        $builder->add('tags', TextType::class, ['label' => 'admin.work.form.tags']);
         $builder->add('picture', MediaType::class, [
             'label' => false
         ]);

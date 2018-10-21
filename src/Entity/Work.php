@@ -37,6 +37,13 @@ class Work
     private $url;
 
     /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="admin.validation.mandatory.label")
+     */
+    private $tags;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -82,6 +89,22 @@ class Work
     public function setUrl(string $url): void
     {
         $this->url = $url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTags(): ?string
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param string $tags
+     */
+    public function setTags(string $tags): void
+    {
+        $this->tags = $tags;
     }
 
     /**

@@ -29,13 +29,6 @@ class WorkTranslation
     private $description;
 
     /**
-     * @var string
-     * @ORM\Column(name="description_site", type="text")
-     * @Assert\NotBlank(message="admin.validation.mandatory.label")
-     */
-    private $descriptionSite;
-
-    /**
      * @return string
      */
     public function getName(): ?string
@@ -65,21 +58,5 @@ class WorkTranslation
     public function setDescription(string $description): void
     {
         $this->description = $description;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescriptionSite(): ?string
-    {
-        return $this->descriptionSite;
-    }
-
-    /**
-     * @param string $descriptionSite
-     */
-    public function setDescriptionSite(string $descriptionSite): void
-    {
-        $this->descriptionSite = $descriptionSite;
     }
 }
