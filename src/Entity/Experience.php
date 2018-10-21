@@ -46,13 +46,6 @@ class Experience
     private $type;
 
     /**
-     * @var string
-     * @ORM\Column(length=255, nullable=true)
-     * @Assert\NotBlank(message="admin.validation.mandatory.label")
-     */
-    private $duration;
-
-    /**
      *
      * @var \DateTime
      * @ORM\Column(name="start_date", type="date")
@@ -132,14 +125,6 @@ class Experience
     }
 
     /**
-     * @return string
-     */
-    public function getDuration(): ?string
-    {
-        return $this->duration;
-    }
-
-    /**
      * @return \DateTime
      */
     public function getStartDate(): ?\DateTime
@@ -153,14 +138,6 @@ class Experience
     public function setStartDate(\DateTime $startDate): void
     {
         $this->startDate = $startDate;
-    }
-
-    /**
-     * @param string $duration
-     */
-    public function setDuration(string $duration): void
-    {
-        $this->duration = $duration;
     }
 
     /**

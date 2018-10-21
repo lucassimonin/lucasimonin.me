@@ -23,6 +23,13 @@ class ExperienceTranslation
 
     /**
      * @var string
+     * @ORM\Column(length=255, nullable=true)
+     * @Assert\NotBlank(message="admin.validation.mandatory.label")
+     */
+    private $duration;
+
+    /**
+     * @var string
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="admin.validation.mandatory.label")
      */
@@ -65,6 +72,22 @@ class ExperienceTranslation
     public function setTitle(string $title): void
     {
         $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDuration(): ?string
+    {
+        return $this->duration;
+    }
+
+    /**
+     * @param string $duration
+     */
+    public function setDuration(string $duration): void
+    {
+        $this->duration = $duration;
     }
 
     /**

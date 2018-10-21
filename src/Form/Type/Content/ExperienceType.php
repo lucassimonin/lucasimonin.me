@@ -41,6 +41,9 @@ class ExperienceType extends AbstractType
                 'title' => [
                     'label' => 'admin.experience.form.title',
                 ],
+                'duration' => [
+                    'label' => 'admin.experience.form.duration',
+                ],
                 'description' => [
                     'label' => 'admin.experience.form.description',
                     'attr' => ['class' => 'editor-wysiwyg'],
@@ -59,7 +62,6 @@ class ExperienceType extends AbstractType
             'label' => 'admin.component.experience.label.type',
             'attr' => ['class' => 'select2']
         ]);
-        $builder->add('duration', TextType::class, ['label' => 'admin.experience.form.duration']);
         $builder->add('startDate', DateType::class, [
             'widget' => 'single_text',
             'label' => 'admin.experience.form.start_date',

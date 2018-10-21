@@ -1,3 +1,2 @@
 User-agent: *
-Disallow: /ez
 Sitemap: https://lucasimonin.me/sitemap.xml
