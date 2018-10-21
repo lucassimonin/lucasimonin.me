@@ -613,6 +613,9 @@ img::-moz-selection {
 #projects figure .description p {
     font-size: 14px;
 }
+#projects p {
+  margin-bottom: 0;
+}
 .dotted {
     border-bottom: 1px dotted;
 }
