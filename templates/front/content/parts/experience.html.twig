@@ -1,13 +1,13 @@
 {% spaceless %}
     <div class="experience row {% if not pdf %}wow fadeInLeft{% endif %}">
-        <div class="col-md-4">
+        <div class="col-{% if not pdf %}md{% else %}xs{% endif %}-4">
             <h4>{{ item.name }}</h4>
             <p class="experience-period">
                 <i class="fa fa-clock-o"></i>
                 {{ item.duration }}
             </p>
         </div>
-        <div class="col-md-8">
+        <div class="col-{% if not pdf %}md{% else %}xs{% endif %}-8">
             <p>
                 <strong>{{ item.title }}</strong>
             </p>

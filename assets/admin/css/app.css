@@ -306,6 +306,10 @@ div.px-nav-dropdown-menu-title {
     background: url("../images/IconLock.svg") no-repeat 26px center;
 }
 
+.container-pdf {
+    max-width: 1280px;
+    padding: 40px 180px;
+}
 
 
 #login-img {

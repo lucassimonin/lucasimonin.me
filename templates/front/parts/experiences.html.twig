@@ -1,6 +1,6 @@
 {% spaceless %}
     <div class="bg-grey">
-        <section id="experiences" class="container">
+        <section id="experiences" class="container{% if pdf %}-pdf{% endif %}">
             <h2>{{ 'app.title.xp'|trans({}, 'app') }}</h2>
             <p class="lead">
                 “{{ 'app.quote.xp'|trans({}, 'app') }}”<br>- {{ 'app.quote.xp.author'|trans({}, 'app') }}
