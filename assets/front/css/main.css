@@ -616,6 +616,10 @@ img::-moz-selection {
 #projects p {
   margin-bottom: 5px;
 }
+.padding-pdf {
+  padding-top: 1400px;
+}
+
 .dotted {
     border-bottom: 1px dotted;
 }
