@@ -1,5 +1,5 @@
 {% spaceless %}
-    <div class="experience row wow fadeInLeft">
+    <div class="experience row {% if not pdf %}wow fadeInLeft{% endif %}">
         <div class="col-md-4">
             <h4>{{ item.name }}</h4>
             <p class="experience-period">

@@ -85,7 +85,7 @@ class HomeController extends Controller
      * @return Response
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function experiences(Request $request, ContentService $contentService) : Response
+    public function experiences(Request $request, ContentService $contentService, $pdf) : Response
     {
         $orderBy['c.startDate'] = 'desc';
         $locale = $request->getLocale();
@@ -93,6 +93,7 @@ class HomeController extends Controller
         return $this->render(
             'front/parts/experiences.html.twig',
             [
+                'pdf' => $pdf,
                 'xps' => $contentService->getContents(
                     Experience::class,
                     'app.experiences.' . $locale,
@@ -110,7 +111,7 @@ class HomeController extends Controller
      * @return Response
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function skills(Request $request, ContentService $contentService) : Response
+    public function skills(Request $request, ContentService $contentService, $pdf) : Response
     {
         $orderBy['c.note'] = 'desc';
         $locale = $request->getLocale();
@@ -135,7 +136,8 @@ class HomeController extends Controller
                     'app.skills.' . Skill::SKILL_TYPE_TOOLS . '.' . $locale,
                     ['c.type' => ['=', Skill::SKILL_TYPE_TOOLS]],
                     $orderBy
-                )
+                ),
+                'pdf' => $pdf
             ]
         );
     }

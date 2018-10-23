@@ -32,8 +32,8 @@
                 </div>
             </div>
         </section>
-        {{ render(controller('App\\Controller\\Front\\HomeController::experiences')) }}
-        {{ render(controller('App\\Controller\\Front\\HomeController::skills')) }}
+        {{ render(controller('App\\Controller\\Front\\HomeController::experiences', { 'pdf': false  })) }}
+        {{ render(controller('App\\Controller\\Front\\HomeController::skills', { 'pdf': false  })) }}
         {{ render(controller('App\\Controller\\Front\\HomeController::works')) }}
         {% include 'front/content/parts/contact.html.twig' %}
     {% endspaceless %}
