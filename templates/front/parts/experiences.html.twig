@@ -1,5 +1,5 @@
 {% spaceless %}
-    <div class="{% if pdf %}bg-grey{% endif %}">
+    <div class="{% if not pdf %}bg-grey{% endif %}">
         <section id="experiences" class="container{% if pdf %}-pdf{% endif %}">
             <h2>{{ 'app.title.xp'|trans({}, 'app') }}</h2>
             <p class="lead">

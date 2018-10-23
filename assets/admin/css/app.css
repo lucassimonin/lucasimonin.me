@@ -253,6 +253,9 @@ div.px-nav-dropdown-menu-title {
 .inputlogin.login {
     background: url("../images/IconUsername.svg") no-repeat 26px center;
 }
+.margin-pdf {
+    margin-top: 1400px;
+}
 
 .aa-input-container {
     display: inline-block;
