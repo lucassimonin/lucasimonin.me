@@ -2,7 +2,7 @@
     <!DOCTYPE html>
     <html lang="{{ app.request.locale|slice(0, 2) }}">
         <head>
-            <link rel="stylesheet" href="https://lucasimonin.me/build/front/css/style.css" type="text/css" />
+            {% include 'front/pagelayout/page_head_style.html.twig' %}
         </head>
         <body id="page-top" data-spy="scroll" data-target="#mainNav">
             {% block content %}{% endblock %}

@@ -55,11 +55,7 @@ class HomeController extends Controller
 
         return new PdfResponse(
             $this->get('knp_snappy.pdf')->getOutputFromHtml($html, [
-                'encoding' => 'utf-8',
-                'margin-top'    => 20,
-                'margin-right'  => 0,
-                'margin-bottom' => 20,
-                'margin-left'   => 0
+                'encoding' => 'utf-8'
             ]),
             'cv_lucas-simonin.pdf'
         );
