@@ -14,6 +14,9 @@ YARN            = $(EXEC_JS) yarn
 build:
 	$(DOCKER_COMPOSE) build --pull
 
+build-nocache:
+	$(DOCKER_COMPOSE) build --pull --no-cache
+
 start: ## Start the project
 start:
 	$(DOCKER_COMPOSE) up -d --remove-orphans --no-recreate
@@ -34,6 +37,9 @@ reset: kill install
 
 install: ## Install and start the project
 install: .env build start db assets
+
+install-nocache: ## Install with no cache on docker and start the project
+install-nocache: .env build-nocache start db assets
 
 deploy: .env vendor assets-prod db-update sync-translation update-js-route
 	rm -rf var/cache/*

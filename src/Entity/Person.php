@@ -327,5 +327,4 @@ class Person
     {
         return $this->__call('firstName', array());
     }
-
 }

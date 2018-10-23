@@ -136,5 +136,4 @@ class Work
     {
         return $this->__call('name', array());
     }
-
 }

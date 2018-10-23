@@ -7,6 +7,7 @@ use App\Entity\Person;
 use App\Entity\Skill;
 use App\Entity\Work;
 use App\Services\Content\ContentService;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,6 +35,30 @@ class HomeController extends Controller
         return $this->render('front/index.html.twig', [
             'person' => $person
         ]);
+    }
+
+    /**
+     * Homepage
+     * @Route("/download/pdf", name="download_pdf")
+     * @return Response
+     */
+    public function download() : Response
+    {
+        $person = $this->getDoctrine()->getRepository(Person::class)->findAll();
+        if (!empty($person)) {
+            $person = $person[0];
+        }
+
+        $html = $this->renderView('front/pdf/index.html.twig', [
+            'person' => $person
+        ]);
+
+        return new PdfResponse(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html, [
+                'encoding' => 'utf-8'
+            ]),
+            'cv_lucas-simonin.pdf'
+        );
     }
 
     /**
@@ -76,7 +101,6 @@ class HomeController extends Controller
                 )
             ]
         );
-
     }
 
     /**
@@ -114,7 +138,6 @@ class HomeController extends Controller
                 )
             ]
         );
-
     }
 
     /**

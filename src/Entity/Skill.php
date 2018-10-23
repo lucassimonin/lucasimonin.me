@@ -125,5 +125,4 @@ class Skill
     {
         return $this->__call('name', array());
     }
-
 }

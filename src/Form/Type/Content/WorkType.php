@@ -49,7 +49,6 @@ class WorkType extends AbstractType
             'label' => false
         ]);
         $builder->add('url', UrlType::class, ['label' => 'admin.work.form.url']);
-
     }
 
     /**

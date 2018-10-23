@@ -1,0 +1,11 @@
+{% spaceless %}
+    <!DOCTYPE html>
+    <html lang="{{ app.request.locale|slice(0, 2) }}">
+        <head>
+            {% include 'front/pagelayout/page_head_style.html.twig' %}
+        </head>
+        <body id="page-top" data-spy="scroll" data-target="#mainNav">
+            {% block content %}{% endblock %}
+        </body>
+    </html>
+{% endspaceless %}

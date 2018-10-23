@@ -1,0 +1,36 @@
+{% extends "front/pdf/pagelayout.html.twig" %}
+{% block content %}
+    {% spaceless %}
+        <section id="profile" class="container">
+            <h2>{{ 'app.global.title'|trans({}, 'app')|raw }}</h2>
+            <p class="lead">{{ 'app.presentation.subtitle'|trans({}, 'app') }}</p>
+            <hr>
+            <div class="row">
+                <div class="col-md-4 wow fadeInLeft">
+                    <h3>{{ 'app.title.about'|trans({}, 'app') }}</h3>
+                    {{ person.biography|raw }}
+                </div>
+                <div class="col-md-4 text-center wow fadeInUp">
+                    <img src="{{ absolute_url(asset('uploads/media/' ~ person.picture.fileName)) }}" alt="{{ person.picture.alt }}" />
+                </div>
+                <div class="col-md-4 wow fadeInRight">
+                    <h3>{{ 'app.title.details'|trans({}, 'app') }}</h3>
+                    <p>
+                        <strong>{{ 'app.title.name'|trans({}, 'app') }}:</strong><br>
+                        {{ person.firstName ~ ' ' ~ person.lastName }}<br>
+                        <strong>{{ 'app.title.work'|trans({}, 'app') }}:</strong><br>
+                        {{ person.work }}<br>
+                        <strong>{{ 'app.title.age'|trans({}, 'app') }}:</strong><br>
+                        {% set current_year = 'now'|date('Y') %}
+                        {{ 'app.birthday.value'|trans({'%year%': (current_year - person.birthday|date('Y'))}, 'app') }}<br>
+                        <strong>{{ 'app.title.degree'|trans({}, 'app') }}:</strong><br>
+                        {{ person.degree }}<br>
+                        <strong>{{ 'app.title.location'|trans({}, 'app') }}:</strong><br>
+                        <a href="{{ person.cityUrl }}" rel="external" class="dotted" target="_blank">{{ person.city }}</a></p>
+                </div>
+            </div>
+        </section>
+        {{ render(controller('App\\Controller\\Front\\HomeController::experiences')) }}
+        {{ render(controller('App\\Controller\\Front\\HomeController::skills')) }}
+    {% endspaceless %}
+{% endblock %}

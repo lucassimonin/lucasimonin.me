@@ -49,7 +49,6 @@ class SkillType extends AbstractType
             'label' => 'admin.component.skill.label.type',
             'attr' => ['class' => 'select2']
         ]);
-
     }
 
     /**

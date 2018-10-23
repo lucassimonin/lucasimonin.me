@@ -81,5 +81,4 @@ class MediaUploadListener
     {
         return $this->uploader->getTargetDirectory().'/'.$fileName;
     }
-
 }

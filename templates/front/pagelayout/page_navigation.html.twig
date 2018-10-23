@@ -15,7 +15,7 @@
                 <li class=""><a class="page-scroll" href="#abilities">{{ 'app.title.abilities'|trans({}, 'app') }}</a></li>
                 <li><a class="page-scroll" href="#projects">{{ 'app.title.project'|trans({}, 'app') }}</a></li>
                 <li><a class="page-scroll" href="#contact">{{ 'app.title.contact'|trans({}, 'app') }}</a></li>
-                <li class="hidden-xs"><a href="#" onclick="window.print();return false;">{{ 'app.title.print'|trans({}, 'app') }}</a></li>
+                <li class="hidden-xs"><a href="{{ path('download_pdf') }}">{{ 'app.title.download'|trans({}, 'app') }}</a></li>
                 {% include "front/content/parts/languages.html.twig" %}
             </ul>
         </div>

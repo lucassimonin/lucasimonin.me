@@ -45,7 +45,6 @@ class ContentRepository extends EntityRepository
             foreach ($orderBy as $sort => $order) {
                 $qb->orderBy($sort, $order);
             }
-
         }
         return $qb->getQuery()->getResult();
     }
