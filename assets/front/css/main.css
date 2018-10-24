@@ -616,9 +616,6 @@ img::-moz-selection {
 #projects p {
   margin-bottom: 5px;
 }
-.padding-pdf {
-  padding-top: 1400px;
-}
 
 .dotted {
     border-bottom: 1px dotted;
@@ -742,9 +739,6 @@ ul.no-bullets {
 
   .container { padding: 60px 20px; min-width: 280px; }
   .hidden-phone { display: none; }
-
-  #experiences .experience .experience-details > span { display: block; margin-bottom: 6px; }
-  #experiences .experience .experience-details .seperator { display: none; }
 
   #interests .left { float: none; }
   #interests .right { float: none; }
