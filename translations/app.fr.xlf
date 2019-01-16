@@ -1,0 +1,1143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="fr" trgLang="fr">
+  <file id="app.fr">
+    <unit id="HoBZEZU" name="admin.dashboard.label">
+      <segment>
+        <source>admin.dashboard.label</source>
+        <target>Tableau de bord</target>
+      </segment>
+    </unit>
+    <unit id="wZegnVj" name="admin.users.menu.label">
+      <segment>
+        <source>admin.users.menu.label</source>
+        <target>Utilisateurs</target>
+      </segment>
+    </unit>
+    <unit id="k1T.RUR" name="common.locale.en">
+      <segment>
+        <source>common.locale.en</source>
+        <target>Anglais</target>
+      </segment>
+    </unit>
+    <unit id="_l6cIZ0" name="admin.comon.edit_profile">
+      <segment>
+        <source>admin.comon.edit_profile</source>
+        <target>Éditer mon profil</target>
+      </segment>
+    </unit>
+    <unit id="YQnFmWI" name="admin.common.logout.title">
+      <segment>
+        <source>admin.common.logout.title</source>
+        <target>Déconnexion</target>
+      </segment>
+    </unit>
+    <unit id="A_yUZNp" name="admin.common.sure_continue">
+      <segment>
+        <source>admin.common.sure_continue</source>
+        <target>Êtes-vous sûr ?</target>
+      </segment>
+    </unit>
+    <unit id="D3FMUyo" name="admin.common.cancel.title">
+      <segment>
+        <source>admin.common.cancel.title</source>
+        <target>Annuler</target>
+      </segment>
+    </unit>
+    <unit id="KEOUM8s" name="admin.common.yes">
+      <segment>
+        <source>admin.common.yes</source>
+        <target>Oui</target>
+      </segment>
+    </unit>
+    <unit id="oHGy6ig" name="admin.adminstration.label">
+      <segment>
+        <source>admin.adminstration.label</source>
+        <target>Administration</target>
+      </segment>
+    </unit>
+    <unit id="7JlYavk" name="admin.users.list.title">
+      <segment>
+        <source>admin.users.list.title</source>
+        <target>Liste des utilisateurs</target>
+      </segment>
+    </unit>
+    <unit id="LNPFhpH" name="admin.common.new.button">
+      <segment>
+        <source>admin.common.new.button</source>
+        <target>Nouveau</target>
+      </segment>
+    </unit>
+    <unit id="SVQNkbM" name="admin.common.search.button">
+      <segment>
+        <source>admin.common.search.button</source>
+        <target>Rechercher</target>
+      </segment>
+    </unit>
+    <unit id="Uy216Fx" name="admin.user.form.firstname">
+      <segment>
+        <source>admin.user.form.firstname</source>
+        <target>Prénom</target>
+      </segment>
+    </unit>
+    <unit id="YkCCWp5" name="admin.user.form.search.firstname">
+      <segment>
+        <source>admin.user.form.search.firstname</source>
+        <target>Prénom</target>
+      </segment>
+    </unit>
+    <unit id="Gq_mIB3" name="admin.user.form.lastname">
+      <segment>
+        <source>admin.user.form.lastname</source>
+        <target>Nom</target>
+      </segment>
+    </unit>
+    <unit id="VvuRzdy" name="admin.user.form.email">
+      <segment>
+        <source>admin.user.form.email</source>
+        <target>Email</target>
+      </segment>
+    </unit>
+    <unit id="ZuhsT6s" name="admin.user.form.search.lastname">
+      <segment>
+        <source>admin.user.form.search.lastname</source>
+        <target>Nom</target>
+      </segment>
+    </unit>
+    <unit id="Ub84WJJ" name="admin.user.form.search.email">
+      <segment>
+        <source>admin.user.form.search.email</source>
+        <target>Email</target>
+      </segment>
+    </unit>
+    <unit id="uS_ZWyK" name="admin.common.activate">
+      <segment>
+        <source>admin.common.activate</source>
+        <target>Activé</target>
+      </segment>
+    </unit>
+    <unit id="ttwz1o." name="admin.common.created_at">
+      <segment>
+        <source>admin.common.created_at</source>
+        <target>Créé le</target>
+      </segment>
+    </unit>
+    <unit id="TiDjp1w" name="admin.common.actions">
+      <segment>
+        <source>admin.common.actions</source>
+        <target>Actions</target>
+      </segment>
+    </unit>
+    <unit id="hwwX2rK" name="admin.common.roles">
+      <segment>
+        <source>admin.common.roles</source>
+        <target>Rôles</target>
+      </segment>
+    </unit>
+    <unit id="Dqrpbv_" name="roles.super_admin">
+      <segment>
+        <source>roles.super_admin</source>
+        <target>Super admin</target>
+      </segment>
+    </unit>
+    <unit id="o86NjrR" name="admin.common.update.button">
+      <segment>
+        <source>admin.common.update.button</source>
+        <target>Modifier</target>
+      </segment>
+    </unit>
+    <unit id="NNksXh." name="admin.common.delete.button">
+      <segment>
+        <source>admin.common.delete.button</source>
+        <target>Supprimer</target>
+      </segment>
+    </unit>
+    <unit id="MTRH44u" name="admin.google_authentificator.label">
+      <segment>
+        <source>admin.google_authentificator.label</source>
+        <target>QR code Google authentificator</target>
+      </segment>
+    </unit>
+    <unit id="XIHOQ5z" name="admin.flash.created">
+      <segment>
+        <source>admin.flash.created</source>
+        <target>Élément créé</target>
+      </segment>
+    </unit>
+    <unit id="epb30dM" name="admin.flash.errors">
+      <segment>
+        <source>admin.flash.errors</source>
+        <target>Le formulaire contient des erreurs</target>
+      </segment>
+    </unit>
+    <unit id="db4CMcX" name="admin.flash.updated">
+      <segment>
+        <source>admin.flash.updated</source>
+        <target>Élément mis à jour</target>
+      </segment>
+    </unit>
+    <unit id="qsBBcmi" name="admin.common.seo">
+      <segment>
+        <source>admin.common.seo</source>
+        <target>Seo</target>
+      </segment>
+    </unit>
+    <unit id="r23pgEo" name="admin.user.title.edit">
+      <segment>
+        <source>admin.user.title.edit</source>
+        <target>Modifier un utilisateur</target>
+      </segment>
+    </unit>
+    <unit id="FkJNqCA" name="admin.media.id.label">
+      <segment>
+        <source>admin.media.id.label</source>
+        <target>Id</target>
+      </segment>
+    </unit>
+    <unit id="Ldcc4yI" name="admin.user.form.username">
+      <segment>
+        <source>admin.user.form.username</source>
+        <target>Nom d'utilisateur</target>
+      </segment>
+    </unit>
+    <unit id="FXtYEQV" name="admin.flash.user.password">
+      <segment>
+        <source>admin.flash.user.password</source>
+        <target>Si vous laissez vide le mot de passe ne sera pas modifié</target>
+      </segment>
+    </unit>
+    <unit id="_TMCCTd" name="admin.user.form.password">
+      <segment>
+        <source>admin.user.form.password</source>
+        <target>Mot de passe</target>
+      </segment>
+    </unit>
+    <unit id="kPxiO1E" name="admin.user.form.repeat_password">
+      <segment>
+        <source>admin.user.form.repeat_password</source>
+        <target>Répéter votre mot de passe</target>
+      </segment>
+    </unit>
+    <unit id="ayInDxG" name="admin.user.form.roles">
+      <segment>
+        <source>admin.user.form.roles</source>
+        <target>Rôles</target>
+      </segment>
+    </unit>
+    <unit id="s2Wwe3m" name="roles.admin">
+      <segment>
+        <source>roles.admin</source>
+        <target>Admin</target>
+      </segment>
+    </unit>
+    <unit id="AzwKU52" name="admin.validation.mandatory.label">
+      <segment>
+        <source>admin.validation.mandatory.label</source>
+        <target>Ce champ est requis</target>
+      </segment>
+    </unit>
+    <unit id="mvm.MQS" name="admin.validation.too_short.label">
+      <segment>
+        <source>admin.validation.too_short.label</source>
+        <target>La valeur du champs est trop courte</target>
+      </segment>
+    </unit>
+    <unit id="e6vYZ0g" name="admin.validation.too_long.label">
+      <segment>
+        <source>admin.validation.too_long.label</source>
+        <target>La valeur du champs est trop longue</target>
+      </segment>
+    </unit>
+    <unit id="M5CBoLD" name="admin.validation.email.label">
+      <segment>
+        <source>admin.validation.email.label</source>
+        <target>E-mail invalide</target>
+      </segment>
+    </unit>
+    <unit id="7PNFI_2" name="admin.common.login.title">
+      <segment>
+        <source>admin.common.login.title</source>
+        <target>Se connecter</target>
+      </segment>
+    </unit>
+    <unit id="76_SOF6" name="admin.common.remember_me">
+      <segment>
+        <source>admin.common.remember_me</source>
+        <target>Se rappeler de moi</target>
+      </segment>
+    </unit>
+    <unit id="KZjkaOh" name="admin.common.auth_code.title">
+      <segment>
+        <source>admin.common.auth_code.title</source>
+        <target>Google authenticator code</target>
+      </segment>
+    </unit>
+    <unit id="UQe2uvQ" name="admin.common.create.button">
+      <segment>
+        <source>admin.common.create.button</source>
+        <target>Créer</target>
+      </segment>
+    </unit>
+    <unit id="Qiz94KI" name="admin.user.title.create">
+      <segment>
+        <source>admin.user.title.create</source>
+        <target>Création d'un utilisateur</target>
+      </segment>
+    </unit>
+    <unit id="JQWsb8v" name="app.global.meta_title">
+      <segment>
+        <source>app.global.meta_title</source>
+        <target>CV intéractif | Lucas SIMONIN</target>
+      </segment>
+    </unit>
+    <unit id="gpwD92Q" name="app.global.title">
+      <segment>
+        <source>app.global.title</source>
+        <target><![CDATA[Lucas <span class="red">SIMONIN</span>]]></target>
+      </segment>
+    </unit>
+    <unit id="ZkMdida" name="app.global.subtitle">
+      <segment>
+        <source>app.global.subtitle</source>
+        <target>CV intéractif</target>
+      </segment>
+    </unit>
+    <unit id="OQGY2Lf" name="app.title.presentation">
+      <segment>
+        <source>app.title.presentation</source>
+        <target>Profil</target>
+      </segment>
+    </unit>
+    <unit id="adtQz4V" name="app.title.xp">
+      <segment>
+        <source>app.title.xp</source>
+        <target>Expériences</target>
+      </segment>
+    </unit>
+    <unit id="xKKneUS" name="app.title.abilities">
+      <segment>
+        <source>app.title.abilities</source>
+        <target>Capacités</target>
+      </segment>
+    </unit>
+    <unit id="13JfQJx" name="app.title.project">
+      <segment>
+        <source>app.title.project</source>
+        <target>Projets</target>
+      </segment>
+    </unit>
+    <unit id="RxnG4G7" name="app.title.contact">
+      <segment>
+        <source>app.title.contact</source>
+        <target>Contact</target>
+      </segment>
+    </unit>
+    <unit id="A_OH5y6" name="app.presentation.subtitle">
+      <segment>
+        <source>app.presentation.subtitle</source>
+        <target>Je suis un développeur PHP créatif</target>
+      </segment>
+    </unit>
+    <unit id="0FNz.9P" name="app.title.print">
+      <segment>
+        <source>app.title.print</source>
+        <target>Imprimer</target>
+      </segment>
+    </unit>
+    <unit id="jBZ9m4z" name="app.title.about">
+      <segment>
+        <source>app.title.about</source>
+        <target>À propos</target>
+      </segment>
+    </unit>
+    <unit id="N7Dko4T" name="app.title.details">
+      <segment>
+        <source>app.title.details</source>
+        <target>Détails</target>
+      </segment>
+    </unit>
+    <unit id="lQa9UfI" name="app.title.name">
+      <segment>
+        <source>app.title.name</source>
+        <target>Nom</target>
+      </segment>
+    </unit>
+    <unit id="7IMUw3o" name="app.title.work">
+      <segment>
+        <source>app.title.work</source>
+        <target>Poste actuel</target>
+      </segment>
+    </unit>
+    <unit id="jlQry52" name="app.title.age">
+      <segment>
+        <source>app.title.age</source>
+        <target>Àge</target>
+      </segment>
+    </unit>
+    <unit id="PF3YNxH" name="app.title.degree">
+      <segment>
+        <source>app.title.degree</source>
+        <target>Diplôme</target>
+      </segment>
+    </unit>
+    <unit id="N2W85hN" name="app.title.location">
+      <segment>
+        <source>app.title.location</source>
+        <target>Emplacement</target>
+      </segment>
+    </unit>
+    <unit id="n4EQ.vd" name="app.quote.xp">
+      <segment>
+        <source>app.quote.xp</source>
+        <target>L'expérience est le commencement de la sagesse.</target>
+      </segment>
+    </unit>
+    <unit id="Sc2JiXJ" name="app.quote.xp.author">
+      <segment>
+        <source>app.quote.xp.author</source>
+        <target>Alcman de Sardes</target>
+      </segment>
+    </unit>
+    <unit id="O17Dlk_" name="app.title.education">
+      <segment>
+        <source>app.title.education</source>
+        <target>Éducations</target>
+      </segment>
+    </unit>
+    <unit id="wtH.9j4" name="app.title.career">
+      <segment>
+        <source>app.title.career</source>
+        <target>Carrières</target>
+      </segment>
+    </unit>
+    <unit id="NHzFthn" name="app.quote.skill">
+      <segment>
+        <source>app.quote.skill</source>
+        <target>La compétence ou l'incompétence n'ont pas d'âge.</target>
+      </segment>
+    </unit>
+    <unit id="uljf3.d" name="app.quote.skill.author">
+      <segment>
+        <source>app.quote.skill.author</source>
+        <target>Michel Bouthot, Chemins parsemés d'immortelles pensées</target>
+      </segment>
+    </unit>
+    <unit id="_a9R6A_" name="app.title.skill">
+      <segment>
+        <source>app.title.skill</source>
+        <target>Compétences</target>
+      </segment>
+    </unit>
+    <unit id="NYodrBO" name="app.title.language">
+      <segment>
+        <source>app.title.language</source>
+        <target>Langues</target>
+      </segment>
+    </unit>
+    <unit id="6SxWCsl" name="app.title.tools">
+      <segment>
+        <source>app.title.tools</source>
+        <target>Outils</target>
+      </segment>
+    </unit>
+    <unit id="HT98z5O" name="app.title.others">
+      <segment>
+        <source>app.title.others</source>
+        <target>Autres</target>
+      </segment>
+    </unit>
+    <unit id="EuXNuiu" name="app.skill.creative">
+      <segment>
+        <source>app.skill.creative</source>
+        <target>Créatif</target>
+      </segment>
+    </unit>
+    <unit id="PmXe0xI" name="app.skill.team">
+      <segment>
+        <source>app.skill.team</source>
+        <target>Equipier</target>
+      </segment>
+    </unit>
+    <unit id="sm4O60E" name="app.skill.passion">
+      <segment>
+        <source>app.skill.passion</source>
+        <target>Passionné</target>
+      </segment>
+    </unit>
+    <unit id="ydIev08" name="app.skill.web">
+      <segment>
+        <source>app.skill.web</source>
+        <target>Web Addict</target>
+      </segment>
+    </unit>
+    <unit id="kPDjeN_" name="app.skill.travel">
+      <segment>
+        <source>app.skill.travel</source>
+        <target>Voyageur</target>
+      </segment>
+    </unit>
+    <unit id="6h25PZW" name="app.skill.sport">
+      <segment>
+        <source>app.skill.sport</source>
+        <target>Sportif</target>
+      </segment>
+    </unit>
+    <unit id="mOl82Ag" name="app.quote.contact">
+      <segment>
+        <source>app.quote.contact</source>
+        <target>Nous devenons ce que nous sommes à travers notre contact au monde, aux autres.</target>
+      </segment>
+    </unit>
+    <unit id="fE4pgLX" name="app.quote.contact.author">
+      <segment>
+        <source>app.quote.contact.author</source>
+        <target>Natascha Kampusch, 3096 jours</target>
+      </segment>
+    </unit>
+    <unit id="8kOhSXr" name="admin.person.title.update">
+      <segment>
+        <source>admin.person.title.update</source>
+        <target>Édition contenu général</target>
+      </segment>
+    </unit>
+    <unit id="Gn.X9_Z" name="admin.common.default.translation">
+      <segment>
+        <source>admin.common.default.translation</source>
+        <target>Défaut</target>
+      </segment>
+    </unit>
+    <unit id="fY6ccbH" name="admin.user.form.meta_description">
+      <segment>
+        <source>admin.user.form.meta_description</source>
+        <target>Méta description</target>
+      </segment>
+    </unit>
+    <unit id="sNAjZoV" name="admin.user.form.meta_title">
+      <segment>
+        <source>admin.user.form.meta_title</source>
+        <target>Méta titre</target>
+      </segment>
+    </unit>
+    <unit id="IjiJj4W" name="admin.person.form.work">
+      <segment>
+        <source>admin.person.form.work</source>
+        <target>Poste actuel</target>
+      </segment>
+    </unit>
+    <unit id="sYJPXir" name="admin.person.form.degree">
+      <segment>
+        <source>admin.person.form.degree</source>
+        <target>Diplôme</target>
+      </segment>
+    </unit>
+    <unit id="GITEPLJ" name="admin.person.form.biography">
+      <segment>
+        <source>admin.person.form.biography</source>
+        <target>Biographie</target>
+      </segment>
+    </unit>
+    <unit id="WO0Rj23" name="admin.person.form.city">
+      <segment>
+        <source>admin.person.form.city</source>
+        <target>Ville</target>
+      </segment>
+    </unit>
+    <unit id="za4ioT_" name="admin.person.form.birthday">
+      <segment>
+        <source>admin.person.form.birthday</source>
+        <target>Date d'anniversaire</target>
+      </segment>
+    </unit>
+    <unit id="RY4FqLb" name="admin.person.form.city_url">
+      <segment>
+        <source>admin.person.form.city_url</source>
+        <target>Url goole map de la ville</target>
+      </segment>
+    </unit>
+    <unit id="C49LD9x" name="app.birthday.value">
+      <notes>
+        <note>parameters:</note>
+        <note> '%year%': 29</note>
+      </notes>
+      <segment>
+        <source>app.birthday.value</source>
+        <target>%year% ans</target>
+      </segment>
+    </unit>
+    <unit id="SG8NXzQ" name="admin.experience.menu.label">
+      <segment>
+        <source>admin.experience.menu.label</source>
+        <target>Expériences</target>
+      </segment>
+    </unit>
+    <unit id="BqEV_Cq" name="admin.experience.list.title">
+      <segment>
+        <source>admin.experience.list.title</source>
+        <target>Liste des expériences</target>
+      </segment>
+    </unit>
+    <unit id="jyWIPYx" name="admin.common.form.name">
+      <segment>
+        <source>admin.common.form.name</source>
+        <target>Nom</target>
+      </segment>
+    </unit>
+    <unit id="OiKTbhj" name="admin.user.form.search.name">
+      <segment>
+        <source>admin.user.form.search.name</source>
+        <target>Nom</target>
+      </segment>
+    </unit>
+    <unit id="6NuwfSR" name="admin.common.no_data.title">
+      <segment>
+        <source>admin.common.no_data.title</source>
+        <target>Aucune donnée.</target>
+      </segment>
+    </unit>
+    <unit id="ETV53.d" name="admin.experience.title.create">
+      <segment>
+        <source>admin.experience.title.create</source>
+        <target>Création d'un expérience</target>
+      </segment>
+    </unit>
+    <unit id="eXDJr61" name="admin.experience.form.name">
+      <segment>
+        <source>admin.experience.form.name</source>
+        <target>Nom</target>
+      </segment>
+    </unit>
+    <unit id="W1uXz9o" name="admin.experience.form.title">
+      <segment>
+        <source>admin.experience.form.title</source>
+        <target>Titre</target>
+      </segment>
+    </unit>
+    <unit id="uHdzXv8" name="admin.component.experience.label.type">
+      <segment>
+        <source>admin.component.experience.label.type</source>
+        <target>Type</target>
+      </segment>
+    </unit>
+    <unit id="c.GS8U4" name="admin.experience.form.description">
+      <segment>
+        <source>admin.experience.form.description</source>
+        <target>Description</target>
+      </segment>
+    </unit>
+    <unit id="zMhkHch" name="admin.experience.form.work">
+      <segment>
+        <source>admin.experience.form.work</source>
+        <target>Travail</target>
+      </segment>
+    </unit>
+    <unit id="MNsDrsO" name="admin.experience.form.education">
+      <segment>
+        <source>admin.experience.form.education</source>
+        <target>Éducation</target>
+      </segment>
+    </unit>
+    <unit id="2d5QA0W" name="admin.experience.form.duration">
+      <segment>
+        <source>admin.experience.form.duration</source>
+        <target>Durée</target>
+      </segment>
+    </unit>
+    <unit id="7KZOZSR" name="admin.experience.form.city">
+      <segment>
+        <source>admin.experience.form.city</source>
+        <target>Ville</target>
+      </segment>
+    </unit>
+    <unit id="t9IF8rZ" name="admin.experience.form.url">
+      <segment>
+        <source>admin.experience.form.url</source>
+        <target>Url entreprise</target>
+      </segment>
+    </unit>
+    <unit id="OZkEcGY" name="admin.skill.list.title">
+      <segment>
+        <source>admin.skill.list.title</source>
+        <target>Liste des compétences</target>
+      </segment>
+    </unit>
+    <unit id="jp7ajFC" name="admin.skill.menu.label">
+      <segment>
+        <source>admin.skill.menu.label</source>
+        <target>Compétences</target>
+      </segment>
+    </unit>
+    <unit id="KHyGifX" name="admin.skill.title.create">
+      <segment>
+        <source>admin.skill.title.create</source>
+        <target>Création  d'une compétence</target>
+      </segment>
+    </unit>
+    <unit id="BeRPEAH" name="admin.skill.form.name">
+      <segment>
+        <source>admin.skill.form.name</source>
+        <target>Nom</target>
+      </segment>
+    </unit>
+    <unit id="S4sJv1P" name="admin.skill.form.note">
+      <segment>
+        <source>admin.skill.form.note</source>
+        <target>Note (5 max)</target>
+      </segment>
+    </unit>
+    <unit id="hk1c4vL" name="admin.component.skill.label.type">
+      <segment>
+        <source>admin.component.skill.label.type</source>
+        <target>Type</target>
+      </segment>
+    </unit>
+    <unit id="Bel06Us" name="admin.skill.form.skill">
+      <segment>
+        <source>admin.skill.form.skill</source>
+        <target>Compétence</target>
+      </segment>
+    </unit>
+    <unit id="wAG0TgW" name="admin.skill.form.language">
+      <segment>
+        <source>admin.skill.form.language</source>
+        <target>Langue</target>
+      </segment>
+    </unit>
+    <unit id="x3XUwtV" name="admin.skill.form.tools">
+      <segment>
+        <source>admin.skill.form.tools</source>
+        <target>Outils</target>
+      </segment>
+    </unit>
+    <unit id="XwzqbZr" name="admin.skill.title.update">
+      <segment>
+        <source>admin.skill.title.update</source>
+        <target>Mise à jour d'une compétence</target>
+      </segment>
+    </unit>
+    <unit id="jYzP_n2" name="admin.experience.title.update">
+      <segment>
+        <source>admin.experience.title.update</source>
+        <target>Mise à jour d'une expérience</target>
+      </segment>
+    </unit>
+    <unit id="_oiINOu" name="admin.work.list.title">
+      <segment>
+        <source>admin.work.list.title</source>
+        <target>Liste des projets</target>
+      </segment>
+    </unit>
+    <unit id="nXQHv3n" name="admin.work.menu.label">
+      <segment>
+        <source>admin.work.menu.label</source>
+        <target>Projets</target>
+      </segment>
+    </unit>
+    <unit id="QTP_C0j" name="admin.work.title.update">
+      <segment>
+        <source>admin.work.title.update</source>
+        <target>Mise à jour d'un projet</target>
+      </segment>
+    </unit>
+    <unit id="Rc3ZG3f" name="admin.work.title.create">
+      <segment>
+        <source>admin.work.title.create</source>
+        <target>Création d'un projet</target>
+      </segment>
+    </unit>
+    <unit id="ocLdGkU" name="admin.work.form.name">
+      <segment>
+        <source>admin.work.form.name</source>
+        <target>Nom</target>
+      </segment>
+    </unit>
+    <unit id="HUM01BP" name="admin.work.form.description">
+      <segment>
+        <source>admin.work.form.description</source>
+        <target>Description</target>
+      </segment>
+    </unit>
+    <unit id="V7ewEIP" name="admin.work.form.description_site">
+      <segment>
+        <source>admin.work.form.description_site</source>
+        <target>Description du projet</target>
+      </segment>
+    </unit>
+    <unit id="HnrvO2E" name="admin.work.form.url">
+      <segment>
+        <source>admin.work.form.url</source>
+        <target>Url</target>
+      </segment>
+    </unit>
+    <unit id="_mSxAco" name="admin.work.form.picture">
+      <segment>
+        <source>admin.work.form.picture</source>
+        <target>Image</target>
+      </segment>
+    </unit>
+    <unit id="n2BIKkV" name="admin.flash.removed">
+      <segment>
+        <source>admin.flash.removed</source>
+        <target>Élément supprimé</target>
+      </segment>
+    </unit>
+    <unit id=".6EiJ5M" name="admin.media.form.file">
+      <segment>
+        <source>admin.media.form.file</source>
+        <target>Image</target>
+      </segment>
+    </unit>
+    <unit id="2jpVoaQ" name="admin.media.form.alt">
+      <segment>
+        <source>admin.media.form.alt</source>
+        <target>Alt image</target>
+      </segment>
+    </unit>
+    <unit id="uXwrCQv" name="admin.person.form.twitter">
+      <segment>
+        <source>admin.person.form.twitter</source>
+        <target>Url compte Twitter</target>
+      </segment>
+    </unit>
+    <unit id="MRt0.dJ" name="admin.person.form.linkedin">
+      <segment>
+        <source>admin.person.form.linkedin</source>
+        <target>Url compte Linkedin</target>
+      </segment>
+    </unit>
+    <unit id="wGv9ftF" name="admin.person.form.instagram">
+      <segment>
+        <source>admin.person.form.instagram</source>
+        <target>Url compte Instagram</target>
+      </segment>
+    </unit>
+    <unit id="UeqP9Pt" name="admin.person.form.github">
+      <segment>
+        <source>admin.person.form.github</source>
+        <target>Url compte github</target>
+      </segment>
+    </unit>
+    <unit id="tR7zobv" name="admin.person.form.mail">
+      <segment>
+        <source>admin.person.form.mail</source>
+        <target>Email</target>
+      </segment>
+    </unit>
+    <unit id="EEvzLaw" name="admin.experience.form.start_date">
+      <segment>
+        <source>admin.experience.form.start_date</source>
+        <target>Début expérience</target>
+      </segment>
+    </unit>
+    <unit id="o9UFPaU" name="app.common.tags">
+      <segment>
+        <source>app.common.tags</source>
+        <target>Tags</target>
+      </segment>
+    </unit>
+    <unit id="VPoWGMb" name="app.quote.project">
+      <segment>
+        <source>app.quote.project</source>
+        <target>Mon projet préféré ? C'est le prochain.</target>
+      </segment>
+    </unit>
+    <unit id="bn_fwzX" name="app.quote.project.author">
+      <segment>
+        <source>app.quote.project.author</source>
+        <target>Frank Lloyd Wright</target>
+      </segment>
+    </unit>
+    <unit id="zDcj17L" name="app.show_more">
+      <segment>
+        <source>app.show_more</source>
+        <target>Voir plus</target>
+      </segment>
+    </unit>
+    <unit id="EUbARsH" name="admin.work.form.tags">
+      <segment>
+        <source>admin.work.form.tags</source>
+        <target>Tags</target>
+      </segment>
+    </unit>
+    <unit id="_eVMqAZ" name="app.title.download">
+      <segment>
+        <source>app.title.download</source>
+        <target>Télécharger</target>
+      </segment>
+    </unit>
+    <unit id="rc1IudF" name="app.title.email">
+      <segment>
+        <source>app.title.email</source>
+        <target>Email</target>
+      </segment>
+    </unit>
+    <unit id="R7dbuzN" name="app.title.phone">
+      <segment>
+        <source>app.title.phone</source>
+        <target>Téléphone</target>
+      </segment>
+    </unit>
+    <unit id="cIml7PX" name="admin.order.list.title">
+      <segment>
+        <source>admin.order.list.title</source>
+        <target>Liste des commandes</target>
+      </segment>
+    </unit>
+    <unit id="sahI2ys" name="admin.common.state">
+      <segment>
+        <source>admin.common.state</source>
+        <target>Status</target>
+      </segment>
+    </unit>
+    <unit id="sbVzrPe" name="roles.commercial">
+      <segment>
+        <source>roles.commercial</source>
+        <target>Commercial</target>
+      </segment>
+    </unit>
+    <unit id="GlnKHt8" name="roles.preparator">
+      <segment>
+        <source>roles.preparator</source>
+        <target>Préparateur</target>
+      </segment>
+    </unit>
+    <unit id="4KBbl3T" name="admin.common.switch_to_user.button">
+      <segment>
+        <source>admin.common.switch_to_user.button</source>
+        <target>Changer d'utilisateur</target>
+      </segment>
+    </unit>
+    <unit id="3mJmVLu" name="admin.common.exit_impersonation.title">
+      <segment>
+        <source>admin.common.exit_impersonation.title</source>
+        <target>Quitter Usurpation</target>
+      </segment>
+    </unit>
+    <unit id="DlBL1n5" name="admin.common.creator">
+      <segment>
+        <source>admin.common.creator</source>
+        <target>Commercial</target>
+      </segment>
+    </unit>
+    <unit id="F9pWEDb" name="admin.order.title.update">
+      <segment>
+        <source>admin.order.title.update</source>
+        <target>Mise à jour d'une commande</target>
+      </segment>
+    </unit>
+    <unit id="TCnmvct" name="admin.order.form.name">
+      <segment>
+        <source>admin.order.form.name</source>
+        <target>Nom</target>
+      </segment>
+    </unit>
+    <unit id="cJWQHDV" name="admin.order.form.items">
+      <segment>
+        <source>admin.order.form.items</source>
+        <target>Bières commandées</target>
+      </segment>
+    </unit>
+    <unit id="9UgmL49" name="admin.item.form.name">
+      <segment>
+        <source>admin.item.form.name</source>
+        <target>Nom</target>
+      </segment>
+    </unit>
+    <unit id="oIgJgb9" name="admin.component.order.label.type">
+      <segment>
+        <source>admin.component.order.label.type</source>
+        <target>Type</target>
+      </segment>
+    </unit>
+    <unit id="NIfe9OM" name="admin.type.barrel">
+      <segment>
+        <source>admin.type.barrel</source>
+        <target>Fût</target>
+      </segment>
+    </unit>
+    <unit id="8jM_0Nn" name="admin.type.bottle">
+      <segment>
+        <source>admin.type.bottle</source>
+        <target>Bouteille</target>
+      </segment>
+    </unit>
+    <unit id="j_FqJhj" name="admin.item.form.quantity">
+      <segment>
+        <source>admin.item.form.quantity</source>
+        <target>Quantité</target>
+      </segment>
+    </unit>
+    <unit id="E5wV8EJ" name="admin.common.delete">
+      <segment>
+        <source>admin.common.delete</source>
+        <target>Supprimer</target>
+      </segment>
+    </unit>
+    <unit id="TP5fXZ4" name="admin.common.add">
+      <segment>
+        <source>admin.common.add</source>
+        <target>Ajouter</target>
+      </segment>
+    </unit>
+    <unit id="0HhzX6T" name="admin.order.state.wait_return">
+      <segment>
+        <source>admin.order.state.wait_return</source>
+        <target>En attente de retour</target>
+      </segment>
+    </unit>
+    <unit id="GaM1X1U" name="admin.order.state.return_ok">
+      <segment>
+        <source>admin.order.state.return_ok</source>
+        <target>Retour fait</target>
+      </segment>
+    </unit>
+    <unit id="8HFDFC_" name="admin.common.updated_at">
+      <segment>
+        <source>admin.common.updated_at</source>
+        <target>Mise à jour le</target>
+      </segment>
+    </unit>
+    <unit id="oQETlil" name="admin.order.transition.to_wait_customer">
+      <segment>
+        <source>admin.order.transition.to_wait_customer</source>
+        <target>Attente GO client</target>
+      </segment>
+    </unit>
+    <unit id="x0uNB8q" name="admin.order.transition.to_return_ok">
+      <segment>
+        <source>admin.order.transition.to_return_ok</source>
+        <target>Retour fait</target>
+      </segment>
+    </unit>
+    <unit id="9Npx5OM" name="admin.order.transition.to_return_wait_return">
+      <segment>
+        <source>admin.order.transition.to_return_wait_return</source>
+        <target>En attente de retour</target>
+      </segment>
+    </unit>
+    <unit id="QsQdORW" name="admin.order.transition.to_return_ok_wait_customer">
+      <segment>
+        <source>admin.order.transition.to_return_ok_wait_customer</source>
+        <target>En attente client</target>
+      </segment>
+    </unit>
+    <unit id="O8834bA" name="admin.order.title.create">
+      <segment>
+        <source>admin.order.title.create</source>
+        <target>Créer une commande</target>
+      </segment>
+    </unit>
+    <unit id="5T_IdgK" name="admin.order.form.items_text">
+      <segment>
+        <source>admin.order.form.items_text</source>
+        <target>Liste des bières</target>
+      </segment>
+    </unit>
+    <unit id="e7w16jP" name="admin.order.state.wait_customer">
+      <segment>
+        <source>admin.order.state.wait_customer</source>
+        <target>En attente retour client</target>
+      </segment>
+    </unit>
+    <unit id="oV1YINM" name="admin.order.transition.to_wait_customer_wait_return">
+      <segment>
+        <source>admin.order.transition.to_wait_customer_wait_return</source>
+        <target>Retour client</target>
+      </segment>
+    </unit>
+    <unit id="LJzEY_E" name="admin.common.see.button">
+      <segment>
+        <source>admin.common.see.button</source>
+        <target>Voir</target>
+      </segment>
+    </unit>
+    <unit id="IUebQxK" name="admin.common.save.button">
+      <segment>
+        <source>admin.common.save.button</source>
+        <target>Sauvegarder</target>
+      </segment>
+    </unit>
+    <unit id="q5BkHU5" name="admin.order.state.wait_palette">
+      <segment>
+        <source>admin.order.state.wait_palette</source>
+        <target>En attente bon commande</target>
+      </segment>
+    </unit>
+    <unit id="jy4FbcB" name="admin.order.transition.to_ready">
+      <segment>
+        <source>admin.order.transition.to_ready</source>
+        <target>Prête pour enlèvement </target>
+      </segment>
+    </unit>
+    <unit id="uLE6MVn" name="admin.common.back">
+      <segment>
+        <source>admin.common.back</source>
+        <target>Retour</target>
+      </segment>
+    </unit>
+    <unit id="TDWe8sT" name="admin.order.state.ready">
+      <segment>
+        <source>admin.order.state.ready</source>
+        <target>Prête pour enlèvement</target>
+      </segment>
+    </unit>
+    <unit id="WzZZ5N0" name="admin.order.transition.to_finish">
+      <segment>
+        <source>admin.order.transition.to_finish</source>
+        <target>Palette enlevée</target>
+      </segment>
+    </unit>
+    <unit id="CVCJtZz" name="admin.order.state.finish">
+      <segment>
+        <source>admin.order.state.finish</source>
+        <target>Palette enlevée</target>
+      </segment>
+    </unit>
+    <unit id="wjj8ZVG" name="admin.order.transition.to_wait_palette">
+      <segment>
+        <source>admin.order.transition.to_wait_palette</source>
+        <target>Ok pour palette</target>
+      </segment>
+    </unit>
+    <unit id="BzTxwj2" name="admin.order.state.customer_return">
+      <segment>
+        <source>admin.order.state.customer_return</source>
+        <target>Modification client</target>
+      </segment>
+    </unit>
+    <unit id="djJ3QQb" name="admin.common.pdf">
+      <segment>
+        <source>admin.common.pdf</source>
+        <target>Étiquette </target>
+      </segment>
+    </unit>
+    <unit id="l_FNFDh" name="admin.common.download.button">
+      <segment>
+        <source>admin.common.download.button</source>
+        <target>Télécharger l'étiquette</target>
+      </segment>
+    </unit>
+    <unit id="SZ2Fkoj" name="admin.order.state.draft">
+      <segment>
+        <source>admin.order.state.draft</source>
+        <target>Brouillon</target>
+      </segment>
+    </unit>
+    <unit id="xuTM49J" name="admin.order.transition.to_wait_return">
+      <segment>
+        <source>admin.order.transition.to_wait_return</source>
+        <target>En attente de retour</target>
+      </segment>
+    </unit>
+    <unit id="XjRl.cT" name="app.error_page.title">
+      <segment>
+        <source>app.error_page.title</source>
+        <target>Oups! Page non trouvée</target>
+      </segment>
+    </unit>
+    <unit id="767_jPV" name="app.error_page.description">
+      <segment>
+        <source>app.error_page.description</source>
+        <target>Nous sommes désolés, mais la page que vous avez demandée n'a pas été trouvée.</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

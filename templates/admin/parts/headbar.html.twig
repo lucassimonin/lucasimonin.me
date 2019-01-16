@@ -1,27 +1,8 @@
-
-<!-- Navbar -->
-<nav class="navbar px-navbar">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="{{ path('admin_dashboard') }}"><img src="{{ asset('images/admin/logo.png') }}" /> </a>
-    </div>
-    <ul class="nav navbar-nav navbar-right" id="navbar-right">
-        {% if languageSwitcher is not defined %}
-            {% include 'admin/parts/language_switcher.html.twig' %}
-        {% endif %}
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <span class="visible-md visible-sm visible-xs"><i class="fa fa-user"></i></span>
-                {% if app.user is defined and app.user is not null %}
-                    <span class="hidden-md hidden-sm hidden-xs">{{ app.user.username }}</span>
-                {% endif %}
-            </a>
-            <ul class="dropdown-menu" id="navbar-action-user">
-                <li><a href="{{ path('admin_user_edit', {'id': app.user.id}) }}"><i class="dropdown-icon fa fa-user"></i> {{ 'admin.comon.edit_profile'|trans({}, 'app') }}</a> </li>
-                {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
-                    <li><a href="{{ path('admin_dashboard', {'_switch_user': '_exit'}) }}"><i class="dropdown-icon fa fa-user-secret"></i> {{ 'admin.common.exit_impersonation.title'|trans({}, 'app') }}</a></li>
-                {% endif %}
-                <li><a href="{{ path('logout') }}"><i class="dropdown-icon fa fa-power-off"></i> {{ 'admin.common.logout.title'|trans({}, 'app') }}</a></li>
-            </ul>
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ path('admin_dashboard') }}">CV Website</a>
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="{{ path('logout') }}">{{ 'admin.common.logout.title'|trans({}, 'app') }}</a>
         </li>
     </ul>
 </nav>

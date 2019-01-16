@@ -43,12 +43,16 @@ services:
         tags:
         - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }
 
-    App\Services\Core\CacheService:
+    App\Command\GenerateQRCodeMFACommand:
+        arguments:
+            $pathKernel: '%kernel.project_dir%'
+            $googleAuthenticator: '@scheb_two_factor.security.google_authenticator'
+    App\Services\Core\CacheManager:
         arguments:
             $lifeTime: '%app.cache_lifetime%'
             $cacheFolder: '%kernel.cache_dir%'
 
-    App\Services\Core\FileUploader:
+    App\Utils\FileUploader:
         arguments:
             $targetDirectory: '%media_directory%'
 

@@ -96,16 +96,47 @@ p {
 .fa-blue{color:#337ab7}
 .fa-orange{color:#fdbd10}
 
-.navbar  { border: 0; background-color: #222222; position: absolute; top: 100%; right: 5%; width: 110px; z-index: 999; border-radius: 0; }
+.navbar  { border: 0; background-color: #222222; position: absolute; top: 100%; right: 5%; width: 110px; z-index: 999; border-radius: 0; padding: 0;}
 .navbar .navbar-collapse { padding: 0; max-height: none; }
 .navbar .navbar-nav { float: none; }
 .navbar-nav { margin: 0; }
 .navbar .nav > li { display: block; float: none; height: 80px; }
 .navbar .nav > li a { display: block;  height: 80px; text-align: center; padding-top: 30px; font-weight: 600; color: #FFFFFF; }
 .navbar .nav > li a:hover, .navbar .nav > li a:focus { color: #999999; }
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus { background: #9a2323; color: #FFFFFF; }
-.navbar-default .navbar-toggle:hover .icon-bar,
-.navbar-default .navbar-toggle:focus .icon-bar { background: #222222; }
+.navbar-default .navbar-nav > .nav-item > a.active, .navbar-default .navbar-nav > .nav-item > a.active:hover, .navbar-default .navbar-nav > .nav-item > a.active:focus { background: #9a2323; color: #FFFFFF; }
+.navbar-default .navbar-toggler { color: #fff; height: 45px; }
+@media (min-width: 768px) {
+  .navbar-default .navbar-toggler {
+    display: none;
+  }
+  .navbar-collapse {
+    width: auto;
+    border-top: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  .navbar-collapse.collapse {
+    display: block !important;
+    height: auto !important;
+    padding-bottom: 0;
+    overflow: visible !important;
+  }
+  .navbar-collapse.in {
+    overflow-y: visible;
+  }
+  .navbar-fixed-top .navbar-collapse,
+  .navbar-static-top .navbar-collapse,
+  .navbar-fixed-bottom .navbar-collapse {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-toggler {
+    display: block;
+  }
+}
 
 .fixed  { position: fixed; top: 60px; }
 

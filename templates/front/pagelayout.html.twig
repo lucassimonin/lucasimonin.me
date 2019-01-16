@@ -4,10 +4,8 @@
         <head>
             {{ render(controller('App\\Controller\\Front\\HomeController::meta')) }}
             {% include 'front/pagelayout/page_head_style.html.twig' %}
-            {% include 'front/pagelayout/page_head_for_ie.html.twig' %}
-            {% include 'front/pagelayout/page_head_script.html.twig' %}
         </head>
-        <body id="page-top" data-spy="scroll" data-target="#mainNav">
+        <body id="page-top">
             {% block content %}{% endblock %}
             {% include 'front/pagelayout/page_footer_script.html.twig' %}
         </body>

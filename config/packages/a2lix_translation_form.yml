@@ -3,4 +3,4 @@ a2lix_translation_form:
   locales: '%app.locales.available%'
   default_locale: '%locale%'
   required_locales: ['%locale%']
-  templating: "admin/a2lix_bootstrap_3_layout.html.twig"
+  templating: "admin/a2lix_bootstrap_layout.html.twig"

@@ -11,14 +11,14 @@ use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * Class HomeController
  *
  * @package App\Controller\Front
  */
-class HomeController extends Controller
+class HomeController extends AbstractController
 {
     /**
      * Homepage

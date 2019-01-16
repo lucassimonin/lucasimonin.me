@@ -15,15 +15,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ChoiceExtension extends AbstractTypeExtension
 {
-    /**
-     * Returns the name of the type being extended.
-     *
-     * @return string The name of the type being extended
-     */
-    public function getExtendedType()
+    public static function getExtendedTypes(): iterable
     {
-        // use FormType::class to modify (nearly) every field in the system
-        return ChoiceType::class;
+        return array(ChoiceType::class);
     }
 
     public function finishView(FormView $view, FormInterface $form, array $options)

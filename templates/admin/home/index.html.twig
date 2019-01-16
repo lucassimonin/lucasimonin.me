@@ -1,9 +1,4 @@
 {% extends "admin/layout.html.twig" %}
 {% block title %}{{ 'admin.dashboard.label'|trans({}, 'app') }}{% endblock %}
-{% block mainTitle %}<h1>{{ 'admin.dashboard.label'|trans({}, 'app') }}</h1>{% endblock %}
-
-{% block content %}
-<div class="row">
-
-</div>
-{% endblock %}
+{% block mainTitle %}{{ 'admin.dashboard.label'|trans({}, 'app') }}{% endblock %}
+{% block breadcrumb %}{% endblock %}

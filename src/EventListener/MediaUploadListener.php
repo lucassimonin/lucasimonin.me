@@ -8,18 +8,18 @@
 
 namespace App\EventListener;
 
+use App\Utils\FileUploaderInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use App\Entity\Media;
-use App\Services\Core\FileUploader;
 
 class MediaUploadListener
 {
     private $uploader;
 
-    public function __construct(FileUploader $uploader)
+    public function __construct(FileUploaderInterface $uploader)
     {
         $this->uploader = $uploader;
     }

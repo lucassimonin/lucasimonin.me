@@ -16,7 +16,7 @@ namespace App\Form\Model;
 class SearchContent
 {
     /**
-     * @var string
+     * @var string|null
      */
     private $name;
 
@@ -31,7 +31,7 @@ class SearchContent
     /**
      * @param string $name
      */
-    public function setName(string $name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }

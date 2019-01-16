@@ -10,12 +10,13 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * @ORM\Entity(repositoryClass="App\Repository\ContentRepository")
  * @ORM\Table(name="skill")
  */
-class Skill
+class Skill implements ContentInterface
 {
     use ORMBehaviors\Translatable\Translatable;
     const SKILL_TYPE_SKILL = 'skill';
     const SKILL_TYPE_LANGUAGE = 'language';
     const SKILL_TYPE_TOOLS = 'tools';
+    protected static $keyCache = 'app.skills.';
 
     /**
      * @ORM\Column(type="integer")
@@ -111,7 +112,7 @@ class Skill
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function getName()
     {
@@ -119,10 +120,15 @@ class Skill
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function __toString()
     {
         return $this->__call('name', array());
+    }
+
+    public function keyCache(): string
+    {
+        return static::keyCache() . $this->getType() . '.';
     }
 }

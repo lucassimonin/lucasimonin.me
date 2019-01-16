@@ -9,7 +9,7 @@
 
 namespace App\Controller\Admin;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,9 +17,9 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class HomeController
  *
  * @package App\Controller\Admin
- * @Route("/{_locale}/admin", requirements={ "_locale" = "%admin.locales%" })
+ * @Route("/admin")
  */
-class HomeController extends Controller
+class HomeController extends AbstractController
 {
     /**
      * Dashboard Admin
@@ -28,10 +28,6 @@ class HomeController extends Controller
      */
     public function indexAction()
     {
-        $breadcrumbs = $this->container->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem('admin.dashboard.label', $this->get("router")->generate("admin_dashboard"));
-
-        return $this->render('admin/home/index.html.twig', [
-        ]);
+        return $this->render('admin/home/index.html.twig');
     }
 }

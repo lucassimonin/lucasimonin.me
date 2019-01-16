@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class SkillController
  *
  * @package App\Controller\Admin
- * @Route("/{_locale}/admin/skills", requirements={ "_locale" = "%admin.locales%" })
+ * @Route("/admin/skills")
  */
 class SkillController extends BaseContentController
 {
