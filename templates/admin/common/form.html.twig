@@ -2,17 +2,14 @@
 
 {% block title %}{{ ('admin.' ~ title ~ '.title.' ~ type)|trans({}, 'app') }}{% endblock %}
 {% block mainTitle %}
-    <h1>{{ ('admin.' ~ title ~ '.title.' ~ type)|trans({}, 'app') }}</h1>
+    {{ ('admin.' ~ title ~ '.title.' ~ type)|trans({}, 'app') }}
 {% endblock %}
 
 {% block content %}
     {{ form_start(form) }}
         <div class="row">
             <div class="col-md-12">
-                <div class="col-sm-12">
-
                     {{ form_widget(form) }}
-                </div>
                 <button class="btn btn-info btn-save">
                     <i class="fa fa-save"></i> {{ ('admin.common.' ~ type ~ '.button')|trans({}, 'app') }}
                 </button>

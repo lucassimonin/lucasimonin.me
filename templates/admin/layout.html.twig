@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>{% block title %}{% endblock %} | {{ 'admin.adminstration.label'|trans({}, 'app') }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('images/front/apple-touch-icon-57x57.png') }}" />
     <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('images/front/apple-touch-icon-114x114.png') }}" />
     <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('images/front/apple-touch-icon-72x72.png') }}" />
@@ -18,42 +18,34 @@
     <link rel="icon" type="image/png" href="{{ asset('images/front/favicon-32x32.png') }}" sizes="32x32" />
     <link rel="icon" type="image/png" href="{{ asset('images/front/favicon-16x16.png') }}" sizes="16x16" />
     <link rel="icon" type="image/png" href="{{ asset('images/front/favicon-128.png') }}" sizes="128x128" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     {% block stylesheets %}
-        <link href="{{ asset('build/admin/css/style.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('libs/ckeditor/contents.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('build/admin.css') }}" rel="stylesheet" type="text/css">
     {% endblock %}
-    <script src="{{ asset('build/admin/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('libs/ckeditor/ckeditor.js') }}"></script>
 </head>
-<body id="{% block bodyId %}{% endblock %}">
+<body>
     {% trans_default_domain 'app' %}
-    {% block menu %}
-        {% include "admin/parts/menu.html.twig" %}
-    {% endblock %}
     {% block headbar %}
         {% include "admin/parts/headbar.html.twig" %}
     {% endblock %}
-    <div class="px-content">
-        <div class="" id="flash-messages"></div>
-        {% block breadcrumb %}{{ wo_render_breadcrumbs({ viewTemplate: "admin/parts/breadcrumbs.html.twig" }) }}{% endblock %}
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="alert alert-success alert-layout alert-dark" ><i class="fa fa-check"></i>&nbsp; {{ flashMessage|trans({}, 'app')|raw }}<button type="button" class="close" data-dismiss="alert">×</button></div>
-        {% endfor %}
-        {% for flashMessage in app.session.flashbag.get('warning') %}
-            <div class="alert alert-warning alert-layout alert-dark" ><i class="fa fa-exclamation-triangle"></i>&nbsp; {{ flashMessage|trans({}, 'app')|raw }}<button type="button" class="close" data-dismiss="alert">×</button></div>
-        {% endfor %}
-        {% for flashMessage in app.session.flashbag.get('error') %}
-            <div class="alert alert-danger alert-layout alert-dark" ><i class="fa fa-check"></i>&nbsp; {{ flashMessage|trans({}, 'app')|raw }}<button type="button" class="close" data-dismiss="alert">×</button></div>
-        {% endfor %}
-        <div class="page-header {% block classPageHeader %}{% endblock %}">
-            {% block mainTitle %}{% endblock %}
-            <div style="display: inline-block; float: right;">
-                {% block options %}{% endblock %}
-            </div>
+    <div class="container-fluid">
+        <div class="row">
+            {% include "admin/parts/menu.html.twig" %}
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                {% block breadcrumb %}{{ wo_render_breadcrumbs({ viewTemplate: "admin/parts/breadcrumbs.html.twig" }) }}{% endblock %}
+                {% include 'admin/parts/flashes.html.twig' %}
+
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                    <h1 class="h2">{% block mainTitle %}{% endblock %}</h1>
+                    {% block options %}{% endblock %}
+                </div>
+                {% block content %}{% endblock %}
+            </main>
         </div>
-        {% block content %}{% endblock %}
     </div>
     {% block javascripts %}
-        <script src="{{ asset('build/admin/js/app.js') }}"></script>
+        <script src="{{ asset('build/admin.js') }}"></script>
     {% endblock %}
 </body>
 </html>

@@ -10,11 +10,12 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * @ORM\Entity(repositoryClass="App\Repository\ContentRepository")
  * @ORM\Table(name="experience")
  */
-class Experience
+class Experience implements ContentInterface
 {
     use ORMBehaviors\Translatable\Translatable;
-    const EXPERIENCE_TYPE_EDUCATION = 'education';
-    const EXPERIENCE_TYPE_WORK = 'work';
+    public const EXPERIENCE_TYPE_EDUCATION = 'education';
+    public const EXPERIENCE_TYPE_WORK = 'work';
+    protected static $keyCache = 'app.experiences.';
 
     /**
      * @ORM\Column(type="integer")
@@ -168,5 +169,10 @@ class Experience
     public function __toString()
     {
         return $this->__call('name', array());
+    }
+
+    public function keyCache(): string
+    {
+        return static::$keyCache;
     }
 }

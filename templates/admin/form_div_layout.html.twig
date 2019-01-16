@@ -1,4 +1,4 @@
-{% use "bootstrap_3_layout.html.twig" %}
+{% use "bootstrap_4_layout.html.twig" %}
 
 {# Rows #}
 {% block form_row -%}
@@ -7,7 +7,7 @@
         {{- form_label(form) -}}
         {% if image_input is defined and image_input and form.vars.data %}
             <br>
-           <img src="{{ asset('uploads/media/' ~ form.vars.data.filename) }}" class="img-responsive img-thumbnail">
+           <img src="{{ asset('uploads/media/' ~ form.vars.data.filename) }}" alt="{{ form.vars.data.filename }}" class="img-responsive img-thumbnail">
         {% endif %}
         {{- form_widget(form) -}}
         {{- form_errors(form) -}}

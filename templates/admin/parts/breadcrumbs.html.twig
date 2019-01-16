@@ -1,27 +1,23 @@
 {% if wo_breadcrumbs()|length %}
     {%- spaceless -%}
-        <ol class="breadcrumb page-breadcrumb" id="{{ listId }}" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-            {% for b in breadcrumbs %}
-                <li {% if loop.last %}class="active"{% endif %} {% if itemClass is defined and itemClass|length %} class="{{ itemClass }}"{% endif %}{% if not loop.first %} itemprop="child"{% endif %}>
-                    {% if b.url and not loop.last %}
-                        <a href="{{ b.url }}" itemprop="url"{% if linkRel is defined and linkRel|length %} rel="{{ linkRel }}"{% endif %}>
-                    {% endif %}
-                    {% if b.translate %}
-                         {{- b.text|trans(b.translationParameters, 'app') -}}
-                    {% else %}
-                        {{- b.text -}}
-                    {% endif %}
-                    {% if b.url and not loop.last %}
-                        </a>
-                    {% endif %}
-
-                    {#
-                    {% if separator is not null and not loop.last %}
-                        <span class='{{ separatorClass }}'>{{ separator }}</span>
-                    {% endif %}
-                    #}
-                </li>
-            {% endfor %}
-        </ol>
+        <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" id="{{ listId }}">
+                    {% for b in breadcrumbs %}
+                        <li class="breadcrumb-item {% if loop.last %}active{% endif %}">
+                            {% if b.url and not loop.last %}
+                                <a href="{{ b.url }}">
+                            {% endif %}
+                            {% if b.translate %}
+                                 {{- b.text|trans(b.translationParameters, 'app') -}}
+                            {% else %}
+                                {{- b.text -}}
+                            {% endif %}
+                            {% if b.url and not loop.last %}
+                                </a>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ol>
+        </nav>
     {%- endspaceless -%}
 {% endif %}

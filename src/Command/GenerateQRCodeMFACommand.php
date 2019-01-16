@@ -9,35 +9,63 @@
 namespace App\Command;
 
 use App\Entity\User;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use App\Services\User\UserManagerInterface;
+use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class GenerateQRCodeMFACommand extends ContainerAwareCommand
+class GenerateQRCodeMFACommand extends Command
 {
+    protected static $defaultName = 'app:generate:qrcode-mfa';
+
+    /**
+     * @var UserManagerInterface
+     */
+    private $userManager;
+    /**
+     * @var string
+     */
+    private $pathKernel;
+    /**
+     * @var GoogleAuthenticatorInterface
+     */
+    private $googleAuthenticator;
+
+
+    /**
+     * GenerateQRCodeMFACommand constructor.
+     * @param UserManagerInterface $userManager
+     * @param string $pathKernel
+     * @param GoogleAuthenticatorInterface $googleAuthenticator
+     */
+    public function __construct(UserManagerInterface $userManager, string $pathKernel, GoogleAuthenticatorInterface $googleAuthenticator)
+    {
+        $this->userManager = $userManager;
+        $this->pathKernel = $pathKernel;
+        $this->googleAuthenticator = $googleAuthenticator;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
-            ->setName('app:generate:qrcode-mfa')
             ->setDescription('Generate QR Code for MFA')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $doctrine = $this->getContainer()->get('doctrine');
-        $users = $doctrine->getRepository(User::class)->findAll();
         /** @var User $user */
-        $googleAuthenticator = $this->getContainer()->get("scheb_two_factor.security.google_authenticator");
-        foreach ($users as $user) {
+        foreach ($this->userManager->findAll() as $user) {
             if ('' === $user->getGoogleAuthenticatorSecret()) {
-                $user->setGoogleAuthenticatorSecret($googleAuthenticator->generateSecret());
-                $doctrine->getManager()->persist($user);
-                $doctrine->getManager()->flush();
+                $user->setGoogleAuthenticatorSecret($this->googleAuthenticator->generateSecret());
+                $this->userManager->save($user);
             }
-            $url = $googleAuthenticator->getUrl($user);
+            $url = $this->googleAuthenticator->getUrl($user);
             $output->writeln($url);
-            file_put_contents(sprintf('%s/var/qrcodes/%s.png', $this->getContainer()->getParameter('kernel.project_dir'), $user->getEmail()), file_get_contents($url));
+            file_put_contents(sprintf('%s/var/qrcodes/%s.png', $this->pathKernel, $user->getEmail()), file_get_contents($url));
         }
     }
 }

@@ -1,19 +1,19 @@
 {% extends "admin/layout.html.twig" %}
 
-{% set menuActive = 'users' %}
 {% block title %}{{ ('admin.' ~ type ~ '.list.title')|trans({}, 'app') }}{% endblock %}
-{% block mainTitle %}
-<h1>{{ ('admin.' ~ type ~ '.list.title')|trans({}, 'app') }}</h1>
-{% endblock %}
-
+{% block mainTitle %}{{ ('admin.' ~ type ~ '.list.title')|trans({}, 'app') }}{% endblock %}
 
 {% block options %}
-    <a class="btn btn-success btn-xs" href="{{ path('admin_' ~ type ~ '_create') }}">
-        <i class="fa fa-plus "></i> {{ 'admin.common.new.button'|trans({}, 'app') }}
-    </a>
-    <a class="btn btn-info btn-xs btn-search-open" href="#">
-        <i class="fa fa-search "></i> {{ 'admin.common.search.button'|trans({}, 'app') }}
-    </a>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <button class="btn  btn-outline-secondary btn-search-open">
+                <i class="fa fa-search "></i>{{ 'admin.common.search.button'|trans({}, 'app') }}
+            </button>
+            <a class="btn-success btn" href="{{ path('admin_' ~ type ~ '_create') }}">
+                <i class="fa fa-plus "></i>{{ 'admin.common.new.button'|trans({}, 'app') }}
+            </a>
+        </div>
+    </div>
 {% endblock %}
 
 {% block content %}
@@ -43,10 +43,10 @@
                     {% for content in pagination %}
                         <tr>
 
-                            <td style="vertical-align:middle;"><a href="{{ path('admin_' ~ type ~ '_edit', {'id': content.id}) }}">{{ content.name }}</a></td>
+                            <td><a href="{{ path('admin_' ~ type ~ '_edit', {'id': content.id}) }}">{{ content.name }}</a></td>
 
-                            <td style="text-align:center;vertical-align:middle;">
-                                <a href="{{ path('admin_' ~ type ~ '_edit', {'id': content.id}) }}" class="btn btn-default">
+                            <td>
+                                <a href="{{ path('admin_' ~ type ~ '_edit', {'id': content.id}) }}" class="btn btn-outline-secondary">
                                     <i class="fa fa-edit"></i> {{ 'admin.common.update.button'|trans({}, 'app') }}
                                 </a>
                                 <a href="{{ path('admin_' ~ type ~ '_delete', {'id': content.id}) }}" class="btn btn-danger delete-button">

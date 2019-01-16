@@ -10,7 +10,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Person;
 use App\Form\Type\Content\PersonType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,9 +19,9 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class PersonController
  *
  * @package App\Controller\Admin
- * @Route("/{_locale}/admin/person", requirements={ "_locale" = "%admin.locales%" })
+ * @Route("/admin/person")
  */
-class PersonController extends Controller
+class PersonController extends AbstractController
 {
     /**
      * @param Request     $request

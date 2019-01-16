@@ -12,8 +12,8 @@ use App\Entity\User;
 use App\Form\Model\SearchUser;
 use App\Form\Type\User\SearchUserType;
 use App\Form\Type\User\UserType;
-use App\Services\User\UserService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Services\User\UserManager;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,9 +22,9 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class UserController
  *
  * @package App\Controller\Admin
- * @Route("/{_locale}/admin/users", requirements={ "_locale" = "%admin.locales%" })
+ * @Route("/admin/users")
  */
-class UserController extends Controller
+class UserController extends AbstractController
 {
     /**
      * @param Request     $request
@@ -81,11 +81,11 @@ class UserController extends Controller
 
     /**
      * @param Request     $request
-     * @param UserService $userService
+     * @param UserManager $userService
      * @Route("/create", name="admin_user_create")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function create(Request $request, UserService $userService)
+    public function create(Request $request, UserManager $userService)
     {
         // Breadcrumb
         $breadcrumbs = $this->get("white_october_breadcrumbs");
@@ -141,11 +141,11 @@ class UserController extends Controller
     /**
      * @param Request     $request
      * @param             $id
-     * @param UserService $userService
+     * @param UserManager $userService
      * @Route("/edit/{id}", name="admin_user_edit")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function edit(Request $request, User $user, UserService $userService)
+    public function edit(Request $request, User $user, UserManager $userService)
     {
         // Breadcrumb
         $breadcrumbs = $this->get("white_october_breadcrumbs");
@@ -198,11 +198,11 @@ class UserController extends Controller
     /**
      * @param Request     $request
      * @param User        $user
-     * @param UserService $userService
+     * @param UserManager $userService
      * @Route("/delete/{id}", name="admin_user_delete")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function delete(Request $request, User $user, UserService $userService)
+    public function delete(Request $request, User $user, UserManager $userService)
     {
         $userService->remove($user);
 

@@ -16,110 +16,87 @@ namespace App\Form\Model;
 class SearchUser
 {
     /**
-     * Id
-     *
-     * @var string
+     * @var string|null
      */
     protected $id;
 
     /**
-     * Email
-     *
-     * @var string
+     * @var string|null
      */
     protected $email;
 
     /**
-     * Firstname
-     *
-     * @var string
+     * @var string|null
      */
     protected $firstName;
 
     /**
-     * Lastname
-     *
-     * @var string
+     * @var string|null
      */
     protected $lastName;
 
     /**
-     * Set id
-     *
-     * @param mixed $id
+     * @return string|null
      */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * Get id
-     *
-     * @return mixed
-     */
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
     }
 
     /**
-     * Set Email
-     *
-     * @param mixed $email
+     * @param string|null $id
      */
-    public function setEmail($email)
+    public function setId(?string $id): void
     {
-        $this->email = $email;
+        $this->id = $id;
     }
 
     /**
-     * Get Email
-     *
-     * @return mixed
+     * @return string|null
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
     /**
-     * Set firstname
-     * @param mixed $firstName
+     * @param string|null $email
      */
-    public function setFirstName($firstName)
+    public function setEmail(?string $email): void
     {
-        $this->firstName = $firstName;
+        $this->email = $email;
     }
 
     /**
-     * Get firstname
-     *
-     * @return mixed
+     * @return string|null
      */
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
     /**
-     * Set lastname
-     *
-     * @param mixed $lastName
+     * @param string|null $firstName
      */
-    public function setLastName($lastName)
+    public function setFirstName(?string $firstName): void
     {
-        $this->lastName = $lastName;
+        $this->firstName = $firstName;
     }
 
     /**
-     * Get lastname
-     *
-     * @return mixed
+     * @return string|null
      */
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->lastName;
+    }
+
+    /**
+     * @param string|null $lastName
+     */
+    public function setLastName(?string $lastName): void
+    {
+        $this->lastName = $lastName;
     }
 
     /**
@@ -127,7 +104,7 @@ class SearchUser
      *
      * @return array
      */
-    public function getSearchData()
+    public function getSearchData(): array
     {
         $tab = array();
 

@@ -77,12 +77,12 @@ update-js-route: .env vendor
 assets: ## Run Yarn to compile assets
 assets: node_modules
 	rm -rf public/build/*
-	$(YARN) run build
+	$(YARN) run dev
 
 assets-prod: ## Run Yarn to compile and minified assets
-assets-prod: node_modules
+build-assets: node_modules
 	rm -rf public/build/*
-	$(YARN) run build-prod
+	$(YARN) run build
 
 watch: ## Run Yarn in watch mode
 watch: node_modules
@@ -118,11 +118,11 @@ test: tu tf
 
 tu: ## Run unit tests
 tu: vendor
-	$(EXEC_PHP) ./vendor/bin/phpunit tests --exclude-group functional
+	$(EXEC_PHP) bin/phpunit tests --color --exclude-group functional
 
 tf: ## Run functional tests
 tf: vendor
-	$(EXEC_PHP) ./vendor/bin/phpunit tests --group functional
+	$(EXEC_PHP) bin/phpunit tests --color --group functional
 
 .PHONY: tests tu tf
 
@@ -204,10 +204,10 @@ phpmetrics: artefacts
 	$(QA) phpmetrics --report-html=$(ARTEFACTS)/phpmetrics src
 
 php-cs-fixer: ## php-cs-fixer (http://cs.sensiolabs.org)
-	bin/php-cs-fixer fix src --dry-run --using-cache=no --verbose --diff
+	$(QA) php-cs-fixer fix src --dry-run --using-cache=no --verbose --diff
 
 apply-php-cs-fixer: ## apply php-cs-fixer fixes
-	bin/php-cs-fixer fix src --using-cache=no --verbose --diff
+	$(QA) php-cs-fixer fix src --using-cache=no --verbose --diff
 
 twigcs: ## twigcs (https://github.com/allocine/twigcs)
 	$(QA) twigcs lint templates

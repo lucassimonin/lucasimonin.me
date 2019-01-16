@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class ExperienceController
  *
  * @package App\Controller\Admin
- * @Route("/{_locale}/admin/experiences", requirements={ "_locale" = "%admin.locales%" })
+ * @Route("/admin/experiences")
  */
 class ExperienceController extends BaseContentController
 {
@@ -71,7 +71,7 @@ class ExperienceController extends BaseContentController
         if ($form->isSubmitted() && $form->isValid()) {
             $contentService->save($experience);
             $this->get('session')->getFlashBag()->set(
-                'notice',
+                'success',
                 'admin.flash.created'
             );
 
@@ -107,7 +107,7 @@ class ExperienceController extends BaseContentController
         if ($form->isSubmitted() && $form->isValid()) {
             $contentService->save($experience);
             $this->get('session')->getFlashBag()->set(
-                'notice',
+                'info',
                 'admin.flash.updated'
             );
 
@@ -134,7 +134,7 @@ class ExperienceController extends BaseContentController
     {
         $contentService->remove($experience);
         $this->get('session')->getFlashBag()->set(
-            'notice',
+            'warning',
             'admin.flash.removed'
         );
 

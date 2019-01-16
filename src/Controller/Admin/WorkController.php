@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class WorkController
  *
  * @package App\Controller\Admin
- * @Route("/{_locale}/admin/works", requirements={ "_locale" = "%admin.locales%" })
+ * @Route("/admin/works")
  */
 class WorkController extends BaseContentController
 {

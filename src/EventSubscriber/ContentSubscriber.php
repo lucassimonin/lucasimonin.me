@@ -8,16 +8,14 @@
 
 namespace App\EventSubscriber;
 
-use App\Entity\Experience;
-use App\Entity\Skill;
-use App\Entity\Work;
-use App\Services\Core\CacheService;
+use App\Entity\ContentInterface;
+use App\Services\Core\CacheManagerInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
 class ContentSubscriber
 {
-    /** @var Work|Experience|Skill */
+    /** @var ContentInterface */
     private $entity;
 
     /** @var EntityManager */
@@ -30,12 +28,12 @@ class ContentSubscriber
 
     /**
      * ContentSubscriber constructor.
-     * @param CacheService $cacheService
+     * @param CacheManagerInterface $cacheManager
      * @param $locales
      */
-    public function __construct(CacheService $cacheService, $locales)
+    public function __construct(CacheManagerInterface $cacheManager, $locales)
     {
-        $this->cache = $cacheService->getCache();
+        $this->cache = $cacheManager->getCache();
         $this->locales = $locales;
     }
 
@@ -50,9 +48,6 @@ class ContentSubscriber
 
     /**
      * @param LifecycleEventArgs $args
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function postUpdate(LifecycleEventArgs $args)
     {
@@ -66,9 +61,6 @@ class ContentSubscriber
 
     /**
      * @param LifecycleEventArgs $args
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function postPersist(LifecycleEventArgs $args)
     {
@@ -84,25 +76,13 @@ class ContentSubscriber
 
     private function removeCache()
     {
-        $key = '';
-        switch (get_class($this->entity)) {
-            case Work::class:
-                $key = 'app.works.';
-                break;
-            case Experience::class:
-                $key = 'app.experiences.';
-                break;
-            case Skill::class:
-                $key = 'app.skills.' . $this->entity->getType() . '.';
-                break;
-        }
         foreach ($this->locales as $locale) {
-            $this->cache->deleteItem($key . $locale);
+            $this->cache->deleteItem($this->entity->keyCache() . $locale);
         }
     }
 
     private function isAvailable()
     {
-        return in_array(get_class($this->entity), [Work::class, Experience::class, Skill::class]);
+        return $this->entity instanceof ContentInterface;
     }
 }

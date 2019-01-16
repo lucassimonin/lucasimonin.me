@@ -8,7 +8,7 @@
 
 namespace App\Services\Content;
 
-use App\Services\Core\CacheService;
+use App\Services\Core\CacheManagerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -27,12 +27,12 @@ class ContentService
     /**
      * ContentService constructor.
      * @param EntityManagerInterface $em
-     * @param CacheService $cacheService
+     * @param CacheManagerInterface $cacheManager
      */
-    public function __construct(EntityManagerInterface $em, CacheService $cacheService)
+    public function __construct(EntityManagerInterface $em, CacheManagerInterface $cacheManager)
     {
         $this->em = $em;
-        $this->cache = $cacheService->getCache();
+        $this->cache = $cacheManager->getCache();
     }
 
     /**

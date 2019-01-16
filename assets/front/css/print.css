@@ -1,7 +1,6 @@
 @media print and (color) {
     * {
         -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
     }
 }
 
@@ -11,25 +10,9 @@ body {
 }
 
 @font-face {
-    font-family: 'Lato';
-    src: url('../fonts/Lato-Regular.eot');
-    src: url('../fonts/Lato-Regular.eot?#iefix') format('embedded-opentype'), url('../fonts/Lato-Regular.woff2') format('woff2'), url('../fonts/Lato-Regular.woff') format('woff'), url('../fonts/Lato-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
     font-family: 'LatoLight';
     src: url('../fonts/Lato-Light.eot');
     src: url('../fonts/Lato-Light.eot?#iefix') format('embedded-opentype'), url('../fonts/Lato-Light.woff2') format('woff2'), url('../fonts/Lato-Light.woff') format('woff'), url('../fonts/Lato-Light.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'LatoBold';
-    src: url('../fonts/Lato-Bold.eot');
-    src: url('../fonts/Lato-Bold.eot?#iefix') format('embedded-opentype'), url('../fonts/Lato-Bold.woff2') format('woff2'), url('../fonts/Lato-Bold.woff') format('woff'), url('../fonts/Lato-Bold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -124,16 +107,13 @@ section .lead {
 .fa-blue{color:#337ab7}
 .fa-orange{color:#fdbd10}
 
-.navbar  { border: 0px; background-color: #222222; position: absolute; top: 100%; right: 5%; width: 110px; z-index: 999; border-radius: 0; }
-.navbar .navbar-collapse { padding: 0px; max-height: none; }
+.navbar  { border: 0; background-color: #222222; position: absolute; top: 100%; right: 5%; width: 110px; z-index: 999; border-radius: 0; }
+.navbar .navbar-collapse { padding: 0; max-height: none; }
 .navbar .navbar-nav { float: none; }
-.navbar-nav { margin: 0px; }
+.navbar-nav { margin: 0; }
 .navbar .nav > li { display: block; float: none; height: 80px; }
 .navbar .nav > li a { display: block;  height: 80px; text-align: center; padding-top: 30px; font-weight: 600; color: #FFFFFF; }
 .navbar .nav > li a:hover, .navbar .nav > li a:focus { color: #999999; }
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus { background: #9a2323; color: #FFFFFF; }
-.navbar-default .navbar-toggle:hover .icon-bar,
-.navbar-default .navbar-toggle:focus .icon-bar { background: #222222; }
 
 .fixed  { position: fixed; top: 60px; }
 
@@ -152,7 +132,7 @@ section .lead {
 }
 
 hr {
-    margin: 40px 0px;
+    margin: 40px 0;
     border-color: #727878;
     opacity: 0.2;
 }
@@ -227,13 +207,13 @@ h3 {
 #projects .row > div { margin-bottom: 30px; }
 #projects figure { position: relative; overflow: hidden; }
 #projects figure h3 { color: #FFF; font-weight: 600; margin-bottom: 5px; font-size: 20px}
-#projects figure p > strong { width: 60px; display: inline-block; margin: 0px; }
+#projects figure p > strong { width: 60px; display: inline-block; margin: 0; }
 #projects figure img { width: 110%; }
 #projects figure figcaption {
     padding: 20px 30px;
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     height: 100%;
     width: 100%;
 }
@@ -244,16 +224,16 @@ h3 {
     font-size: 0;
     opacity: 0;
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     height: 100%;
     width: 100%;
 }
 #projects figure .icon {
     background: #9a2323;
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
     width: 48px;
     height: 48px;
 }
@@ -461,7 +441,6 @@ header .header-content .header-content-inner {
     background-color: #333;
     padding: 5px 0;
     width: 250px;
-    margin: 0 auto;
     margin:10px auto;
 }
 
@@ -872,8 +851,8 @@ figure .ezrichtext-field p {
 
 ul.no-bullets {
     list-style-type: none;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 
 #abilities ul > li .ability-score {
@@ -884,7 +863,7 @@ ul.no-bullets {
     color: #9a2323;
 }
 
-#abilities ul > li { min-height: 30px; padding: 3px 0px;font-weight: 200; }
+#abilities ul > li { min-height: 30px; padding: 3px 0;font-weight: 200; }
 #abilities ul > li:hover { background: #F2F2F2; }
 #abilities ul > li .ability-title { display: inline-block; width: 60%; }
 #abilities ul > li .ability-score { float: right; }
