@@ -20,7 +20,7 @@ class SecurityController extends AbstractController
      * @param AuthenticationUtils $authUtils
      * @return Response
      */
-    public function login(Request $request, AuthenticationUtils $authUtils)
+    public function login(Request $request, AuthenticationUtils $authUtils): Response
     {
         if (null !== $this->getUser()) {
             return $this->redirectToRoute('admin_dashboard');

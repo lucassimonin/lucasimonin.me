@@ -58,9 +58,9 @@ class SkillType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => Skill::class,
             'translation_domain' => 'app'
-        ));
+        ]);
     }
 }

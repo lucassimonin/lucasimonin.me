@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Model\SearchInterface;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,18 +13,20 @@ use Doctrine\ORM\EntityRepository;
 class ContentRepository extends EntityRepository
 {
     /**
-     * @param array $filters
+     * @param SearchInterface $search
      * @return mixed
      */
-    public function queryForSearch($filters = array())
+    public function queryForSearch(SearchInterface $search)
     {
+        $filters = $search->getFilters();
         $qb = $this->createQueryBuilder('c')
             ->join('c.translations', 't');
-        if (count($filters) > 0) {
-            foreach ($filters as $key => $filter) {
-                $qb->andWhere('t.'.$key.' LIKE :'.$key);
-                $qb->setParameter($key, '%'.$filter.'%');
+        foreach ($filters as $key => $filter) {
+            if (null === $filter) {
+                continue;
             }
+            $qb->andWhere('t.'.$key.' LIKE :'.$key);
+            $qb->setParameter($key, '%'.$filter.'%');
         }
 
         return $qb->getQuery();

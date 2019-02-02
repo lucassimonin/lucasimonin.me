@@ -3,10 +3,10 @@
 namespace App\Controller\Front;
 
 use App\Entity\Experience;
-use App\Entity\Person;
 use App\Entity\Skill;
 use App\Entity\Work;
-use App\Services\Content\ContentService;
+use App\Services\Content\ContentManagerInterface;
+use App\Services\Content\PersonManagerInterface;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,19 +21,35 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     /**
+     * @var ContentManagerInterface
+     */
+    private $contentManager;
+    /**
+     * @var PersonManagerInterface
+     */
+    private $personManager;
+
+    /**
+     * HomeController constructor.
+     * @param ContentManagerInterface $contentManager
+     * @param PersonManagerInterface $personManager
+     */
+    public function __construct(ContentManagerInterface $contentManager, PersonManagerInterface $personManager)
+    {
+        $this->contentManager = $contentManager;
+        $this->personManager = $personManager;
+    }
+
+
+    /**
      * Homepage
      * @Route("/", name="homepage")
      * @return Response
      */
     public function index() : Response
     {
-        $person = $this->getDoctrine()->getRepository(Person::class)->findAll();
-        if (!empty($person)) {
-            $person = $person[0];
-        }
-
         return $this->render('front/index.html.twig', [
-            'person' => $person
+            'person' => $this->getPersonManager()->find()
         ]);
     }
 
@@ -44,13 +60,8 @@ class HomeController extends AbstractController
      */
     public function download() : Response
     {
-        $person = $this->getDoctrine()->getRepository(Person::class)->findAll();
-        if (!empty($person)) {
-            $person = $person[0];
-        }
-
         $html = $this->renderView('front/pdf/index.html.twig', [
-            'person' => $person
+            'person' => $this->getPersonManager()->find()
         ]);
 
         return new PdfResponse(
@@ -68,24 +79,18 @@ class HomeController extends AbstractController
      */
     public function localeIndex() : Response
     {
-        $person = $this->getDoctrine()->getRepository(Person::class)->findAll();
-        if (!empty($person)) {
-            $person = $person[0];
-        }
-
         return $this->render('front/index.html.twig', [
-            'person' => $person
+            'person' => $this->getPersonManager()->find()
         ]);
     }
 
     /**
      * Part experiences
      * @param Request $request
-     * @param ContentService $contentService
+     * @param bool $pdf
      * @return Response
-     * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function experiences(Request $request, ContentService $contentService, $pdf) : Response
+    public function experiences(Request $request, bool $pdf) : Response
     {
         $orderBy['c.startDate'] = 'desc';
         $locale = $request->getLocale();
@@ -94,7 +99,7 @@ class HomeController extends AbstractController
             'front/parts/experiences.html.twig',
             [
                 'pdf' => $pdf,
-                'xps' => $contentService->getContents(
+                'xps' => $this->getContentManager()->getContents(
                     Experience::class,
                     'app.experiences.' . $locale,
                     [],
@@ -107,11 +112,10 @@ class HomeController extends AbstractController
     /**
      * Part skills
      * @param Request $request
-     * @param ContentService $contentService
+     * @param bool $pdf
      * @return Response
-     * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function skills(Request $request, ContentService $contentService, $pdf) : Response
+    public function skills(Request $request, bool $pdf) : Response
     {
         $orderBy['c.note'] = 'desc';
         $locale = $request->getLocale();
@@ -119,19 +123,19 @@ class HomeController extends AbstractController
         return $this->render(
             'front/parts/skills.html.twig',
             [
-                'skills' => $contentService->getContents(
+                'skills' => $this->getContentManager()->getContents(
                     Skill::class,
                     'app.skills.' . Skill::SKILL_TYPE_SKILL . '.' . $locale,
                     ['c.type' => ['=', Skill::SKILL_TYPE_SKILL]],
                     $orderBy
                 ),
-                'languages' => $contentService->getContents(
+                'languages' => $this->getContentManager()->getContents(
                     Skill::class,
                     'app.skills.' . Skill::SKILL_TYPE_LANGUAGE . '.' . $locale,
                     ['c.type' => ['=', Skill::SKILL_TYPE_LANGUAGE]],
                     $orderBy
                 ),
-                'tools' => $contentService->getContents(
+                'tools' => $this->getContentManager()->getContents(
                     Skill::class,
                     'app.skills.' . Skill::SKILL_TYPE_TOOLS . '.' . $locale,
                     ['c.type' => ['=', Skill::SKILL_TYPE_TOOLS]],
@@ -145,20 +149,16 @@ class HomeController extends AbstractController
     /**
      * Part works
      * @param Request $request
-     * @param ContentService $contentService
      * @return Response
-     * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function works(Request $request, ContentService $contentService) : Response
+    public function works(Request $request) : Response
     {
-        $locale = $request->getLocale();
-
         return $this->render(
             'front/parts/works.html.twig',
             [
-                'works' => $contentService->getContents(
+                'works' => $this->getContentManager()->getContents(
                     Work::class,
-                    'app.works.' . $locale
+                    'app.works.' . $request->getLocale()
                 )
             ]
         );
@@ -166,13 +166,18 @@ class HomeController extends AbstractController
 
     public function meta()
     {
-        $person = $this->getDoctrine()->getRepository(Person::class)->findAll();
-        if (!empty($person)) {
-            $person = $person[0];
-        }
-
         return $this->render('front/pagelayout/page_head.html.twig', [
-            'person' => $person
+            'person' => $this->getPersonManager()->find()
         ]);
+    }
+
+    private function getContentManager(): ContentManagerInterface
+    {
+        return $this->contentManager;
+    }
+
+    private function getPersonManager(): PersonManagerInterface
+    {
+        return $this->personManager;
     }
 }

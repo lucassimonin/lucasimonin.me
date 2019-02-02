@@ -8,7 +8,7 @@
 
 namespace App\Form\Type\Content;
 
-use App\Form\Model\SearchContent;
+use App\Model\SearchContent;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -16,8 +16,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  *  Form Type
- *
- * @SuppressWarnings(PHPMD.UnusedLocalVariable)
  */
 class SearchContentType extends AbstractType
 {
@@ -29,7 +27,12 @@ class SearchContentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', TextType::class, ['required' => false]);
+        $builder->add('name', TextType::class, [
+            'label' => false,
+            'attr' => [
+                'placeholder' => 'admin.common.form.name'
+            ]
+        ]);
     }
 
     /**
@@ -39,9 +42,15 @@ class SearchContentType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => SearchContent::class,
-            'translation_domain' => 'app'
-        ));
+            'translation_domain' => 'app',
+            'csrf_protection' => false
+        ]);
+    }
+
+    public function getBlockPrefix()
+    {
+        return '';
     }
 }

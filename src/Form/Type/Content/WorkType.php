@@ -58,9 +58,9 @@ class WorkType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => Work::class,
             'translation_domain' => 'app'
-        ));
+        ]);
     }
 }

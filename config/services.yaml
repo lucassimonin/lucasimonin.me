@@ -5,8 +5,6 @@ parameters:
     app.locales: "en|fr"
     app.cache_lifetime: 84400
     app.locales.available: ["fr", "en"]
-    admin.locales: "en|fr"
-    admin.locales.available: ["en", "fr"]
     validator.translation_domain: 'app'
     media_directory: '%kernel.project_dir%/public/uploads/media'
 
@@ -23,7 +21,7 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
-        exclude: '../src/{Entity,Migrations,Tests,Kernel.php,Query,Repository}'
+        exclude: '../src/{Entity,Migrations,Tests,Kernel.php,Query,Repository,Model}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class

@@ -8,7 +8,7 @@
 
 namespace App\Form\Type\User;
 
-use App\Form\Model\SearchUser;
+use App\Model\SearchUser;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -29,10 +29,10 @@ class SearchUserType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('id', TextType::class, array('required' => false));
-        $builder->add('firstName', TextType::class, array('required' => false));
-        $builder->add('lastName', TextType::class, array('required' => false));
-        $builder->add('email', TextType::class, array('required' => false));
+        $builder->add('id', TextType::class, ['required' => false]);
+        $builder->add('firstName', TextType::class, ['required' => false]);
+        $builder->add('lastName', TextType::class, ['required' => false]);
+        $builder->add('email', TextType::class, ['required' => false]);
     }
 
     /**
@@ -42,9 +42,15 @@ class SearchUserType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => SearchUser::class,
-            'translation_domain' => 'app'
-        ));
+            'translation_domain' => 'app',
+            'csrf_protection' => false
+        ]);
+    }
+
+    public function getBlockPrefix()
+    {
+        return '';
     }
 }

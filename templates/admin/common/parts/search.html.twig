@@ -1,17 +1,16 @@
-<form action="" class="form-horizontal" method="get" enctype="multipart/form-data" novalidate >
-    {{ form_errors(form.name) }}
-    <div class="form-group panel-block">
-        <div class="row">
-            {{ form_label(form.name, "admin.common.form.name", { 'label_attr': { 'class': 'col-sm-1 control-label' }}) }}
-            <div class="col-sm-11">
-                {{ form_widget(form.name, { 'attr': {'class': 'form-control', 'placeholder': 'admin.user.form.search.name'} }) }}
+<div class="col-md-12 m-b-2 col-sm-12 search-zone"  {% if app.request.query.all is empty %}style="display: none;"{% endif %}>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="panel panel-inverse search-block">
+                <div class="panel-body">
+                    {{ form_start(form, {'method': 'get'}) }}
+                    {{ form_widget(form) }}
+                    <div class="col-sm-12" style="text-align: center;">
+                        <input class="btn btn-outline-secondary" type="submit" value="{{ 'admin.common.search.button'|trans({}, 'app') }}">
+                    </div>
+                    {{ form_end(form) }}
+                </div>
             </div>
         </div>
     </div>
-
-    <div class="form-group panel-block">
-        <div class="col-sm-12" style="text-align: center;">
-            <input class="btn btn-default" type="submit" value="{{ 'admin.common.search.button'|trans({}, 'app') }}">
-        </div>
-    </div>
-</form>
+</div>
