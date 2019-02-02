@@ -18,17 +18,7 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-md-12 m-b-2 col-sm-12 search-zone"  {% if app.request.query.get('search') is empty %}style="display: none;"{% endif %}>
-            <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    <div class="panel panel-inverse">
-                        <div class="panel-body">
-                            {% include "admin/common/parts/search.html.twig" %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% include "admin/common/parts/search.html.twig" %}
         <div class="col-md-12 col-sm-12">
             <div class="table-app">
                 <table class="table no-margin-botton table-bordered table-hover table-striped">
@@ -39,12 +29,9 @@
                     </tr>
                     </thead>
                     <tbody>
-
                     {% for content in pagination %}
                         <tr>
-
                             <td><a href="{{ path('admin_' ~ type ~ '_edit', {'id': content.id}) }}">{{ content.name }}</a></td>
-
                             <td>
                                 <a href="{{ path('admin_' ~ type ~ '_edit', {'id': content.id}) }}" class="btn btn-outline-secondary">
                                     <i class="fa fa-edit"></i> {{ 'admin.common.update.button'|trans({}, 'app') }}

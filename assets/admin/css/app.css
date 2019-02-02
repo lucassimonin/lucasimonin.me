@@ -21,6 +21,101 @@ textarea.form-control{
     height: 200px;
 }
 
+.form-signin {
+    width: 100%;
+    max-width: 420px;
+    padding: 15px;
+    margin: auto;
+}
+
+.form-label-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.form-label-group > input,
+.form-label-group > label {
+    height: 3.125rem;
+    padding: .75rem;
+}
+
+.form-label-group > label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    margin-bottom: 0; /* Override default `<label>` margin */
+    line-height: 1.5;
+    color: #495057;
+    pointer-events: none;
+    cursor: text; /* Match the input under the label */
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    transition: all .1s ease-in-out;
+}
+
+.form-label-group input::-webkit-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input:-ms-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::-ms-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::-moz-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::placeholder {
+    color: transparent;
+}
+
+.form-label-group input:not(:placeholder-shown) {
+    padding-top: 1.25rem;
+    padding-bottom: .25rem;
+}
+
+.form-label-group input:not(:placeholder-shown) ~ label {
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    font-size: 12px;
+    color: #777;
+}
+
+/* Fallback for Edge
+-------------------------------------------------- */
+@supports (-ms-ime-align: auto) {
+    .form-label-group > label {
+        display: none;
+    }
+    .form-label-group input::-ms-input-placeholder {
+        color: #777;
+    }
+}
+
+/* Fallback for IE
+-------------------------------------------------- */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .form-label-group > label {
+        display: none;
+    }
+    .form-label-group input:-ms-input-placeholder {
+        color: #777;
+    }
+}
+
+.panel.search-block {
+    border-radius: 0;
+    box-shadow: none;
+    border-bottom: 1px solid #ebebeb;
+    border-left: 1px solid #ebebeb;
+    border-right: 1px solid #ebebeb;
+}
 
 .btn > i {
     margin-right: 5px;
@@ -29,34 +124,7 @@ textarea.form-control{
     display: none;
 }
 
-.inputlogin {
-    height: 64px;
-    color: rgba(0,0,0,0.54);
-    padding-right: 23px;
-    padding-left: 64px;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    background-color: rgb(249, 249, 249);
-    box-shadow: none;
-    border: 1px solid rgba(0,0,0,0.117647);
-}
 
-.inputlogin.login {
-    background: url("../images/IconUsername.svg") no-repeat 26px center;
-}
-
-.inputlogin.password {
-    background: url("../images/IconLock.svg") no-repeat 26px center;
-}
-
-
-
-
-#login-img {
-    margin-top:100px;
-    margin-bottom: 20px;
-    text-align: center;
-}
 .black-link, .black-link:hover {
     color:#000000;
 }
@@ -234,22 +302,6 @@ body {
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
 }
 
-.navbar .form-control {
-    padding: .75rem 1rem;
-    border-width: 0;
-    border-radius: 0;
-}
-
-.form-control-dark {
-    color: #fff;
-    background-color: rgba(255, 255, 255, .1);
-    border-color: rgba(255, 255, 255, .1);
-}
-
-.form-control-dark:focus {
-    border-color: transparent;
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
-}
 
 
 

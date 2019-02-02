@@ -3,13 +3,13 @@
 namespace App\Form\Type\Media;
 
 use App\Entity\Media;
-use App\Form\Type\BaseType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class MediaType extends BaseType
+class MediaType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -24,8 +24,8 @@ class MediaType extends BaseType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => Media::class
-        ));
+        ]);
     }
 }

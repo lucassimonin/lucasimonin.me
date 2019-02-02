@@ -10,8 +10,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Experience;
 use App\Form\Type\Content\ExperienceType;
-use App\Form\Type\Content\SearchContentType;
-use App\Services\Content\ContentService;
+use App\Services\Content\ContentManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,34 +30,25 @@ class ExperienceController extends BaseContentController
      */
     public function list(Request $request)
     {
-        $data = $this->initSearch($request);
-        $form = $this->createForm(SearchContentType::class, $data);
-
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem('admin.dashboard.label', $this->get("router")->generate("admin_dashboard"));
         $breadcrumbs->addItem('admin.experience.list.title');
 
-        $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $this->getDoctrine()->getRepository(Experience::class)->queryForSearch($data->getSearchData()),
-            $request->query->get('page', 1),
-            20
-        );
+        list($pagination, $form) = $this->initSearch($request, Experience::class);
 
-        return $this->render('admin/common/list.html.twig', array(
+        return $this->render('admin/common/list.html.twig', [
             'pagination' => $pagination,
             'form' => $form->createView(),
             'type' => 'experience'
-        ));
+        ]);
     }
 
     /**
      * @param Request     $request
-     * @param ContentService $contentService
      * @Route("/create", name="admin_experience_create")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function create(Request $request, ContentService $contentService)
+    public function create(Request $request)
     {
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem('admin.dashboard.label', $this->get("router")->generate("admin_dashboard"));
@@ -69,7 +59,7 @@ class ExperienceController extends BaseContentController
         $form = $this->createForm(ExperienceType::class, $experience);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $contentService->save($experience);
+            $this->getContentManager()->save($experience);
             $this->get('session')->getFlashBag()->set(
                 'success',
                 'admin.flash.created'
@@ -80,22 +70,22 @@ class ExperienceController extends BaseContentController
 
         return $this->render(
             'admin/common/form.html.twig',
-            array(
+            [
                 'form' => $form->createView(),
                 'title' => 'experience',
                 'type' => 'create'
-            )
+            ]
         );
     }
 
     /**
      * @param Request $request
      * @param Experience $experience
-     * @param ContentService $contentService
+     * @param ContentManager $contentService
      * @Route("/edit/{id}", name="admin_experience_edit")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function edit(Request $request, Experience $experience, ContentService $contentService)
+    public function edit(Request $request, Experience $experience)
     {
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem('admin.dashboard.label', $this->get("router")->generate("admin_dashboard"));
@@ -105,7 +95,7 @@ class ExperienceController extends BaseContentController
         $form = $this->createForm(ExperienceType::class, $experience);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $contentService->save($experience);
+            $this->getContentManager()->save($experience);
             $this->get('session')->getFlashBag()->set(
                 'info',
                 'admin.flash.updated'
@@ -116,23 +106,22 @@ class ExperienceController extends BaseContentController
 
         return $this->render(
             'admin/common/form.html.twig',
-            array(
+            [
                 'form' => $form->createView(),
                 'title' => 'experience',
                 'type' => 'update'
-            )
+            ]
         );
     }
 
     /**
      * @param Experience $experience
-     * @param ContentService $contentService
      * @Route("/delete/{id}", name="admin_experience_delete")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function delete(Experience $experience, ContentService $contentService)
+    public function delete(Experience $experience)
     {
-        $contentService->remove($experience);
+        $this->getContentManager()->remove($experience);
         $this->get('session')->getFlashBag()->set(
             'warning',
             'admin.flash.removed'

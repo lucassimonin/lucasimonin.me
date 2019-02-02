@@ -32,11 +32,15 @@ $('.delete-button').click(function(){
     return confirm('Confirmez cette suppression ?');
 });
 
+$('.btn-search-open').click(function(e){
+    e.preventDefault();
+    $('.search-zone').fadeToggle();
+});
+
 $(document).ready(function() {
     if($('.editor-wysiwyg').length) {
         _loadWysiwyg($('.editor-wysiwyg'), true);
     }
-
     if($('.date').length) {
         $.datetimepicker.setLocale($('html').attr('lang'));
         $('.date').datetimepicker({

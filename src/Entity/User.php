@@ -36,7 +36,6 @@ class User implements UserInterface, \Serializable, TwoFactorInterface
     private $googleAuthenticatorSecret;
 
     /**
-     * Firstname
      * @var string
      * @ORM\Column(name="first_name", length=255, nullable=true)
      * @Assert\NotBlank(message="admin.validation.mandatory.label")
@@ -45,7 +44,6 @@ class User implements UserInterface, \Serializable, TwoFactorInterface
     private $firstName;
 
     /**
-     * Lastname
      * @var string
      * @ORM\Column(name="last_name", length=255, nullable=true)
      * @Assert\NotBlank(message="admin.validation.mandatory.label")
@@ -61,8 +59,6 @@ class User implements UserInterface, \Serializable, TwoFactorInterface
     private $username;
 
     /**
-     * Slug
-     *
      * @Gedmo\Slug(fields={"username"})
      * @ORM\Column(length=255, unique=true)
      */
@@ -125,7 +121,7 @@ class User implements UserInterface, \Serializable, TwoFactorInterface
     public function __construct($enabled = false)
     {
         $this->enabled = $enabled;
-        $this->roles = [];
+        $this->roles = [self::ROLE_DEFAULT];
     }
 
     /**

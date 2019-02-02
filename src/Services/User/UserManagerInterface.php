@@ -14,4 +14,5 @@ interface UserManagerInterface
 {
     public function findAll(): array;
     public function save(User $user): User;
+    public function remove(User $user): void;
 }

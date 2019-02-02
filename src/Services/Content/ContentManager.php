@@ -8,24 +8,23 @@
 
 namespace App\Services\Content;
 
+use App\Entity\ContentInterface;
 use App\Services\Core\CacheManagerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * Class ContentService
+ * Class ContentManager
  * `
- * Object manager of user
- *
  * @package App\Services\Content
  */
-class ContentService
+class ContentManager implements ContentManagerInterface
 {
     private $em;
 
     private $cache;
 
     /**
-     * ContentService constructor.
+     * ContentManager constructor.
      * @param EntityManagerInterface $em
      * @param CacheManagerInterface $cacheManager
      */
@@ -39,7 +38,7 @@ class ContentService
      * @param $content
      * @return mixed
      */
-    public function save($content)
+    public function save(ContentInterface $content): ContentInterface
     {
         // Save user
         $this->em->persist($content);
@@ -51,7 +50,7 @@ class ContentService
     /**
      * @param mixed $content
      */
-    public function remove($content)
+    public function remove(ContentInterface $content): void
     {
         $this->em->remove($content);
         $this->em->flush();

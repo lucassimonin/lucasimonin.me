@@ -6,15 +6,17 @@
  * @author Lucas Simonin <lsimonin2@gmail.com>
  */
 
-namespace App\Form\Model;
+namespace App\Model;
 
 /**
  * Class SearchUser
  *
- * @package App\Form\Model\User
+ * @package App\Model\User
  */
-class SearchUser
+class SearchUser implements SearchInterface
 {
+    public static $limit = 20;
+
     /**
      * @var string|null
      */
@@ -34,6 +36,28 @@ class SearchUser
      * @var string|null
      */
     protected $lastName;
+
+    /** @var int  */
+    private $page = 1;
+
+    public function __construct(array $queries)
+    {
+        $this->page = $queries['page'] ?? 1;
+        $this->id = $queries['id'] ?? null;
+        $this->firstName = $queries['firstName'] ?? null;
+        $this->lastName = $queries['lastName'] ?? null;
+        $this->email = $queries['email'] ?? null;
+    }
+
+    public function getFilters(): array
+    {
+        return [
+            'id' => $this->id,
+            'firstName' => $this->firstName,
+            'lastName' => $this->lastName,
+            'email' => $this->email
+        ];
+    }
 
     /**
      * @return string|null
@@ -100,27 +124,10 @@ class SearchUser
     }
 
     /**
-     * Get search data
-     *
-     * @return array
+     * @return int
      */
-    public function getSearchData(): array
+    public function getPage(): int
     {
-        $tab = array();
-
-        if (!empty($this->id)) {
-            $tab['id'] = $this->id;
-        }
-        if (!empty($this->firstName)) {
-            $tab['firstName'] = $this->firstName;
-        }
-        if (!empty($this->lastName)) {
-            $tab['lastName'] = $this->lastName;
-        }
-        if (!empty($this->email)) {
-            $tab['email'] = $this->email;
-        }
-
-        return $tab;
+        return $this->page;
     }
 }

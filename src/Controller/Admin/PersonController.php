@@ -8,8 +8,8 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Person;
 use App\Form\Type\Content\PersonType;
+use App\Services\Content\PersonManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,33 +23,25 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PersonController extends AbstractController
 {
+
     /**
-     * @param Request     $request
-     * @Route("/edit", name="admin_person_edit")
+     * @param Request $request
+     * @param PersonManagerInterface $personManager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @Route("/edit", name="admin_person_edit")
      */
-    public function edit(Request $request)
+    public function edit(Request $request, PersonManagerInterface $personManager): Response
     {
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem('admin.dashboard.label', $this->get("router")->generate("admin_dashboard"));
         $breadcrumbs->addItem("admin.person.title.update");
-
-        $person = $this->getDoctrine()->getRepository(Person::class)->findAll();
-        if (empty($person)) {
-            $person = new Person();
-        } else {
-            $person = $person[0];
-        }
-
+        $person = $personManager->find();
         $form = $this->createForm(PersonType::class, $person);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager = $this->getDoctrine()->getManager();
-            $manager->persist($person);
-            $manager->flush();
+            $personManager->save($person);
             $this->get('session')->getFlashBag()->set(
-                'notice',
+                'success',
                 'admin.flash.updated'
             );
 
@@ -58,11 +50,11 @@ class PersonController extends AbstractController
         // View
         return $this->render(
             'admin/common/form.html.twig',
-            array(
+            [
                 'form' => $form->createView(),
                 'title' => 'person',
                 'type' => 'update'
-            )
+            ]
         );
     }
 }

@@ -42,5 +42,5 @@ security:
     access_control:
         - { path: ^/login$,    role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/2fa, role: IS_AUTHENTICATED_2FA_IN_PROGRESS }
-        - { path: '^/(%admin.locales%)/admin/',    role: ROLE_ADMIN }
+        - { path: '^/admin/',    role: ROLE_ADMIN }
 

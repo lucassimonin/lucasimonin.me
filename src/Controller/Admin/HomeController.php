@@ -23,10 +23,10 @@ class HomeController extends AbstractController
 {
     /**
      * Dashboard Admin
-     * @Route("/", name="admin_dashboard", requirements={ "_locale" = "%admin.locales%" }, options={"expose"=true})
+     * @Route("/", name="admin_dashboard", options={"expose"=true})
      * @return Response
      */
-    public function indexAction()
+    public function indexAction(): Response
     {
         return $this->render('admin/home/index.html.twig');
     }

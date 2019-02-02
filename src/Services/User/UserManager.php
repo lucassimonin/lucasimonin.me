@@ -13,10 +13,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * Class UserService
+ * Class UserManager
  * `
- * Object manager of user
- *
  * @package App\Services\User
  */
 class UserManager implements UserManagerInterface
@@ -40,7 +38,6 @@ class UserManager implements UserManagerInterface
         $this->repository = $this->manager->getRepository(User::class);
     }
 
-
     /**
      * @param User $user
      * @return User
@@ -61,7 +58,7 @@ class UserManager implements UserManagerInterface
     /**
      * @param User $user
      */
-    public function remove(User $user)
+    public function remove(User $user): void
     {
         $this->manager->remove($user);
         $this->manager->flush();
