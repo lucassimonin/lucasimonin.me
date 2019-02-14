@@ -8,6 +8,7 @@ use App\Entity\Work;
 use App\Services\Content\ContentManagerInterface;
 use App\Services\Content\PersonManagerInterface;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
+use Knp\Snappy\Pdf;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -56,16 +57,17 @@ class HomeController extends AbstractController
     /**
      * Homepage
      * @Route("/download/pdf", name="download_pdf")
+     * @param Pdf $snappy
      * @return Response
      */
-    public function download() : Response
+    public function download(Pdf $snappy) : Response
     {
         $html = $this->renderView('front/pdf/index.html.twig', [
             'person' => $this->getPersonManager()->find()
         ]);
 
         return new PdfResponse(
-            $this->get('knp_snappy.pdf')->getOutputFromHtml($html, [
+            $snappy->getOutputFromHtml($html, [
                 'encoding' => 'utf-8'
             ]),
             'cv_lucas-simonin.pdf'
@@ -179,12 +181,5 @@ class HomeController extends AbstractController
     private function getPersonManager(): PersonManagerInterface
     {
         return $this->personManager;
-    }
-
-    public static function getSubscribedServices()
-    {
-        return array_merge(parent::getSubscribedServices(), [
-            'knp_snappy.pdf' => '?knp_snappy.pdf',
-        ]);
     }
 }
