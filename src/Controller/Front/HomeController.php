@@ -180,4 +180,11 @@ class HomeController extends AbstractController
     {
         return $this->personManager;
     }
+
+    public static function getSubscribedServices()
+    {
+        return array_merge(parent::getSubscribedServices(), [
+            'knp_snappy.pdf' => '?knp_snappy.pdf',
+        ]);
+    }
 }
