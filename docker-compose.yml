@@ -1,6 +1,20 @@
-version: '3.2'
-
+version: '3.5'
+networks:
+  app_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
 services:
+  certbot:
+    build:
+      context: "docker/certbot"
+      args:
+        UID: ${UID}
+        GUID: ${GUID}
+    volumes:
+      - "./:/srv:cached"
+
   database:
     image: mysql:8.0
     volumes:
@@ -10,42 +24,75 @@ services:
     - '3306:3306'
     environment:
     - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    networks:
+      app_network:
+        ipv4_address: 10.5.0.3
 
-  php:
+  front:
     build:
-      context: ./docker/php
-    ports:
-    - '9000:9000'
-    working_dir: /srv
-    depends_on:
-    - mailhog
+      context: "docker/front"
+      args:
+        UID: ${UID}
+        GUID: ${GUID}
     volumes:
-    - ./:/srv/
+      - "./:/srv"
 
-  http:
-    image: nginx:1.15.2-alpine
-    ports:
-    - '80:80'
-    depends_on:
-    - php
+  quality:
+    command: tail -f /dev/null
+    image: mykiwi/phaudit:7.3
     volumes:
-    - ./docker/nginx/vhost.conf:/etc/nginx/conf.d/default.conf:ro
-    - ./public/:/srv/public/:ro
+      - "./:/project"
 
-  node:
+  language:
     build:
-      context: ./docker/node
-    working_dir: /srv
+      context: "docker/php"
+      args:
+        UID: ${UID}
+        GUID: ${GUID}
+    expose:
+      - '9000'
     volumes:
-    - ./:/srv/
+      - "./:/srv:cached"
+    networks:
+      app_network:
+        ipv4_address: 10.5.0.6
+    extra_hosts:
+      - "${APP_SERVER_NAME}:10.5.0.5"
+
+
+  mailing:
+    image: mailhog/mailhog
+    expose:
+      - '1025'
+    ports:
+      - '8025:8025'
+    networks:
+      app_network:
+        ipv4_address: 10.5.0.4
 
   redis:
     image: redis:4.0.11-alpine3.8
     ports:
-    - '6379:6379'
+      - '6379:6379'
+    networks:
+      app_network:
+        ipv4_address: 10.5.0.7
 
-  mailhog:
-    image: mailhog/mailhog
+  server:
+    image: openresty/openresty
+    environment:
+      APP_SERVER_NAME: ${APP_SERVER_NAME}
     ports:
-    - '1025:1025'
-    - '8025:8025'
+      - '80:80'
+      - '443:443'
+    volumes:
+      - "./docker/nginx/cert:/etc/cert"
+      - "./docker/nginx/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf"
+      - "./docker/nginx/hosts/vhost.conf:/etc/nginx/conf.d/default.conf"
+      - "./docker/nginx/hosts/${SSL_FILE}:/etc/nginx/conf.d/ssl.conf"
+      - "./public:/srv/public:cached"
+      - "./docker/nginx/.htpasswd:/etc/nginx/.htpasswd"
+      - "./logs:/srv/logs"
+    networks:
+      app_network:
+        ipv4_address: 10.5.0.5

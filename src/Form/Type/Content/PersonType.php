@@ -10,6 +10,7 @@ namespace App\Form\Type\Content;
 
 use App\Entity\Person;
 use App\Form\Type\Media\MediaType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -50,8 +51,7 @@ class PersonType extends AbstractType
                 ],
                 'biography' => [
                     'label' => 'admin.person.form.biography',
-                    'attr' => ['class' => 'editor-wysiwyg'],
-                    'field_type' => TextareaType::class
+                    'field_type' => CKEditorType::class
                 ]
             ]
         ]);

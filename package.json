@@ -3,6 +3,8 @@
     "private": true,
     "dependencies": {
         "bootstrap": "4.*",
+        "ckeditor": "^4.0.0",
+        "core-js": "3",
         "flag-icon-css": "^3.2.1",
         "font-awesome": "latest",
         "jquery-datetimepicker": "^2.5.20",
@@ -20,7 +22,7 @@
         }
     },
     "devDependencies": {
-        "@symfony/webpack-encore": "^0.17.0",
+        "@symfony/webpack-encore": "^0.26.0",
         "eslint": "^4.19.0",
         "popper.js": "^1.14.6",
         "webpack-notifier": "^1.7.0"

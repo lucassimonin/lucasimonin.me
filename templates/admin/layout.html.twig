@@ -19,10 +19,8 @@
     <link rel="icon" type="image/png" href="{{ asset('images/front/favicon-16x16.png') }}" sizes="16x16" />
     <link rel="icon" type="image/png" href="{{ asset('images/front/favicon-128.png') }}" sizes="128x128" />
     {% block stylesheets %}
-        <link href="{{ asset('libs/ckeditor/contents.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('build/admin.css') }}" rel="stylesheet" type="text/css">
     {% endblock %}
-    <script src="{{ asset('libs/ckeditor/ckeditor.js') }}"></script>
 </head>
 <body>
     {% trans_default_domain 'app' %}
