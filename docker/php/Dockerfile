@@ -1,54 +1,25 @@
-FROM composer
+FROM php:7.3-fpm-alpine
 
-FROM php:7.2.8-fpm-alpine
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-COPY --from=composer /usr/bin/composer /usr/local/bin/composer
+ARG UID=${UID}
+ARG GUID=${GUID}
 
-ENV APCU_VERSION 5.1.8
-ENV XDEBUG_VERSION 2.6.0
+WORKDIR /srv/
 
-RUN apk add --no-cache \
-        ca-certificates \
-        icu-libs \
-        git \
-        unzip \
-        zlib-dev && \
-    apk add --no-cache --virtual .build-deps \
-        $PHPIZE_DEPS \
-        autoconf \
-        icu-dev && \
-    docker-php-ext-install \
-        mbstring \
-        iconv \
-        intl \
-        zip && \
-    pecl install apcu-${APCU_VERSION} && \
-    docker-php-ext-enable apcu && \
-    docker-php-ext-enable opcache && \
-    docker-php-ext-install pdo_mysql && \
-    echo "short_open_tag = off" >> /usr/local/etc/php/php.ini && \
-    echo "date.timezone = Europe/Paris" >> /usr/local/etc/php/conf.d/symfony.ini && \
-    echo "opcache.max_accelerated_files = 20000" >> /usr/local/etc/php/conf.d/symfony.ini && \
-    echo "realpath_cache_size=4096K" >> /usr/local/etc/php/conf.d/symfony.ini && \
-    echo "realpath_cache_ttl=600" >> /usr/local/etc/php/conf.d/symfony.ini && \
-    pecl install xdebug-${XDEBUG_VERSION} && docker-php-ext-enable xdebug && \
-    echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/symfony.ini && \
-    echo "xdebug.remote_port=9009" >> /usr/local/etc/php/conf.d/symfony.ini && \
-    echo "xdebug.remote_connect_back=0" >> /usr/local/etc/php/conf.d/symfony.ini && \
-    echo "xdebug.remote_host=docker.for.mac.host.internal" >> /usr/local/etc/php/conf.d/symfony.ini && \
-    echo "xdebug.idekey=PHPSTORM" >> /usr/local/etc/php/conf.d/symfony.ini && \
-    echo "xdebug.max_nesting_level=1000" >> /usr/local/etc/php/conf.d/symfony.ini && \
-    apk del .build-deps && \
-    apk add gosu --update --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted && \
-    addgroup bar && \
-    adduser -D -h /home -s /bin/sh -G bar foo
+RUN apk update
+RUN apk add autoconf freetype-dev g++ icu-dev libjpeg-turbo-dev libpng-dev libxml2-dev libxslt-dev libzip-dev make shadow tzdata
+# Xdebug
+RUN docker-php-ext-configure hash --with-mhash
+RUN docker-php-ext-install -j$(nproc) bcmath gd iconv intl json opcache pdo_mysql soap xsl zip exif
 
-# install mhsendmail
-RUN wget -O /usr/sbin/mhsendmail  https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64
-RUN chmod +x /usr/sbin/mhsendmail
+RUN pecl install xdebug-2.7.1 && docker-php-ext-enable xdebug
+COPY conf/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
-RUN apk add gnu-libiconv --update-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
-ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
+# PHP config
+COPY conf/php.ini /usr/local/etc/php/conf.d
+COPY conf/project.pool.conf /usr/local/etc/php/pool.d/
+
 #GD
 RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev libxml2-dev && \
   docker-php-ext-configure gd \
@@ -61,7 +32,21 @@ RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev lib
   apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
 
 # Wkhtmltopdf
-RUN apk add --no-cache xvfb ttf-freefont fontconfig dbus && \
+RUN apk add --no-cache \
+ libstdc++ \
+ libx11 \
+ libxrender \
+ libxext \
+ fontconfig \
+ freetype \
+ ttf-dejavu \
+ ttf-droid \
+ ttf-freefont \
+ ttf-liberation \
+ ttf-ubuntu-font-family
+
+RUN apk add --no-cache xvfb msttcorefonts-installer  dbus && \
+    update-ms-fonts && \
     apk add qt5-qtbase-dev wkhtmltopdf --no-cache \
     --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ \
     --allow-untrusted && \
@@ -74,6 +59,23 @@ killall Xvfb\
 ' > /usr/bin/wkhtmltopdf && \
     chmod +x /usr/bin/wkhtmltopdf
 
-ADD entrypoint.sh /entrypoint
 
-ENTRYPOINT ["/entrypoint"]
+# Initial scripts
+
+
+RUN if [ -z `getent group www-data` ]; then addgroup -g ${GUID} www-data; fi
+RUN if [ -z `getent passwd www-data` ]; then useradd -m -u ${UID} -g ${GUID} www-data; fi
+
+RUN cp /usr/share/zoneinfo/Europe/Paris /etc/localtime
+
+RUN chown -R www-data:www-data /srv/
+
+
+
+USER www-data
+
+RUN echo "alias ll='ls -l'" >> ~/.bashrc
+
+CMD ["php-fpm"]
+
+EXPOSE 9000

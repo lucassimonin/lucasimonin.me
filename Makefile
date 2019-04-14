@@ -1,11 +1,19 @@
 DOCKER_COMPOSE  = docker-compose
 
-EXEC_PHP        = $(DOCKER_COMPOSE) exec -T php /entrypoint
-EXEC_JS         = $(DOCKER_COMPOSE) exec -T node /entrypoint
+EXEC_FRONT      = $(DOCKER_COMPOSE) exec -T front
+EXEC_PHP        = $(DOCKER_COMPOSE) exec -T language
+EXEC_CERTBOT    = $(DOCKER_COMPOSE) exec -T certbot
 
-SYMFONY         = $(EXEC_PHP) bin/console
+CONSOLE         = $(EXEC_PHP) php bin/console
 COMPOSER        = $(EXEC_PHP) composer
-YARN            = $(EXEC_JS) yarn
+QA				= $(DOCKER_COMPOSE) exec -T quality
+YARN         	= $(EXEC_FRONT) yarn
+
+
+ifneq ("$(wildcard .env)","")
+    include .env
+    export $(shell sed 's/=.*//' .env)
+endif
 
 ##
 ## Project
@@ -57,22 +65,22 @@ no-docker:
 
 db: ## Reset the database and load fixtures
 db: flush .env vendor
-	-$(SYMFONY) doctrine:database:drop --if-exists --force
-	-$(SYMFONY) doctrine:database:create --if-not-exists
-	$(SYMFONY) doctrine:schema:update --no-interaction --force
-	$(SYMFONY) doctrine:fixtures:load --no-interaction
+	-$(CONSOLE) doctrine:database:drop --if-exists --force
+	-$(CONSOLE) doctrine:database:create --if-not-exists
+	$(CONSOLE) doctrine:schema:update --no-interaction --force
+	$(CONSOLE) doctrine:fixtures:load --no-interaction
 
 db-update: ## Update database
 db-update: flush .env vendor
-	$(SYMFONY) doctrine:schema:update --no-interaction --force
+	$(CONSOLE) doctrine:schema:update --no-interaction --force
 
 db-validate-schema: ## Validate the doctrine ORM mapping
 db-validate-schema: .env vendor
-	$(SYMFONY) doctrine:schema:validate
+	$(CONSOLE) doctrine:schema:validate
 
 update-js-route: ## Update js route
 update-js-route: .env vendor
-	$(SYMFONY) fos:js-routing:dump --format=json --target=public/build/admin/js/fos_js_routes.json
+	$(CONSOLE) fos:js-routing:dump --format=json --target=public/build/admin/js/fos_js_routes.json
 
 assets: ## Run Yarn to compile assets
 assets: node_modules
@@ -90,23 +98,32 @@ watch: node_modules
 
 clear: ## clear cache
 clear: .env vendor
-	$(SYMFONY) cache:clear --env=dev
+	$(CONSOLE) cache:clear --env=dev
 
 flush: ## Flush db
 flush: .env vendor
-	-$(SYMFONY) doctrine:cache:clear-query
-	-$(SYMFONY) doctrine:cache:clear-metadata
-	$(SYMFONY) doctrine:cache:clear-result
+	-$(CONSOLE) doctrine:cache:clear-query
+	-$(CONSOLE) doctrine:cache:clear-metadata
+	$(CONSOLE) doctrine:cache:clear-result
 
 sync-translation: ## Synchronisation translation from Loco (https://localise.biz)
 sync-translation: .env vendor
-	$(SYMFONY) translation:download
+	$(CONSOLE) translation:download
 
 console: ## Console symfony
 console: .env vendor
-	$(SYMFONY) $(filter-out $@,$(MAKECMDGOALS))
+	$(CONSOLE) $(filter-out $@,$(MAKECMDGOALS))
 
-.PHONY: db assets watch clear flush console assets-prod update-js-route sync-translation
+sync-ssl:
+	$(EXEC_CERTBOT) openssl req -x509 -newkey rsa:4096 -keyout /srv/docker/nginx/cert/key.pem -out /srv/docker/nginx/cert/cert.pem -days 365 -nodes -subj "/C=FR/ST=Herault/L=Montpellier/O=/OU=Org/CN=$(APP_SERVER_NAME)"
+
+new-certificate:
+	$(EXEC_CERTBOT) certbot certonly --webroot  --config-dir /srv/docker/nginx/cert --work-dir /srv/docker/nginx/cert --logs-dir /srv/docker/nginx/cert -w /srv/public -n --agree-tos -m lsimonin2@gmail.com -d $(APP_SERVER_NAME)
+
+renew-certificate:
+	$(EXEC_CERTBOT) certbot renew --webroot --config-dir /srv/docker/nginx/cert --work-dir /srv/docker/nginx/cert --logs-dir /srv/docker/nginx/cert -w /srv/public
+
+.PHONY: db assets watch clear flush console sync-ssl assets-prod update-js-route sync-translation
 
 ##
 ## Tests
@@ -159,18 +176,16 @@ help:
 ## Quality assurance
 ## -----------------
 ##
-
-QA        = docker run --rm -v `pwd`:/project mykiwi/phaudit:7.2
 ARTEFACTS = var/artefacts
 
 lint: ## Lints twig and yaml files
 lint: lt ly
 
 lt: vendor
-	$(SYMFONY) lint:twig templates
+	$(CONSOLE) lint:twig templates
 
 ly: vendor
-	$(SYMFONY) lint:yaml config
+	$(CONSOLE) lint:yaml config
 
 security: ## Check security of your dependencies (https://security.sensiolabs.org/)
 security: vendor

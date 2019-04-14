@@ -10,8 +10,8 @@ namespace App\Form\Type\Content;
 
 use App\Entity\Work;
 use App\Form\Type\Media\MediaType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -39,8 +39,7 @@ class WorkType extends AbstractType
                 ],
                 'description' => [
                     'label' => 'admin.work.form.description',
-                    'attr' => ['class' => 'editor-wysiwyg'],
-                    'field_type' => TextareaType::class
+                    'field_type' => CKEditorType::class
                 ]
             ]
         ]);

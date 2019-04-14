@@ -6,14 +6,14 @@
             <p class="lead">{{ 'app.presentation.subtitle'|trans({}, 'app') }}</p>
             <hr>
             <div class="row">
-                <div class="col-xs-4">
+                <div class="col-md-4">
                     <h3>{{ 'app.title.about'|trans({}, 'app') }}</h3>
                     {{ person.biography|raw }}
                 </div>
-                <div class="col-xs-4 text-center">
+                <div class="col-md-4 text-center">
                     <img src="{{ absolute_url(asset('uploads/media/' ~ person.picture.fileName)) }}" alt="{{ person.picture.alt }}" />
                 </div>
-                <div class="col-xs-4">
+                <div class="col-md-4">
                     <h3>{{ 'app.title.details'|trans({}, 'app') }}</h3>
                     <p>
                         <strong>{{ 'app.title.name'|trans({}, 'app') }}:</strong><br>
