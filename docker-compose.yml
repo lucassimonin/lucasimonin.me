@@ -49,6 +49,7 @@ services:
       args:
         UID: ${UID}
         GUID: ${GUID}
+        XDEBUG: ${XDEBUG}
     expose:
       - '9000'
     volumes:
