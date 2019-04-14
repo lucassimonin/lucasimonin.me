@@ -4,6 +4,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 ARG UID=${UID}
 ARG GUID=${GUID}
+ARG XDEBUG=${XDEBUG}
 
 WORKDIR /srv/
 
@@ -13,8 +14,12 @@ RUN apk add autoconf freetype-dev g++ icu-dev libjpeg-turbo-dev libpng-dev libxm
 RUN docker-php-ext-configure hash --with-mhash
 RUN docker-php-ext-install -j$(nproc) bcmath gd iconv intl json opcache pdo_mysql soap xsl zip exif
 
-RUN pecl install xdebug-2.7.1 && docker-php-ext-enable xdebug
+RUN pecl install xdebug-2.7.1
 COPY conf/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+RUN if [ $XDEBUG = "true" ] ; then \
+docker-php-ext-enable xdebug; \
+fi ;
 
 # PHP config
 COPY conf/php.ini /usr/local/etc/php/conf.d
