@@ -6,6 +6,10 @@
 *.DS_Store
 .AppleDouble
 .LSOverride
+logs/*
+!logs/.gitkeep
+docker/nginx/cert/*
+!docker/nginx/cert/.gitkeep
 ###< Custom Gitignore ###
 
 ###> symfony/framework-bundle ###
