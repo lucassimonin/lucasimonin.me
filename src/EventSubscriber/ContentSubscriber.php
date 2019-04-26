@@ -64,12 +64,7 @@ class ContentSubscriber
      */
     public function postPersist(LifecycleEventArgs $args)
     {
-        $this->entity = $args->getEntity();
-        $this->entityManager = $args->getEntityManager();
-        if (!$this->isAvailable()) {
-            return;
-        }
-        $this->removeCache();
+        $this->postUpdate($args);
     }
 
 

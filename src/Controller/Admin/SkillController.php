@@ -10,6 +10,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Skill;
 use App\Form\Type\Content\SkillType;
+use App\Services\Content\ContentManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,6 +23,20 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class SkillController extends BaseContentController
 {
+
+    /**
+     * SkillController constructor.
+     *
+     * @param ContentManagerInterface $contentManager
+     */
+    public function __construct(ContentManagerInterface $contentManager)
+    {
+        parent::__construct($contentManager);
+        $this->setLabelList('admin.skill.list.title');
+        $this->setRouteList('admin_skill_list');
+    }
+
+
     /**
      * @param Request     $request
      * @Route("/list", name="admin_skill_list")
@@ -29,9 +44,7 @@ class SkillController extends BaseContentController
      */
     public function list(Request $request): Response
     {
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem('admin.dashboard.label', $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem('admin.skill.list.title');
+        $this->initBreadcrumb();
         list($pagination, $form) = $this->initSearch($request, Skill::class);
 
         return $this->render('admin/common/list.html.twig', [
@@ -48,20 +61,14 @@ class SkillController extends BaseContentController
      */
     public function create(Request $request): Response
     {
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem('admin.dashboard.label', $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem("admin.skill.list.title", $this->get("router")->generate("admin_skill_list"));
-        $breadcrumbs->addItem("admin.skill.title.create");
-
+        $this->initBreadcrumb(true)
+             ->addItem("admin.skill.title.create");
         $skill = new Skill();
         $form = $this->createForm(SkillType::class, $skill);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getContentManager()->save($skill);
-            $this->get('session')->getFlashBag()->set(
-                'notice',
-                'admin.flash.created'
-            );
+            $this->setFlashBag('success', 'admin.flash.created');
 
             return $this->redirectToRoute('admin_skill_list');
         }
@@ -84,19 +91,13 @@ class SkillController extends BaseContentController
      */
     public function edit(Request $request, Skill $skill): Response
     {
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem('admin.dashboard.label', $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem("admin.skill.list.title", $this->get("router")->generate("admin_skill_list"));
-        $breadcrumbs->addItem("admin.skill.title.update");
-
+        $this->initBreadcrumb(true)
+             ->addItem("admin.skill.title.update");
         $form = $this->createForm(SkillType::class, $skill);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getContentManager()->save($skill);
-            $this->get('session')->getFlashBag()->set(
-                'notice',
-                'admin.flash.updated'
-            );
+            $this->setFlashBag('success', 'admin.flash.updated');
 
             return $this->redirectToRoute('admin_skill_list');
         }
@@ -119,10 +120,7 @@ class SkillController extends BaseContentController
     public function delete(Skill $skill)
     {
         $this->getContentManager()->remove($skill);
-        $this->get('session')->getFlashBag()->set(
-            'notice',
-            'admin.flash.removed'
-        );
+        $this->setFlashBag('warning', 'admin.flash.removed');
 
         return $this->redirectToRoute('admin_skill_list');
     }

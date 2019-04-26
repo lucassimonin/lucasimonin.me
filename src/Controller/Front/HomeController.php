@@ -68,7 +68,7 @@ class HomeController extends AbstractController
 
         return new PdfResponse(
             $snappy->getOutputFromHtml($html, [
-                'encoding' => 'utf-8',
+                'encoding' => 'utf-8'
             ]),
             'cv_lucas-simonin.pdf'
         );

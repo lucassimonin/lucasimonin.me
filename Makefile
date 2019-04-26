@@ -65,18 +65,27 @@ no-docker:
 
 db: ## Reset the database and load fixtures
 db: flush .env vendor
-	-$(CONSOLE) doctrine:database:drop --if-exists --force
-	-$(CONSOLE) doctrine:database:create --if-not-exists
-	$(CONSOLE) doctrine:schema:update --no-interaction --force
-	$(CONSOLE) doctrine:fixtures:load --no-interaction
+	$(CONSOLE) doctrine:database:drop --if-exists --force
+	$(CONSOLE) doctrine:database:create --if-not-exists
+	$(CONSOLE) doctrine:migrations:migrate --no-interaction --allow-no-migration
+	$(CONSOLE) hautelook:fixtures:load --no-interaction
+
+db-diff: ## create migration file
+db-diff: flush .env vendor
+	$(CONSOLE) doctrine:cache:clear-metadata
+	$(CONSOLE) doctrine:migrations:diff --no-interaction
 
 db-update: ## Update database
 db-update: flush .env vendor
-	$(CONSOLE) doctrine:schema:update --no-interaction --force
+	$(CONSOLE) doctrine:cache:clear-metadata
+	$(CONSOLE) doctrine:migrations:migrate --no-interaction --allow-no-migration
 
 db-validate-schema: ## Validate the doctrine ORM mapping
 db-validate-schema: .env vendor
 	$(CONSOLE) doctrine:schema:validate
+
+db-load-fixture: .env vendor
+	$(CONSOLE) hautelook:fixtures:load
 
 update-js-route: ## Update js route
 update-js-route: .env vendor
@@ -135,11 +144,11 @@ test: tu tf
 
 tu: ## Run unit tests
 tu: vendor
-	$(EXEC_PHP) bin/phpunit tests --color --exclude-group functional
+	$(EXEC_PHP) vendor/bin/simple-phpunit tests --color --exclude-group functional
 
 tf: ## Run functional tests
 tf: vendor
-	$(EXEC_PHP) bin/phpunit tests --color --group functional
+	$(EXEC_PHP) vendor/bin/simple-phpunit tests --color --group functional
 
 .PHONY: tests tu tf
 

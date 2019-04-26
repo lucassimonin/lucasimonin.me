@@ -6,6 +6,7 @@ require('jquery-datetimepicker');
 require('jquery-datetimepicker/build/jquery.datetimepicker.min.css');
 require('bootstrap');
 require('bootstrap/dist/css/bootstrap.min.css');
+require('flag-icon-css/css/flag-icon.min.css');
 require('../css/app.css');
 
 $('.delete-button').click(function(){

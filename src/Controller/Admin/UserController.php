@@ -13,9 +13,9 @@ use App\Model\SearchUser;
 use App\Form\Type\User\SearchUserType;
 use App\Form\Type\User\UserType;
 use App\Services\User\UserManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -24,7 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package App\Controller\Admin
  * @Route("/admin/users")
  */
-class UserController extends AbstractController
+class UserController extends BaseController
 {
     /**
      * @var UserManagerInterface
@@ -37,6 +37,8 @@ class UserController extends AbstractController
      */
     public function __construct(UserManagerInterface $userManager)
     {
+        $this->setLabelList('admin.users.list.title');
+        $this->setRouteList('admin_user_list');
         $this->userManager = $userManager;
     }
 
@@ -47,9 +49,7 @@ class UserController extends AbstractController
      */
     public function list(Request $request): Response
     {
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem('admin.dashboard.label', $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem('admin.users.list.title');
+        $this->initBreadcrumb();
         list($pagination, $form) = $this->initSearch($request);
 
         return $this->render('admin/user/index.html.twig', [
@@ -60,35 +60,14 @@ class UserController extends AbstractController
 
     /**
      * @param Request $request
-     * @return array
-     */
-    public function initSearch(Request $request): array
-    {
-        $search = new SearchUser($request->query->all());
-        $form = $this->createForm(SearchUserType::class, $search);
-        $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $this->getDoctrine()->getRepository(User::class)->queryForSearch($search),
-            $search->getPage(),
-            SearchUser::$limit
-        );
-
-        return [$pagination, $form];
-    }
-
-    /**
-     * @param Request $request
      * @Route("/create", name="admin_user_create")
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @return RedirectResponse|Response
      * @throws \Exception
      */
     public function create(Request $request): Response
     {
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem('admin.dashboard.label', $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem("admin.users.list.title", $this->get("router")->generate("admin_user_list"));
-        $breadcrumbs->addItem("admin.user.title.create");
-
+        $this->initBreadcrumb(true)
+            ->addItem("admin.user.title.create");
         $user = new User();
         $form = $this->createForm(UserType::class, $user, [
             'admin' => $this->isGranted(User::ROLE_SUPER_ADMIN)
@@ -97,19 +76,13 @@ class UserController extends AbstractController
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $this->getUserManager()->save($user);
-                $this->get('session')->getFlashBag()->set(
-                    'success',
-                    'admin.flash.created'
-                );
+                $this->setFlashBag('success', 'admin.flash.created');
 
                 return $this->redirect($this->generateUrl('admin_user_edit', [
                     'id' => $user->getId()
                 ]));
             }
-            $this->get('session')->getFlashBag()->set(
-                'error',
-                'admin.flash.errors'
-            );
+            $this->setFlashBag('error', 'admin.flash.errors');
         }
 
         return $this->render(
@@ -125,18 +98,13 @@ class UserController extends AbstractController
      * @param Request $request
      * @param User $user
      * @Route("/edit/{id}", name="admin_user_edit")
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @return RedirectResponse|Response
      * @throws \Exception
      */
     public function edit(Request $request, User $user): Response
     {
-        // Breadcrumb
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem('admin.dashboard.label', $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem("admin.users.list.title", $this->get("router")->generate("admin_user_list"));
-        $breadcrumbs->addItem("admin.user.title.edit");
-
-        // Init form
+        $this->initBreadcrumb(true)
+             ->addItem("admin.user.title.edit");
         $form = $this->createForm(UserType::class, $user, [
             'admin' => $this->isGranted(User::ROLE_SUPER_ADMIN)
         ]);
@@ -145,17 +113,13 @@ class UserController extends AbstractController
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $this->getUserManager()->save($user);
-                $this->get('session')->getFlashBag()->set(
-                    'notice',
-                    'admin.flash.updated'
-                );
+                $this->setFlashBag('notice', 'admin.flash.updated');
 
-                return $this->redirect($request->headers->get('referer'));
+                return $this->redirect($this->generateUrl('admin_user_edit', [
+                    'id' => $user->getId()
+                ]));
             }
-            $this->get('session')->getFlashBag()->set(
-                'error',
-                'admin.flash.errors'
-            );
+            $this->setFlashBag('error', 'admin.flash.errors');
         }
 
         return $this->render(
@@ -171,36 +135,48 @@ class UserController extends AbstractController
      * @param Request     $request
      * @param User        $user
      * @Route("/delete/{id}", name="admin_user_delete")
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function delete(Request $request, User $user): Response
     {
         $this->getUserManager()->remove($user);
-        $this->get('session')->getFlashBag()->set(
-            'warning',
-            'L\'utilisateur "'.$user->getFirstName().' '.$user->getLastName().'" a bien été supprimé'
-        );
+        $this->setFlashBag('notice', 'admin.flash.removed');
 
         return $this->redirect($request->headers->get('referer'));
     }
 
-    public function googleAuthenticatorUrl($user): Response
+    /**
+     * @param $user
+     *
+     * @return Response
+     */
+    public function googleAuthenticatorUrl(User $user): Response
     {
         return $this->render('admin/user/parts/google_qrcode.html.twig', [
-            'url' => $this->get("scheb_two_factor.security.google_authenticator")->getUrl($user)
+            'url' => $this->getUserManager()->getQRCodeUrl($user)
         ]);
     }
 
-    private function getUserManager()
+    private function getUserManager(): UserManagerInterface
     {
         return $this->userManager;
     }
 
-    public static function getSubscribedServices()
+    /**
+     * @param Request $request
+     * @return array
+     */
+    private function initSearch(Request $request): array
     {
-        return array_merge(parent::getSubscribedServices(), [
-            'knp_paginator' => '?knp_paginator',
-            'white_october_breadcrumbs' => '?white_october_breadcrumbs',
-        ]);
+        $search = new SearchUser($request->query->all());
+        $form = $this->createForm(SearchUserType::class, $search);
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $this->getDoctrine()->getRepository(User::class)->queryForSearch($search),
+            $search->getPage(),
+            SearchUser::$limit
+        );
+
+        return [$pagination, $form];
     }
 }

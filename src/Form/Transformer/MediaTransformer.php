@@ -30,10 +30,8 @@ class MediaTransformer implements DataTransformerInterface
             return null;
         }
 
-        $media = $this->entityManager
+        return $this->entityManager
             ->getRepository(Media::class)
             ->findOneBy(['id' => $mediaNumber]);
-
-        return $media;
     }
 }

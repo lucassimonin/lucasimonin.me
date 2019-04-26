@@ -1,40 +1,34 @@
+{% extends 'knp_menu.html.twig' %}
 
-<!-- Nav -->
+{% block root %}
 <nav id="main-menu" class="col-md-2 d-none d-md-block bg-light sidebar">
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" href="{{ path('admin_dashboard') }}">
-                    <i class="fa fa-tachometer"></i>
-                    {{ 'admin.dashboard.label'|trans({}, 'app') }} <span class="sr-only">(current)</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('admin_experience_list') }}">
-                    <i class="fa fa-address-book-o"></i>
-                    {{ 'admin.experience.menu.label'|trans({}, 'app') }}
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('admin_work_list') }}">
-                    <i class="fa fa-suitcase"></i>
-                    {{ 'admin.work.menu.label'|trans({}, 'app') }}
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('admin_skill_list') }}">
-                    <i class="fa fa-id-card-o"></i>
-                    {{ 'admin.skill.menu.label'|trans({}, 'app') }}
-                </a>
-            </li>
-            {% if is_granted('user-view', app.user) %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('admin_user_list') }}">
-                        <i class="fa fa-users"></i>
-                        {{ 'admin.users.menu.label'|trans({}, 'app') }}
-                    </a>
-                </li>
-            {% endif %}
+            {{ block('list') }}
         </ul>
     </div>
 </nav>
+{% endblock %}
+
+{% block list %}
+    {% for item in item.children %}
+        {{ block('item') }}
+    {% endfor %}
+{% endblock %}
+
+{% block item %}
+    <li class="nav-item">
+        <a class="nav-link {% if matcher.isCurrent(item) %}active{% endif %}" href="{{ item.uri }}">
+            {{ block('icon') }}
+            {{ item.label|trans({}, 'app') }} {% if matcher.isCurrent(item) %}<span class="sr-only">(current)</span>{% endif %}
+        </a>
+    </li>
+{% endblock %}
+
+{% block icon %}
+    {% set icon = item.labelAttribute('icon') %}
+    {% if icon %}
+        <i class="{{ icon }}"></i>
+    {% endif %}
+{% endblock %}
+

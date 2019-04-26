@@ -1,9 +1,7 @@
 {% extends "admin/layout.html.twig" %}
 
 {% block title %}{{ 'admin.user.title.edit'|trans({}, 'app') }}{% endblock %}
-{% block mainTitle %}
-    <h1>{{ 'admin.user.title.edit'|trans({}, 'app') }}</h1>
-{% endblock %}
+{% block mainTitle %}{{ 'admin.user.title.edit'|trans({}, 'app') }}{% endblock %}
 
 {% block content %}
     {{ form_start(form, {'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'}}) }}

@@ -112,9 +112,7 @@ textarea.form-control{
 .panel.search-block {
     border-radius: 0;
     box-shadow: none;
-    border-bottom: 1px solid #ebebeb;
-    border-left: 1px solid #ebebeb;
-    border-right: 1px solid #ebebeb;
+    border: 1px solid #ebebeb;
 }
 
 .btn > i {
