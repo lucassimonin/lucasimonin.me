@@ -13,7 +13,9 @@
                     {{ person.biography|raw }}
                 </div>
                 <div class="col-md-4 text-center wow fadeInUp">
-                    <img src="{{ asset('uploads/media/' ~ person.picture.fileName) }}" alt="{{ person.picture.alt }}" />
+                    {% if person.picture is not null %}
+                        <img src="{{ asset('uploads/media/' ~ person.picture.fileName) }}" alt="{{ person.picture.alt }}" />
+                    {% endif %}
                 </div>
                 <div class="col-md-4 wow fadeInRight">
                     <h3>{{ 'app.title.details'|trans({}, 'app') }}</h3>

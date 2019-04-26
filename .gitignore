@@ -33,3 +33,8 @@ docker/nginx/cert/*
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+###> Sonar ###
+src/.scannerwork
+.scannerwork/*
+###< Sonar ###
