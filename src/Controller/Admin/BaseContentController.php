@@ -11,10 +11,9 @@ namespace App\Controller\Admin;
 use App\Model\SearchContent;
 use App\Form\Type\Content\SearchContentType;
 use App\Services\Content\ContentManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
-class BaseContentController extends AbstractController
+class BaseContentController extends BaseController
 {
     /**
      * @var ContentManagerInterface
@@ -23,6 +22,7 @@ class BaseContentController extends AbstractController
 
     /**
      * SkillController constructor.
+     *
      * @param ContentManagerInterface $contentManager
      */
     public function __construct(ContentManagerInterface $contentManager)
@@ -52,13 +52,5 @@ class BaseContentController extends AbstractController
     protected function getContentManager(): ContentManagerInterface
     {
         return $this->contentManager;
-    }
-
-    public static function getSubscribedServices()
-    {
-        return array_merge(parent::getSubscribedServices(), [
-            'knp_paginator' => '?knp_paginator',
-            'white_october_breadcrumbs' => '?white_october_breadcrumbs',
-        ]);
     }
 }

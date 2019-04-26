@@ -10,6 +10,7 @@ namespace App\Services\User;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -24,18 +25,21 @@ class UserManager implements UserManagerInterface
     private $manager;
 
     private $repository;
+    private $googleAuthenticator;
 
     /**
      * UserService constructor.
      *
      * @param EntityManagerInterface       $manager
      * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param                              $googleAuthenticator
      */
-    public function __construct(EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder, GoogleAuthenticatorInterface $googleAuthenticator)
     {
         $this->manager = $manager;
         $this->passwordEncoder = $passwordEncoder;
         $this->repository = $this->manager->getRepository(User::class);
+        $this->googleAuthenticator = $googleAuthenticator;
     }
 
     /**
@@ -67,5 +71,10 @@ class UserManager implements UserManagerInterface
     public function findAll(): array
     {
         return $this->repository->findAll();
+    }
+
+    public function getQRCodeUrl(User $user): string
+    {
+        return $this->googleAuthenticator->getUrl($user);
     }
 }

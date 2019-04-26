@@ -10,7 +10,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Experience;
 use App\Form\Type\Content\ExperienceType;
-use App\Services\Content\ContentManager;
+use App\Services\Content\ContentManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,16 +24,26 @@ use Symfony\Component\Routing\Annotation\Route;
 class ExperienceController extends BaseContentController
 {
     /**
+     * ExperienceController constructor.
+     *
+     * @param ContentManagerInterface $contentManager
+     */
+    public function __construct(ContentManagerInterface $contentManager)
+    {
+        parent::__construct($contentManager);
+        $this->setLabelList('admin.experience.list.title');
+        $this->setRouteList('admin_experience_list');
+    }
+
+
+    /**
      * @param Request     $request
      * @Route("/list", name="admin_experience_list")
      * @return Response
      */
     public function list(Request $request)
     {
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem('admin.dashboard.label', $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem('admin.experience.list.title');
-
+        $this->initBreadcrumb();
         list($pagination, $form) = $this->initSearch($request, Experience::class);
 
         return $this->render('admin/common/list.html.twig', [
@@ -50,20 +60,14 @@ class ExperienceController extends BaseContentController
      */
     public function create(Request $request)
     {
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem('admin.dashboard.label', $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem("admin.experience.list.title", $this->get("router")->generate("admin_experience_list"));
-        $breadcrumbs->addItem("admin.experience.title.create");
-
+        $this->initBreadcrumb(true)
+             ->addItem("admin.experience.title.create");
         $experience = new Experience();
         $form = $this->createForm(ExperienceType::class, $experience);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getContentManager()->save($experience);
-            $this->get('session')->getFlashBag()->set(
-                'success',
-                'admin.flash.created'
-            );
+            $this->setFlashBag('success', 'admin.flash.created');
 
             return $this->redirectToRoute('admin_experience_list');
         }
@@ -81,25 +85,18 @@ class ExperienceController extends BaseContentController
     /**
      * @param Request $request
      * @param Experience $experience
-     * @param ContentManager $contentService
      * @Route("/edit/{id}", name="admin_experience_edit")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function edit(Request $request, Experience $experience)
     {
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem('admin.dashboard.label', $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem("admin.experience.list.title", $this->get("router")->generate("admin_experience_list"));
-        $breadcrumbs->addItem("admin.experience.title.update");
-
+        $this->initBreadcrumb(true)
+             ->addItem("admin.experience.title.update");
         $form = $this->createForm(ExperienceType::class, $experience);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getContentManager()->save($experience);
-            $this->get('session')->getFlashBag()->set(
-                'info',
-                'admin.flash.updated'
-            );
+            $this->setFlashBag('success', 'admin.flash.updated');
 
             return $this->redirectToRoute('admin_experience_list');
         }
@@ -122,10 +119,7 @@ class ExperienceController extends BaseContentController
     public function delete(Experience $experience)
     {
         $this->getContentManager()->remove($experience);
-        $this->get('session')->getFlashBag()->set(
-            'warning',
-            'admin.flash.removed'
-        );
+        $this->setFlashBag('warning', 'admin.flash.removed');
 
         return $this->redirectToRoute('admin_experience_list');
     }

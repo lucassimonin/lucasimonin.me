@@ -33,9 +33,7 @@ class MediaUploadListener
 
     public function preUpdate(PreUpdateEventArgs $args)
     {
-        $entity = $args->getEntity();
-
-        $this->uploadFile($entity);
+        $this->prePersist($args);
     }
 
     public function postLoad(LifecycleEventArgs $args)

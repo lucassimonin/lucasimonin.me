@@ -1,4 +1,4 @@
 {% spaceless %}
-    <link rel="stylesheet" href="{{ absolute_url(asset('build/app.css')) }}" type="text/css" />
+    {{ encore_entry_link_tags('app') }}
     <link rel="stylesheet" type="text/css" href="{{ absolute_url(asset('build/print.css')) }}" media="print" />
 {% endspaceless %}

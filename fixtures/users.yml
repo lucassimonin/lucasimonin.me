@@ -1,0 +1,20 @@
+App\Entity\User:
+    admin:
+        password: <password(@admin, "12345")>
+        googleAuthenticatorSecret: <googleAuthenticator()>
+        roles: ["ROLE_ADMINISTRATION_ACCESS", "ROLE_USER"]
+        enabled: "true"
+        email: "admin@cv.com"
+        username: "admin@cv.com"
+        firstName: "<fr_FR:firstName()>"
+        lastName: "<fr_FR:lastName()>"
+
+    user:
+        password: <password(@user, "12345")>
+        googleAuthenticatorSecret: <googleAuthenticator()>
+        roles: ["ROLE_USER"]
+        enabled: "true"
+        email: "user@cv.com"
+        username: "user@cv.com"
+        firstName: "<fr_FR:firstName()>"
+        lastName: "<fr_FR:lastName()>"

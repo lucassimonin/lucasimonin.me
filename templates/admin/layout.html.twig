@@ -19,7 +19,7 @@
     <link rel="icon" type="image/png" href="{{ asset('images/front/favicon-16x16.png') }}" sizes="16x16" />
     <link rel="icon" type="image/png" href="{{ asset('images/front/favicon-128.png') }}" sizes="128x128" />
     {% block stylesheets %}
-        <link href="{{ asset('build/admin.css') }}" rel="stylesheet" type="text/css">
+        {{ encore_entry_link_tags('admin') }}
     {% endblock %}
 </head>
 <body>
@@ -29,12 +29,12 @@
     {% endblock %}
     <div class="container-fluid">
         <div class="row">
-            {% include "admin/parts/menu.html.twig" %}
+            {{ knp_menu_render('admin') }}
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
                 {% block breadcrumb %}{{ wo_render_breadcrumbs({ viewTemplate: "admin/parts/breadcrumbs.html.twig" }) }}{% endblock %}
                 {% include 'admin/parts/flashes.html.twig' %}
 
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 border-bottom">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-2 border-bottom">
                     <h1 class="h2">{% block mainTitle %}{% endblock %}</h1>
                     {% block options %}{% endblock %}
                 </div>
@@ -43,7 +43,7 @@
         </div>
     </div>
     {% block javascripts %}
-        <script src="{{ asset('build/admin.js') }}"></script>
+        {{ encore_entry_script_tags('admin') }}
     {% endblock %}
 </body>
 </html>

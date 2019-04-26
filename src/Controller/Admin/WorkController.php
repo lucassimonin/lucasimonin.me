@@ -10,6 +10,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Work;
 use App\Form\Type\Content\WorkType;
+use App\Services\Content\ContentManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,6 +23,19 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class WorkController extends BaseContentController
 {
+
+    /**
+     * WorkController constructor.
+     *
+     * @param ContentManagerInterface $contentManager
+     */
+    public function __construct(ContentManagerInterface $contentManager)
+    {
+        parent::__construct($contentManager);
+        $this->setLabelList('admin.work.list.title');
+        $this->setRouteList('admin_work_list');
+    }
+
     /**
      * @param Request     $request
      * @Route("/list", name="admin_work_list")
@@ -29,9 +43,7 @@ class WorkController extends BaseContentController
      */
     public function list(Request $request): Response
     {
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem('admin.dashboard.label', $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem('admin.work.list.title');
+        $this->initBreadcrumb();
         list($pagination, $form) = $this->initSearch($request, Work::class);
 
         return $this->render('admin/common/list.html.twig', [
@@ -48,20 +60,14 @@ class WorkController extends BaseContentController
      */
     public function create(Request $request): Response
     {
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem('admin.dashboard.label', $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem("admin.work.list.title", $this->get("router")->generate("admin_work_list"));
-        $breadcrumbs->addItem("admin.work.title.create");
-
+        $this->initBreadcrumb(true)
+             ->addItem("admin.work.title.create");
         $work = new Work();
         $form = $this->createForm(WorkType::class, $work);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getContentManager()->save($work);
-            $this->get('session')->getFlashBag()->set(
-                'notice',
-                'admin.flash.created'
-            );
+            $this->setFlashBag('success', 'admin.flash.created');
 
             return $this->redirectToRoute('admin_work_list');
         }
@@ -84,19 +90,13 @@ class WorkController extends BaseContentController
      */
     public function edit(Request $request, Work $work): Response
     {
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem('admin.dashboard.label', $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem("admin.work.list.title", $this->get("router")->generate("admin_work_list"));
-        $breadcrumbs->addItem("admin.work.title.update");
-
+        $this->initBreadcrumb(true)
+             ->addItem("admin.work.title.update");
         $form = $this->createForm(WorkType::class, $work);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getContentManager()->save($work);
-            $this->get('session')->getFlashBag()->set(
-                'notice',
-                'admin.flash.updated'
-            );
+            $this->setFlashBag('success', 'admin.flash.updated');
 
             return $this->redirectToRoute('admin_work_list');
         }
@@ -119,10 +119,7 @@ class WorkController extends BaseContentController
     public function delete(Work $work)
     {
         $this->getContentManager()->remove($work);
-        $this->get('session')->getFlashBag()->set(
-            'notice',
-            'admin.flash.removed'
-        );
+        $this->setFlashBag('warning', 'admin.flash.removed');
 
         return $this->redirectToRoute('admin_work_list');
     }

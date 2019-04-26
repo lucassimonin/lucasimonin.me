@@ -1,30 +1,33 @@
 {% block a2lix_translations_widget %}
     {{ form_errors(form) }}
-
-    <div class="a2lix_translations">
-        <ul class="a2lix_translationsLocales nav nav-tabs" role="tablist">
-        {% for translationsFields in form %}
-            {% set locale = translationsFields.vars.name %}
-
+    {% set links, contents = '', '' %}
+    {% for translationsFields in form %}
+        {% set locale = translationsFields.vars.name %}
+        {% set id_tab = translationsFields.vars.id ~ '_a2lix_translationsFields-' ~ locale %}
+        {% set links %}
+            {{ links }}
             <li class="nav-item {% if app.request.locale == locale %}active{% endif %}">
-                <a href="#" class="nav-link {% if app.request.locale == locale %}active{% endif %}" data-toggle="tab" data-target=".{{ translationsFields.vars.id }}_a2lix_translationsFields-{{ locale }}" role="tab">
+                <a href="#{{ id_tab }}" aria-controls="{{ id_tab }}" class="nav-link {% if app.request.locale == locale %}active{% endif %}" data-toggle="tab" role="tab" aria-selected="{% if app.request.locale == locale %}true{% else %}false{% endif %}">
                     <span class="flag-icon flag-icon-{% if locale == 'en' %}gb{% else %}{{ locale }}{% endif %}"></span>
                     {% if form.vars.default_locale == locale %}{{ 'admin.common.default.translation'|trans({}, 'app') }}{% endif %}
                     {% if translationsFields.vars.required %}*{% endif %}
                 </a>
             </li>
-        {% endfor %}
-        </ul>
-
-        <div class="a2lix_translationsFields tab-content">
-        {% for translationsFields in form %}
-            {% set locale = translationsFields.vars.name %}
-
-            <div class="{{ translationsFields.vars.id }}_a2lix_translationsFields-{{ locale }} tab-pane {% if app.request.locale == locale %}active{% endif %} {% if not form.vars.valid %}sonata-ba-field-error{% endif %}" role="tabpanel">
+        {% endset %}
+        {% set contents %}
+            {{ contents }}
+            <div id="{{ id_tab }}" class="tab-pane {% if app.request.locale == locale %}active{% endif %} {% if not form.vars.valid %}sonata-ba-field-error{% endif %}" role="tabpanel">
                 {{ form_errors(translationsFields) }}
                 {{ form_widget(translationsFields) }}
             </div>
-        {% endfor %}
+        {% endset %}
+    {% endfor %}
+    <div class="a2lix_translations">
+        <ul class="a2lix_translationsLocales nav nav-tabs" role="tablist">
+            {{ links }}
+        </ul>
+        <div class="a2lix_translationsFields tab-content">
+            {{ contents }}
         </div>
     </div>
 {% endblock %}

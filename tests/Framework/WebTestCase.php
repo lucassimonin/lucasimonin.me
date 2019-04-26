@@ -58,13 +58,15 @@ class WebTestCase extends BaseWebTestCase
      */
     protected static $shard = null;
 
-    protected static $firewallName = 'shop';
+    protected static $firewallName = 'main';
 
     // if you don't define multiple connected firewalls, the context defaults to the firewall name
     // See https://symfony.com/doc/current/reference/configuration/security.html#firewall-context
-    protected static $firewallContext = 'shop';
+    protected static $firewallContext = 'main';
 
-    protected static $defaultUserMail = 'user@sylius.com';
+    protected static $defaultUserMail = 'user@cv.com';
+
+    protected static $defaultAdminMail = 'admin@cv.com';
 
 
     protected function setUp()
