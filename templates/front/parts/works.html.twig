@@ -11,7 +11,9 @@
                     {% for work in works %}
                         <div class="col-md-6 col-sm-12 col-12 wow fadeInUp">
                             <figure class="effect">
-                                <img src="{{ asset('uploads/media/' ~ work.picture.fileName) }}" alt="{{ work.picture.alt }}" />
+                                {% if work.picture is not null %}
+                                    <img src="{{ asset('uploads/media/' ~ work.picture.fileName) }}" alt="{{ work.picture.alt }}" />
+                                {% endif %}
                                 <figcaption>
                                     <h3>{{ work.name }}</h3>
                                     <div class="description">
