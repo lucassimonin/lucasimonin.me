@@ -37,35 +37,13 @@ RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev lib
   apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
 
 # Wkhtmltopdf
+RUN echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/apk/repositories
+RUN apk add --update --no-cache \
+    libgcc libstdc++ libx11 glib libxrender libxext libintl \
+    libcrypto1.0 libssl1.0 \
+    ttf-dejavu ttf-droid ttf-freefont ttf-liberation ttf-ubuntu-font-family
 
-#RUN apk add --no-cache \
-# libstdc++ \
-# libx11 \
-# libxrender \
-# libxext \
-# fontconfig \
-# freetype \
-# ttf-dejavu \
-# ttf-droid \
-# ttf-freefont \
-# ttf-liberation \
-# ttf-ubuntu-font-family
-
-#RUN apk add --no-cache xvfb msttcorefonts-installer  dbus && \
-#    update-ms-fonts && \
-#    apk add qt5-qtbase-dev wkhtmltopdf --no-cache \
-#    --repository http://dl-3.alpinelinux.org/alpine/edge/community/ \
-#    --allow-untrusted && \
-#    # Wrapper for xvfb
-#    mv /usr/bin/wkhtmltopdf /usr/bin/wkhtmltopdf-origin && \
-#    echo $'#!/usr/bin/env sh\n\
-#Xvfb :0 -screen 0 1024x768x24 -ac +extension GLX +render -noreset & \n\
-#DISPLAY=:0.0 wkhtmltopdf-origin $@ \n\
-#killall Xvfb\
-#' > /usr/bin/wkhtmltopdf && \
-#    chmod +x /usr/bin/wkhtmltopdf
-
-
+COPY wkhtmltopdf /usr/bin
 # Initial scripts
 
 
