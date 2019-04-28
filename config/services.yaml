@@ -1,27 +1,22 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: "fr"
-    app.locales: "en|fr"
-    app.cache_lifetime: 84400
-    app.locales.available: ["fr", "en"]
-    validator.translation_domain: 'app'
-    media_directory: '%kernel.project_dir%/public/uploads/media'
+    locale: 'en'
 
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-        public: true       # Allows optimizing the container by removing unused services; this also means
-                            # fetching services directly from the container via $container->get() won't work.
-                            # The best practice is to be explicit about your dependencies anyway.
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
-        exclude: '../src/{Entity,Migrations,Tests,Kernel.php,Query,Repository,Model}'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -31,56 +26,3 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    # Extension
-
-    App\Form\Extension\MediaExtension:
-        tags:
-            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FileType }
-
-    App\Form\Extension\ChoiceExtension:
-        tags:
-        - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }
-
-    App\Command\GenerateQRCodeMFACommand:
-        arguments:
-            $pathKernel: '%kernel.project_dir%'
-            $googleAuthenticator: '@scheb_two_factor.security.google_authenticator'
-
-    App\Services\Core\CacheManager:
-        arguments:
-            $lifeTime: '%app.cache_lifetime%'
-            $cacheFolder: '%kernel.cache_dir%'
-
-    App\Utils\FileUploader:
-        arguments:
-            $targetDirectory: '%media_directory%'
-
-    App\EventListener\MediaUploadListener:
-        tags:
-            - { name: doctrine.event_listener, event: prePersist }
-            - { name: doctrine.event_listener, event: preUpdate }
-            - { name: doctrine.event_listener, event: postLoad }
-
-    App\EventSubscriber\ContentSubscriber:
-        arguments:
-            $locales: '%app.locales.available%'
-        tags:
-        - { name: doctrine.event_listener, event: postUpdate, method: postUpdate, priority: 100  }
-        - { name: doctrine.event_listener, event: postPersist, method: postPersist, priority: 100  }
-
-    app.menu_builder:
-        class: App\Menu\Builder
-        arguments: ["@knp_menu.factory"]
-
-    app.main_menu:
-        class: Knp\Menu\MenuItem # the service definition requires setting the class
-        factory: ["@app.menu_builder", createAdminMenu]
-        tags:
-            - { name: knp_menu.menu, alias: admin }
-
-    # Faker
-    App\DataFixtures\Faker\PasswordProvider:
-        tags: [ { name: nelmio_alice.faker.provider } ]
-
-    App\DataFixtures\Faker\GoogleAuthenticatorProvider:
-        tags: [ { name: nelmio_alice.faker.provider } ]
