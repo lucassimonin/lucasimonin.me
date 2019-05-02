@@ -10,9 +10,11 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * @ORM\Entity()
  * @ORM\Table(name="experience_translation")
  */
-class ExperienceTranslation
+class ExperienceTranslation implements ContentInterface
 {
     use ORMBehaviors\Translatable\Translation;
+
+    protected static $keyCache = 'app.experiences.';
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -103,5 +105,10 @@ class ExperienceTranslation
     public function setDescription(?string $description): void
     {
         $this->description = $description;
+    }
+
+    public function keyCache(): string
+    {
+        return static::$keyCache;
     }
 }

@@ -49,10 +49,11 @@ class UserManager implements UserManagerInterface
      */
     public function save(User $user): User
     {
-        // Save user
         $user->setUpdated(new \DateTime());
-        $password = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
-        $user->setPassword($password);
+        if (null !== $user->getPlainPassword()) {
+            $password = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
+        }
         $this->manager->persist($user);
         $this->manager->flush();
 

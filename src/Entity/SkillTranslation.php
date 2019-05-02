@@ -10,9 +10,11 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * @ORM\Entity()
  * @ORM\Table(name="skill_translation")
  */
-class SkillTranslation
+class SkillTranslation implements ContentInterface
 {
     use ORMBehaviors\Translatable\Translation;
+
+    protected static $keyCache = 'app.skills.';
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -35,5 +37,10 @@ class SkillTranslation
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    public function keyCache(): string
+    {
+        return static::$keyCache;
     }
 }
