@@ -67,7 +67,7 @@ class UserController extends BaseController
     public function create(Request $request): Response
     {
         $this->initBreadcrumb(true)
-            ->addItem("admin.user.title.create");
+            ->addItem('admin.user.title.create');
         $user = new User();
         $form = $this->createForm(UserType::class, $user, [
             'admin' => $this->isGranted(User::ROLE_SUPER_ADMIN)
@@ -76,13 +76,13 @@ class UserController extends BaseController
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $this->getUserManager()->save($user);
-                $this->setFlashBag('success', 'admin.flash.created');
+                $this->sendSuccessFlash('admin.flash.created');
 
                 return $this->redirect($this->generateUrl('admin_user_edit', [
                     'id' => $user->getId()
                 ]));
             }
-            $this->setFlashBag('error', 'admin.flash.errors');
+            $this->sendErrorFlash('admin.flash.errors');
         }
 
         return $this->render(
@@ -104,7 +104,7 @@ class UserController extends BaseController
     public function edit(Request $request, User $user): Response
     {
         $this->initBreadcrumb(true)
-             ->addItem("admin.user.title.edit");
+             ->addItem('admin.user.title.edit');
         $form = $this->createForm(UserType::class, $user, [
             'admin' => $this->isGranted(User::ROLE_SUPER_ADMIN)
         ]);
@@ -113,13 +113,13 @@ class UserController extends BaseController
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $this->getUserManager()->save($user);
-                $this->setFlashBag('notice', 'admin.flash.updated');
+                $this->sendSuccessFlash('admin.flash.updated');
 
                 return $this->redirect($this->generateUrl('admin_user_edit', [
                     'id' => $user->getId()
                 ]));
             }
-            $this->setFlashBag('error', 'admin.flash.errors');
+            $this->sendErrorFlash('admin.flash.errors');
         }
 
         return $this->render(
@@ -140,7 +140,7 @@ class UserController extends BaseController
     public function delete(Request $request, User $user): Response
     {
         $this->getUserManager()->remove($user);
-        $this->setFlashBag('notice', 'admin.flash.removed');
+        $this->sendSuccessFlash('admin.flash.removed');
 
         return $this->redirect($request->headers->get('referer'));
     }

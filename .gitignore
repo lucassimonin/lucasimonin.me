@@ -1,3 +1,19 @@
+###> Custom Gitignore ###
+.php_cs.cache
+/.idea/
+/docker/database/*
+/public/uploads/media/*
+*.DS_Store
+.AppleDouble
+.LSOverride
+logs/*
+!logs/.gitkeep
+docker/nginx/cert/*
+!docker/nginx/cert/.gitkeep
+screenshots/*
+!screenshots/.gitkeep
+translations/*.xlf
+###< Custom Gitignore ###
 
 ###> symfony/framework-bundle ###
 /.env.local
@@ -16,3 +32,15 @@
 ###> symfony/web-server-bundle ###
 /.web-server-pid
 ###< symfony/web-server-bundle ###
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###
+
+###> Sonar ###
+src/.scannerwork
+.scannerwork/*
+###< Sonar ###

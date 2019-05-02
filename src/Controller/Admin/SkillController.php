@@ -62,13 +62,13 @@ class SkillController extends BaseContentController
     public function create(Request $request): Response
     {
         $this->initBreadcrumb(true)
-             ->addItem("admin.skill.title.create");
+             ->addItem('admin.skill.title.create');
         $skill = new Skill();
         $form = $this->createForm(SkillType::class, $skill);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getContentManager()->save($skill);
-            $this->setFlashBag('success', 'admin.flash.created');
+            $this->sendSuccessFlash('admin.flash.created');
 
             return $this->redirectToRoute('admin_skill_list');
         }
@@ -92,12 +92,12 @@ class SkillController extends BaseContentController
     public function edit(Request $request, Skill $skill): Response
     {
         $this->initBreadcrumb(true)
-             ->addItem("admin.skill.title.update");
+             ->addItem('admin.skill.title.update');
         $form = $this->createForm(SkillType::class, $skill);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getContentManager()->save($skill);
-            $this->setFlashBag('success', 'admin.flash.updated');
+            $this->sendSuccessFlash('admin.flash.updated');
 
             return $this->redirectToRoute('admin_skill_list');
         }
@@ -120,7 +120,7 @@ class SkillController extends BaseContentController
     public function delete(Skill $skill)
     {
         $this->getContentManager()->remove($skill);
-        $this->setFlashBag('warning', 'admin.flash.removed');
+        $this->sendSuccessFlash('admin.flash.removed');
 
         return $this->redirectToRoute('admin_skill_list');
     }

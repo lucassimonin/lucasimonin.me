@@ -61,13 +61,13 @@ class WorkController extends BaseContentController
     public function create(Request $request): Response
     {
         $this->initBreadcrumb(true)
-             ->addItem("admin.work.title.create");
+             ->addItem('admin.work.title.create');
         $work = new Work();
         $form = $this->createForm(WorkType::class, $work);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getContentManager()->save($work);
-            $this->setFlashBag('success', 'admin.flash.created');
+            $this->sendSuccessFlash('admin.flash.created');
 
             return $this->redirectToRoute('admin_work_list');
         }
@@ -91,12 +91,12 @@ class WorkController extends BaseContentController
     public function edit(Request $request, Work $work): Response
     {
         $this->initBreadcrumb(true)
-             ->addItem("admin.work.title.update");
+             ->addItem('admin.work.title.update');
         $form = $this->createForm(WorkType::class, $work);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getContentManager()->save($work);
-            $this->setFlashBag('success', 'admin.flash.updated');
+            $this->sendSuccessFlash('admin.flash.updated');
 
             return $this->redirectToRoute('admin_work_list');
         }
@@ -119,7 +119,7 @@ class WorkController extends BaseContentController
     public function delete(Work $work)
     {
         $this->getContentManager()->remove($work);
-        $this->setFlashBag('warning', 'admin.flash.removed');
+        $this->sendSuccessFlash('admin.flash.removed');
 
         return $this->redirectToRoute('admin_work_list');
     }

@@ -58,11 +58,7 @@
                                 <a href="{{ path('admin_user_edit', {'id': user.id}) }}" class="btn btn-outline-secondary">
                                     <i class="fa fa-edit"></i> {{ 'admin.common.update.button'|trans({}, 'app') }}
                                 </a>
-                                {% if user.id != app.user.id %}
-                                    <a href="{{ path('admin_dashboard', {'_switch_user': user.username}) }}" class="btn btn-default">
-                                        <i class="fa fa-user-secret"></i> {{ 'admin.common.switch_to_user.button'|trans({}, 'app') }}
-                                    </a>
-                                {% endif %}
+
 
                                 <a href="{{ path('admin_user_delete', {'id': user.id}) }}" class="btn btn-danger delete-button">
                                     <i class="fa fa-trash-o" style="color:white;transition: all 30s linear;"></i> {{ 'admin.common.delete.button'|trans({}, 'app') }}

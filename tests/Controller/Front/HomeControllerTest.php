@@ -9,32 +9,35 @@
 namespace App\Tests\Controller;
 
 
-use App\Tests\Framework\WebTestCase;
+use App\Tests\Framework\PantherTestCase;
+
 /**
  * Class FrontControllerTest
  *
  * @package App\Tests\Controller
  * @group functional
  */
-class HomeControllerTest extends WebTestCase
+class HomeControllerTest extends PantherTestCase
 {
     public function provideUrls()
     {
-        yield ['/'];
-        yield ['/fr'];
-        yield ['/en'];
+        yield ['/', 'home_default'];
+        yield ['/fr', 'home_fr'];
+        yield ['/en', 'home_en'];
+        yield ['/admin/users/list', 'user'];
     }
 
     /**
      * @test
      * @dataProvider provideUrls
      * @param $url
+     * @param $name
      */
-    public function test_page_is_successful($url)
+    public function test_page_is_successful($url, $name)
     {
-        $this->logIn();
         $this->visit($url)
-            ->responseOk();
+            ->takeScreenShot($name);
+        $this->assertEquals(1, $this->crawler->filter('h1')->count(), 'Page OK');
     }
 
 }

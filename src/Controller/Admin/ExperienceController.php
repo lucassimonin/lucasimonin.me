@@ -61,13 +61,13 @@ class ExperienceController extends BaseContentController
     public function create(Request $request)
     {
         $this->initBreadcrumb(true)
-             ->addItem("admin.experience.title.create");
+             ->addItem('admin.experience.title.create');
         $experience = new Experience();
         $form = $this->createForm(ExperienceType::class, $experience);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getContentManager()->save($experience);
-            $this->setFlashBag('success', 'admin.flash.created');
+            $this->sendSuccessFlash('admin.flash.created');
 
             return $this->redirectToRoute('admin_experience_list');
         }
@@ -91,12 +91,12 @@ class ExperienceController extends BaseContentController
     public function edit(Request $request, Experience $experience)
     {
         $this->initBreadcrumb(true)
-             ->addItem("admin.experience.title.update");
+             ->addItem('admin.experience.title.update');
         $form = $this->createForm(ExperienceType::class, $experience);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getContentManager()->save($experience);
-            $this->setFlashBag('success', 'admin.flash.updated');
+            $this->sendSuccessFlash('admin.flash.updated');
 
             return $this->redirectToRoute('admin_experience_list');
         }
@@ -119,7 +119,7 @@ class ExperienceController extends BaseContentController
     public function delete(Experience $experience)
     {
         $this->getContentManager()->remove($experience);
-        $this->setFlashBag('warning', 'admin.flash.removed');
+        $this->sendSuccessFlash('admin.flash.removed');
 
         return $this->redirectToRoute('admin_experience_list');
     }

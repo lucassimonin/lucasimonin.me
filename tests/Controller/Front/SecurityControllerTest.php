@@ -9,14 +9,14 @@
 namespace App\Tests\Controller;
 
 
-use App\Tests\Framework\WebTestCase;
+use App\Tests\Framework\PantherTestCase;
 /**
  * Class SecurityControllerTest
  *
  * @package App\Tests\Controller
  * @group functional
  */
-class SecurityControllerTest extends WebTestCase
+class SecurityControllerTest extends PantherTestCase
 {
 
     /**
@@ -25,7 +25,9 @@ class SecurityControllerTest extends WebTestCase
     public function test_page_is_successful()
     {
         $this->visit('/login')
-             ->responseOk();
+             ->takeScreenShot('login');
+
+        $this->assertEquals(1, $this->crawler->filter('#username')->count(), 'Test element in Login page');
     }
 
     /**
@@ -33,15 +35,15 @@ class SecurityControllerTest extends WebTestCase
      */
     public function login_successful()
     {
-        $this->visit('/login')
-             ->responseOk();
-
-        $form = $this->crawler->filter('.form-signin')->form();
-        $form['_username'] = WebTestCase::$defaultAdminMail;
-        $form['_password'] = 12345;
+        $this->visit('/login');
+        $form = $this->crawler->filter('.form-signin')->form([
+            '_username' => PantherTestCase::$defaultAdminMail,
+            '_password' => 12345
+        ]);
 
         $this->submitForm($form);
-        $this->assertContains(trim($this->crawler->filter('.form-label-group')->filter('label')->text()), 'Google authenticator code', 'Login OK');
+        $this->takeScreenShot('after_submit');
+        $this->assertContains(trim($this->crawler->filter('.form-label-group')->filter('label')->text()), 'Google authenticator code', 'Login form');
     }
 
     /**
@@ -49,12 +51,11 @@ class SecurityControllerTest extends WebTestCase
      */
     public function login_with_bad_password()
     {
-        $this->visit('/login')
-             ->responseOk();
-
-        $form = $this->crawler->filter('.form-signin')->form();
-        $form['_username'] = WebTestCase::$defaultUserMail;
-        $form['_password'] = 123;
+        $this->visit('/login');
+        $form = $this->crawler->filter('.form-signin')->form([
+            '_username' => PantherTestCase::$defaultUserMail,
+            '_password' => 12345
+        ]);
 
         $this->submitForm($form);
         $this->assertEquals(1, $this->crawler->filter('.alert-danger')->count(), 'Bad credentials.');

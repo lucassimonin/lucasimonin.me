@@ -46,11 +46,11 @@ class PersonController extends BaseController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $personManager->save($person);
-            $this->setFlashBag('notice', 'admin.flash.updated');
+            $this->sendSuccessFlash('admin.flash.updated');
 
             return $this->redirect($request->headers->get('referer'));
         }
-        // View
+
         return $this->render(
             'admin/common/form.html.twig',
             [

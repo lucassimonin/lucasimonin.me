@@ -20,8 +20,6 @@ class User implements UserInterface, \Serializable, TwoFactorInterface
     const ROLE_DEFAULT = 'ROLE_USER';
     const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
     const ROLE_ADMIN = 'ROLE_ADMIN';
-    const ROLE_TRANSLATOR = 'ROLE_TRANSLATOR';
-    const ROLE_EXCLUDE_TRANSLATOR = ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'];
 
     /**
      * @ORM\Column(type="integer")

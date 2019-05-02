@@ -38,12 +38,14 @@ class BaseController extends AbstractController
         $this->get('session')->getFlashBag()->set($type, $message);
     }
 
-    public static function getSubscribedServices()
+    protected function sendSuccessFlash(string $message): void
     {
-        return array_merge(parent::getSubscribedServices(), [
-            'knp_paginator' => '?knp_paginator',
-            'white_october_breadcrumbs' => '?white_october_breadcrumbs',
-        ]);
+        $this->setFlashBag('success', $message);
+    }
+
+    protected function sendErrorFlash(string $message): void
+    {
+        $this->setFlashBag('error', $message);
     }
 
     /**
@@ -71,5 +73,13 @@ class BaseController extends AbstractController
     public function setRouteList(?string $routeList): void
     {
         $this->routeList = $routeList;
+    }
+
+    public static function getSubscribedServices()
+    {
+        return array_merge(parent::getSubscribedServices(), [
+            'knp_paginator' => '?knp_paginator',
+            'white_october_breadcrumbs' => '?white_october_breadcrumbs',
+        ]);
     }
 }

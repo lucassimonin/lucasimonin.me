@@ -46,6 +46,10 @@ RUN apk add --update --no-cache \
 COPY wkhtmltopdf /usr/bin
 # Initial scripts
 
+RUN apk add unzip zlib-dev chromium chromium-chromedriver
+ENV PANTHER_NO_SANDBOX 1
+ENV PANTHER_CHROME_DRIVER_BINARY /usr/lib/chromium/chromedriver
+
 
 RUN if [ -z `getent group www-data` ]; then addgroup -g ${GUID} www-data; fi
 RUN if [ -z `getent passwd www-data` ]; then useradd -m -u ${UID} -g ${GUID} www-data; fi

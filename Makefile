@@ -144,24 +144,14 @@ test: tu tf
 
 tu: ## Run unit tests
 tu: vendor
-	$(EXEC_PHP) vendor/bin/simple-phpunit tests --color --exclude-group functional
+	$(EXEC_PHP) bin/phpunit tests --color --exclude-group functional
 
 tf: ## Run functional tests
 tf: vendor
-	$(EXEC_PHP) vendor/bin/simple-phpunit tests --color --group functional
+	$(EXEC_PHP) bin/phpunit tests --color --group functional
 
 .PHONY: tests tu tf
 
-.env: .env.dist
-	@if [ -f .env ]; \
-	then\
-		echo '\033[1;41m/!\ The .env.dist file has changed. Please check your .env file (this message will not be displayed again).\033[0m';\
-		touch .env;\
-		exit 1;\
-	else\
-		echo cp .env.dist .env;\
-		cp .env.dist .env;\
-	fi
 # rules based on files
 composer.lock: composer.json
 	$(COMPOSER) update --lock --no-scripts --no-interaction

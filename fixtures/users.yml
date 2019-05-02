@@ -2,7 +2,7 @@ App\Entity\User:
     admin:
         password: <password(@admin, "12345")>
         googleAuthenticatorSecret: <googleAuthenticator()>
-        roles: ["ROLE_ADMINISTRATION_ACCESS", "ROLE_USER"]
+        roles: ["ROLE_SUPER_ADMIN"]
         enabled: "true"
         email: "admin@cv.com"
         username: "admin@cv.com"
